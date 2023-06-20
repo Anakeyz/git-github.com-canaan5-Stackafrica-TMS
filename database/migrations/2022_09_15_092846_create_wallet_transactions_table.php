@@ -21,7 +21,7 @@ return new class extends Migration
             $table->float('amount', 12);
             $table->float('prev_balance', 12);
             $table->float('new_balance', 12);
-            $table->enum('status', [\App\Enums\Status::SUCCESSFUL, \App\Enums\Status::FAILED]);
+            $table->enum('status', [\App\Enums\Status::SUCCESSFUL->value, \App\Enums\Status::FAILED->value]);
             $table->enum('action', \App\Enums\Action::values());
             $table->enum('type', \App\Models\WalletTransaction::TYPES)->default(\App\Models\WalletTransaction::TYPES[0]);
             $table->longText('info')->nullable();

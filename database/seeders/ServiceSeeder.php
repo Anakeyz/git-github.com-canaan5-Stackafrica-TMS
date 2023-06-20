@@ -22,29 +22,27 @@ class ServiceSeeder extends Seeder
         $services = ['CASHOUT/WITHDRAWAL', 'CABLE TV', 'AIRTIME', 'INTERNET DATA', 'ELECTRICITY', 'BANK TRANSFER', 'WALLET TRANSFER', 'FUNDING/INBOUND'];
 
         collect($services)->each(function ($service) {
-            $s = Service::query()->create([
-                    'name'  => $service,
-//                    'slug'  => General::generateSlug($service)
-                ]);
+            $s = (new Service([
+                'name'  => $service,
+                'menu_name' => str($service)->before('/')->value()
+            ]));
 
-            if ( $service == 'WALLET TRANSFER' ) {
+            $s->withoutApproval()->save();
+
+            if ($service == 'WALLET TRANSFER') {
                 ServiceProvider::create([
                     'service_id'    => $s->id,
                     'name'          => 'INTERNAL',
-                    'is_active'     => true
                 ]);
             }
-            else {
-                ServiceProvider::factory(rand(2, 4))->create(['service_id' => $s->id]);
+
+            if ($service != 'FUNDING/INBOUND' || $service != 'CASHOUT/WITHDRAWAL') {
+                ServiceProvider::create([
+                    'service_id' => $s->id,
+                    'name' => 'Spout',
+                    'class' => '\App\Repository\Spout'
+                ]);
             }
         });
-
-
-//        collect($services)->each(fn($service) => Service::query()
-//                ->create([
-//                    'name'  => $service,
-//                    'slug'  => General::generateSlug($service)
-//                ])
-//        );
     }
 }

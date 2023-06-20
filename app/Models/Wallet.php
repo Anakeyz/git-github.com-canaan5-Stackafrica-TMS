@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ramsey\Uuid\Uuid;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -46,7 +47,7 @@ class Wallet extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id')
-            ->select('first_name', 'other_names', 'id', 'phone', 'email', 'status', 'level');
+            ->select('first_name', 'other_names', 'id', 'phone', 'email', 'status', 'level_id');
     }
 
     /**

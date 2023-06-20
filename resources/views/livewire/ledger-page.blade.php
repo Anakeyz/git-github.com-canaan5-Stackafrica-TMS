@@ -1,7 +1,7 @@
 <div x-data>
     <section>
         <div class="grid grid-cols-4 xl:gap-5 md:gap-5 gap-2">
-            <div class="report-box mt-6">
+            <div class="report-box zoom-in mt-6">
                 <div class="box col-span-1 p-5 intro-x w-auto">
                     <div class="flex flex-wrap gap-3">
                         <div class="w-full">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div class="report-box mt-6">
+            <div class="report-box zoom-in mt-6">
                 <div class="box col-span-1 p-5 intro-x w-auto">
                     <div class="flex flex-wrap gap-3 w-auto">
                         <div class="w-full">
@@ -41,7 +41,7 @@
             </div>
 
             {{--            Opening Balance--}}
-            <div class="report-box mt-6">
+            <div class="report-box zoom-in mt-6">
                 <div class="box col-span-1 p-5 intro-x w-auto">
                     <div class="flex flex-wrap gap-3 w-auto">
                         <div class="mr-auto sm:w-auto w-full">
@@ -58,7 +58,7 @@
             </div>
 
             {{--            Closing Balance--}}
-            <div class="report-box mt-6">
+            <div class="report-box zoom-in mt-6">
                 <div class="box col-span-1 p-5 intro-x w-auto">
                     <div class="flex flex-wrap gap-3 w-auto">
                         <div class="mr-auto sm:w-auto w-full">

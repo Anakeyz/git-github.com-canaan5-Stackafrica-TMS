@@ -16,7 +16,7 @@ class UserObserver
      */
     public function creating(User $user)
     {
-        $user->password = $user->getInitialPassword();
+        $user->password ??= $user->getInitialPassword();
         $user->level_id = 1;
     }
 

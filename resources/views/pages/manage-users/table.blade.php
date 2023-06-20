@@ -84,7 +84,7 @@
                     </tr>
                 @endforeach
             @else
-                <tr><td colspan="7" class="text-center">No users available.</td></tr>
+                <tr><td colspan="9" class="text-center">No users available.</td></tr>
             @endif
             </tbody>
         </table>

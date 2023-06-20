@@ -20,10 +20,10 @@ class UserSeeder extends Seeder
     {
 // Default credentials
         $teq = \App\Models\User::factory()->create([
-            'first_name' => 'Teqtms',
+            'first_name' => 'Stack',
             'other_names' => 'Admin',
-            'email' => 'admin@teqtms.com',
-            'phone' => '09012345678',
+            'email' => 'info@getstack.africa',
+            'phone' => '08081234567',
             'status' => 'ACTIVE',
         ]);
 

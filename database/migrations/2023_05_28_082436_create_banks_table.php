@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code', 10);
-            $table->string('provider', [Etranzact::name(), Spout::name()]);
+            $table->enum('provider', [Etranzact::name(), Spout::name()]);
             $table->timestamps();
         });
     }

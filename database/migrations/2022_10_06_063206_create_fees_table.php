@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Fee;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,9 +19,9 @@ return new class extends Migration
             $table->foreignId('group_id')->constrained('terminal_groups')->cascadeOnDelete();
             $table->string('service_id');
             $table->string('title');
-            $table->enum('type', ['CHARGE', 'COMMISSION'])->default('CHARGE');
+            $table->enum('type', [Fee::CHARGE, Fee::COMMISSION])->default(Fee::CHARGE);
             $table->float('amount', 12);
-            $table->enum('amount_type', ['FIXED', 'PERCENTAGE'])->default('FIXED');
+            $table->enum('amount_type', [Fee::FIXED, Fee::PERCENT])->default('FIXED');
             $table->float('cap')->default(0.00);
             $table->text('info')->nullable();
             $table->jsonb('config')->nullable();

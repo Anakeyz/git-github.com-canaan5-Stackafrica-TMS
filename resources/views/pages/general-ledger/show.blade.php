@@ -32,7 +32,7 @@
 
     <section>
         <div class="block lg:grid lg:grid-cols-3 xl:gap-10 lg:gap-5">
-            <div class="report-box mt-6">
+            <div class="report-box zoom-in mt-6">
                 <div class="intro-y h-full box md:col-span-1 p-5 intro-x w-auto lg:w-full sm:w-96 w-auto">
                     <div class="flex flex-wrap gap-3">
                         <div class="mr-auto">
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="lg:col-span-2 grid grid-cols-2 xl:gap-10 md:gap-5 gap-2">
-                <div class="report-box mt-6">
+                <div class="report-box zoom-in mt-6">
                     <div class="box col-span-1 p-5 intro-x w-auto">
                         <div class="flex flex-wrap gap-3">
                             <div class="mr-auto sm:w-auto w-full">
@@ -62,7 +62,7 @@
                                     <i data-lucide="alert-circle" class="w-4 h-4"></i>
                                 </div>
                                 <div class="text-dark relative truncate sm:text-2xl text-lg font-medium leading-5 md:pl-4 mt-3.5">
-                                    @money($sum['CREDIT'])
+                                    @money($sum['CREDIT'] ?? 0)
                                 </div>
                             </div>
                             <span class="sm:flex items-center justify-center hidden w-12 h-12 rounded-full bg-success bg-opacity-20 text-success">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="report-box mt-6">
+                <div class="report-box zoom-in mt-6">
                     <div class="box col-span-1 p-5 intro-x w-auto">
                         <div class="flex flex-wrap gap-3 w-auto">
                             <div class="mr-auto sm:w-auto w-full">
@@ -80,7 +80,7 @@
                                     <i data-lucide="alert-circle" class="w-4 h-4"></i>
                                 </div>
                                 <div class="text-dark relative sm:text-2xl text-lg truncate font-medium leading-5 md:pl-4 mt-3.5">
-                                    @money($sum['DEBIT'])
+                                    @money($sum['DEBIT'] ?? 0)
                                 </div>
                             </div>
                             <span class="sm:flex items-center justify-center hidden w-12 h-12 rounded-full bg-danger bg-opacity-20 text-danger">
