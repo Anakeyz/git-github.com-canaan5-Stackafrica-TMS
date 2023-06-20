@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use App\Helpers\General;
+use App\Exceptions\FailedApiResponse;
 use Cjmellor\Approval\Concerns\MustBeApproved;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,11 +16,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * These hold the services for which every transaction occurring on the system is carried out for.
- * They include bill payments, transfers, etc.
+ * <p>They include **bill payments**, **transfers**, **withdrawal**, **funding**, etc.
  */
 class Service extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory, LogsActivity, MustBeApproved;
 
     protected $guarded = ['id'];
 
@@ -33,7 +32,18 @@ class Service extends Model
     protected static function boot()
     {
         parent::boot();
-        static::creating(fn ($model) => $model->slug = str($model->name)->slug(''));
+
+        static::creating(fn ($service) => $service->slug = str($service->name)->slug(''));
+
+        static::created(function ($service) {
+            \Cache::forget('services');
+            if ($service->wasChanged(['menu_name'])) \Cache::forget('default-menus');
+        });
+
+        static::updated(function ($service) {
+            \Cache::forget('services');
+            if ($service->wasChanged(['menu_name'])) \Cache::forget('default-menus');
+        });
     }
 
     public function getRouteKeyName()
@@ -48,9 +58,9 @@ class Service extends Model
         return $this->hasMany(ServiceProvider::class);
     }
 
-    public function selectedProvider(): BelongsTo
+    public function provider(): BelongsTo
     {
-        return $this->belongsTo(ServiceProvider::class);
+        return $this->belongsTo(ServiceProvider::class, 'provider_id');
     }
 
     public function walletTransactions(): HasMany
@@ -78,5 +88,22 @@ class Service extends Model
     public function scopeWithSearch(Builder $query, $search): Builder
     {
         return $query->where('name', 'like', '%' . $search . '%');
+    }
+
+    /**
+     * Get the class for the active provider of the service.
+     *
+     * @param string $service The slug for the service as stored in the db <i>services</i> table.
+     * @param string $error_name The name of the error to show on failed response.
+     * @return mixed
+     * @throws \Throwable
+     */
+    public static function getActiveProviderFor(string $service, string $error_name): mixed
+    {
+        $provider = Service::whereSlug($service)->first()?->provider;
+
+        throw_if(is_null($provider), new FailedApiResponse("$error_name is currently unavailable.", 404));
+
+        return new $provider->class;
     }
 }

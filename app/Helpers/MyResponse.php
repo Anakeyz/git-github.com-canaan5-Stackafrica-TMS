@@ -22,7 +22,7 @@ class MyResponse
         ]);
     }
 
-    public static function failed($message = '', $data = null, $code = 403): \Illuminate\Http\JsonResponse
+    public static function failed($message = '', $data = null, $code = 200): \Illuminate\Http\JsonResponse
     {
         /*if ( !is_null($data) ) {
             $teqrypt = new Teqrypt();

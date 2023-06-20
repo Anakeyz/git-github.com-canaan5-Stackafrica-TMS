@@ -2,22 +2,39 @@
 
 namespace App\Models;
 
+use App\Exceptions\FailedApiResponse;
 use Cjmellor\Approval\Concerns\MustBeApproved;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Hash;
 
 class Terminal extends Model
 {
-    use HasFactory;
+    use HasFactory, MustBeApproved;
 
     protected $guarded = ['id'];
 
     protected $appends = [
         'is_active'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'serial';
+    }
+
+    public function pin(): Attribute
+    {
+        return Attribute::set(fn($value) => Hash::make($value));
+    }
+
+    public function adminPin(): Attribute
+    {
+        return Attribute::set(fn($value) => Hash::make($value));
+    }
 
     /**
      * @return BelongsTo
@@ -60,6 +77,15 @@ class Terminal extends Model
     {
         $this->status = $this->status == 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
         $this->save();
+    }
+
+    /**
+     * @throws FailedApiResponse
+     */
+    public function ensureForTransaction(): void
+    {
+        if (!$this->is_active)
+            throw new FailedApiResponse("Your Terminal is $this->status");
     }
 
     /**

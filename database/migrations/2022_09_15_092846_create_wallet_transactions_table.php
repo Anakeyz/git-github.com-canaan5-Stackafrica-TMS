@@ -17,14 +17,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id'); // the product is the service for which the transaction impacts the wallet
             $table->unsignedBigInteger('wallet_id');
-            $table->unsignedBigInteger('user_id');
             $table->string('reference');
             $table->float('amount', 12);
             $table->float('prev_balance', 12);
             $table->float('new_balance', 12);
-            $table->enum('status', \App\Models\Wallet::STATUSES);
-            $table->enum('type', \App\Models\Wallet::IMPACT_TYPE);
-            $table->enum('reason', \App\Models\WalletTransaction::REASON)->default(\App\Models\WalletTransaction::REASON[0]);
+            $table->enum('status', [\App\Enums\Status::SUCCESSFUL, \App\Enums\Status::FAILED]);
+            $table->enum('action', \App\Enums\Action::values());
+            $table->enum('type', \App\Models\WalletTransaction::TYPES)->default(\App\Models\WalletTransaction::TYPES[0]);
             $table->longText('info')->nullable();
             $table->timestamps();
         });

@@ -18,33 +18,29 @@ class Fees extends Controller
 //        return view('pages.fees.index');
 //    }
 
-    public function index( $id )
+    public function index(TerminalGroup $group)
     {
-        $group = TerminalGroup::find($id);
         return view('pages.terminal-groups.fees', compact('group'));
     }
 
-    public function edit($groupId, $feeId)
+    public function edit(Fee $fee)
     {
-        $group = TerminalGroup::find($groupId);
-        $fee = Fee::find($feeId);
+        $group = $fee->group;
 
         return view('pages.fees.edit', compact('group', 'fee'));
     }
 
 
-    public function update($groupId, $feeId)
+    public function update(Request $request, Fee $fee)
     {
-        $fee = Fee::find($feeId);
-
-        $data = \request()->only(['amount', 'amount_type', 'cap', 'info', 'config', 'newConfig']);
+        $data = $request->only(['amount', 'amount_type', 'cap', 'info', 'config', 'newConfig']);
 
         $configs = collect();
-        if ( \request()->has('config') ) {
+        if ( $request->has('config') ) {
             $configs = collect($data['config']);
         }
 
-        if (\request()->has('newConfig') && sizeof(\request('newConfig')) > 0 ) {
+        if ($request->has('newConfig') && sizeof($request->newConfig) > 0 ) {
             $ncArray = array_chunk(\request('newConfig'), 2);
             foreach ($ncArray as $item) {
                 $configs->put($item[0], $item[1]);
@@ -54,10 +50,8 @@ class Fees extends Controller
             $data['config'] = $configs;
         }
 
-        DB::table('fees')->where('id', $feeId)
-            ->update($data);
+        $fee->update($data);
 
-
-        return to_route('terminal-groups.fees', [$groupId])->with('success', 'Update Successful!');
+        return to_route('terminal-groups.fees.index', $fee->group)->with('success', 'Update Successful!');
     }
 }

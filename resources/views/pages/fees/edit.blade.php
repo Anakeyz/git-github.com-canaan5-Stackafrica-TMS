@@ -6,8 +6,8 @@
 
 @section('breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('terminals.index') }}">Terminals</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Edit Terminal</li>
+    <li class="breadcrumb-item"><a href="{{ route('terminal-groups.fees.index', $group) }}">Fees</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Fee</li>
 @endsection
 
 @section('subcontent')
@@ -22,7 +22,7 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 sm:col-span-9 md:col-span-8 lg:col-span-7 xl:col-span-6">
             <!-- BEGIN: Form Layout -->
-            <form class="intro-y box px-5 py-7" method="post" action="">
+            <form class="intro-y box px-5 py-7 my-form" method="post" action="{{ route('fees.update', $fee) }}">
 
                 <h3>Group Name: <b>{{ $group->name }}</b></h3>
                 <hr>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <div class="text-right mt-10 pt-6 border-t">
+                <div class="flex justify-end mt-10 pt-6 border-t">
                     <button type="submit" class="btn btn-primary w-24">Update</button>
                 </div>
             </form>
@@ -99,10 +99,7 @@
     </div>
 @endsection
 
-
-<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
-
-<script>
+<script type="module">
     (function () {
 
         var waitForJQuery = setInterval(function () {

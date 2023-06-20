@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Transaction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -28,12 +29,14 @@ return new class extends Migration
             $table->string('account_name')->nullable();
             $table->string('info')->nullable();
             $table->string('power_token')->nullable();
-            $table->enum('status', \App\Models\Transaction::ALL_STATUS)->default('PENDING');
+            $table->enum('status', \App\Enums\Status::values())->default('PENDING');
             $table->enum('channel', ['POS', 'WEB', 'MOBILE', 'OTHERS'])->default('POS');
             $table->string('provider')->nullable();
+            $table->json('meta')->nullable();
             $table->boolean('wallet_debited')->nullable();
             $table->boolean('wallet_credited')->nullable();
             $table->string('version')->nullable();
+            $table->string('device')->nullable();
             $table->timestamps();
         });
     }

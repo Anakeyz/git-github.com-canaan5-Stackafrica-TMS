@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoutingType extends Model
 {
-    use HasFactory;
+    use HasFactory, MustBeApproved;
 
     protected $guarded = ['id'];
 }

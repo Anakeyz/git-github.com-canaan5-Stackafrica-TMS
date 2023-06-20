@@ -84,7 +84,7 @@
                 },
 
                 setAvailableMenus() {
-                    let default_menus = @js(defaultMenus());
+                    let default_menus = @js(app('menus'));
 
                     this.others = default_menus.filter(
                         menu1 => !this.current_menus.some(menu2 => menu1.id === menu2.id),

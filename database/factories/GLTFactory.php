@@ -2,8 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\GeneralLedger;
-use App\Models\Wallet;
+use App\Enums\Action;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +18,7 @@ class GLTFactory extends Factory
     public function definition()
     {
         return [
-            'type'      => Wallet::IMPACT_TYPE[rand(0,1)],
+            'type'      => Action::values()[rand(0,1)],
             'info'      => 'seeded',
             'amount'    => fake()->randomNumber(5),
             'prev_balance'  => fake()->randomNumber(5),

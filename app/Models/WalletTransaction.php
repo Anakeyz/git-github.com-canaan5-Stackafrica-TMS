@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Action;
+use App\Enums\Status;
 use App\Traits\HasFiltering;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,29 +12,33 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 class WalletTransaction extends Model
 {
-    use HasFactory, HasFiltering, LogsActivity;
+    use HasFactory, HasFiltering, LogsActivity, BelongsToThrough;
 
-    const REASON = ['TRANSACTION', 'CHARGE'];
-
-    const TYPE = ['CREDIT', 'DEBIT'];
+    const TYPES = ['TRANSACTION', 'CHARGE'];
 
     protected $guarded = ['id'];
 
     protected $with = ['wallet'];
 
-    // Relationships
+    protected $casts = [
+        'status' => Status::class,
+        'action' => Action::class
+    ];
 
-    public function agent(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    // Relationships
 
     public function wallet(): BelongsTo
     {
         return $this->belongsTo(Wallet::class);
+    }
+
+    public function agent(): \Znck\Eloquent\Relations\BelongsToThrough
+    {
+        return $this->belongsToThrough(User::class, Wallet::class);
     }
 
     public function service(): BelongsTo
@@ -42,7 +48,7 @@ class WalletTransaction extends Model
 
     public function scopeSuccessful($query)
     {
-        return $query->where('status', 'SUCCESSFUL');
+        return $query->where('status', Status::SUCCESSFUL);
     }
 
     public function getActivitylogOptions(): LogOptions
@@ -57,5 +63,15 @@ class WalletTransaction extends Model
         return $query->where('reference', 'like', '%' . $search . '%')
             ->orWhereHas('wallet', fn($query) => $query->withSearch($search));
 
+    }
+
+    public function isCredit(): bool
+    {
+        return $this->action == Action::CREDIT;
+    }
+
+    public function isDebit(): bool
+    {
+        return $this->action == Action::DEBIT;
     }
 }

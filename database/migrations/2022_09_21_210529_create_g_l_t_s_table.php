@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('amount', 12)->default(0);
             $table->float('prev_balance', 12)->default(0);
             $table->float('new_balance', 12)->default(0);
-            $table->enum('type', \App\Models\Wallet::IMPACT_TYPE);
+            $table->enum('type', \App\Enums\Action::values());
             $table->longText('info')->nullable();
             $table->timestamps();
         });

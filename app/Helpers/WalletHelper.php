@@ -2,10 +2,12 @@
 
 namespace App\Helpers;
 
+use App\Models\Service;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class WalletHelper
 {
@@ -70,134 +72,79 @@ class WalletHelper
      *
      * @param User $user
      * @param float $amount
-     * @param string $info
-     * @param string $trans_type
+     * @param string|null $info
      * @param string $reference
+     * @param Service $service
      * @return array
      */
-    public static function credit(User $user, float $amount, string $info, string $reference, string $trans_type = 'OTHERS' ): array
+    public static function credit(User $user, float $amount, string|null $info, string $reference, Service $service): array
     {
-        try {
-            $wallet = $user->wallet;
+        $wallet = $user->wallet;
 
-            // Check if wallet is active
-            if (!$wallet->is_active) {
-                return [
-                    'success' => false,
-                    'message' => "Wallet is {$wallet->status}"
-                ];
-            }
-
-            $response = [
-                'success' => false,
-                'message' => 'Error crediting wallet'
-            ];
-
-            DB::transaction(function () use ($user, $wallet, $amount, $info, $trans_type, &$response, $reference ) {
-
-                $prev_bal = $wallet->balance;
-                $wallet->balance += $amount;
-
-                $wallet->updated_at = now();
-                $wallet->save();
-
-                $wallet->transactions()->create([
-                    'user_id' => $user->id,
-                    'amount' => $amount,
-                    'reference' => $reference ?? General::generateReference('wallet'),
-                    'type' => 'CREDIT',
-                    'prev_balance' => $prev_bal,
-                    'new_balance' => $wallet->balance,
-                    'info' => $info,
-                    'product' => $trans_type,
-                ]);
-
-                $response = [
-                    'success' => true,
-                    'message' => 'Wallet crediting was successful.'
-                ];
-            });
-
-            return $response;
-
-        } catch (\Exception $exception) {
+        // Check if wallet is active
+        if (!$wallet->is_active) {
             return [
                 'success' => false,
-                'message' => $exception->getMessage()
+                'message' => "Wallet is {$wallet->status}"
             ];
         }
+
+        DB::transaction(function () use ($user, $wallet, $amount, $info, $service, &$response, $reference ) {
+
+            $prev_bal = $wallet->balance;
+            $wallet->balance += $amount;
+
+            $wallet->updated_at = now();
+            $wallet->save();
+
+            $wallet->transactions()->create([
+                'user_id' => $user->id,
+                'product_id' => $service->id,
+                'amount' => $amount,
+                'reference' => $reference ?? General::generateReference('wallet'),
+                'type' => 'CREDIT',
+                'prev_balance' => $prev_bal,
+                'new_balance' => $wallet->balance,
+                'info' => $info,
+            ]);
+        });
+
+        return [
+            'success' => true,
+            'message' => 'Wallet crediting was successful.'
+        ];
     }
 
 
     /**
-     * Debit user Wallet
+     * Process the debit the wallet transaction.
      *
-     * @param User $user
-     * @param float $amount
-     * @param string $info
-     * @param string $reference
-     * @param string $trans_type type/product of transactions
+     * @param Wallet $wallet
+     * @param float $amount The amount to be debited from the wallet
+     * @param Service $service Service for which debit occurs
+     * @param string|null $reference The transaction unique reference
+     * @param string|null $info Reason for the debit
+     * @param float $charge
      * @param bool $allow_negative
-     * @return array
+     * @return Result
      */
-    public static function debit(User $user, float $amount, string $info, string $reference, string $trans_type = 'OTHERS' , bool $allow_negative = false): array
+    public static function processDebit(Wallet $wallet, float $amount, Service $service, string|null $reference, string|null $info, float $charge = 0, bool $allow_negative = false): Result
     {
         try {
-            $wallet = $user->wallet;
+            $wallet->canPerformTransaction(($amount + $charge), 'DEBIT', $allow_negative);
 
-            // Check if wallet is active
-            if (!$wallet->is_active) {
-                return [
-                    'success' => false,
-                    'message' => "Wallet is {$wallet->status}"
-                ];
-            }
+            DB::transaction(function () use ($wallet, $amount, $service, $reference, $info, $charge){
+                $wallet->debit($amount, $service, 'TRANSACTION', $reference, $info);
 
-            if ($amount > $wallet->balance) {
-                if ( !$allow_negative) {
-                    return [
-                        'success' => false,
-                        'message' => "Insufficient Fund!"
-                    ];
-                }
-            }
-
-            $response = [
-                'success' => false,
-                'message' => 'Error with debit'
-            ];
-
-            DB::transaction(function () use ($user, $wallet, $amount, $info, $trans_type, $reference, &$response ) {
-
-                $prev_bal = $wallet->balance;
-
-                $wallet->balance -= $amount;
-                $wallet->updated_at = now();
-                $wallet->save();
-
-                $wallet->transactions()->create([
-                    'user_id' => $user->id,
-                    'amount' => $amount,
-                    'type' => 'DEBIT',
-                    'reference' => $reference ?? General::generateReference('wallet'),
-                    'prev_balance' => $prev_bal,
-                    'new_balance' => $wallet->balance,
-                    'info' => $info,
-                    'product' => $trans_type,
-                ]);
-
-                $response = [
-                    'success' => true,
-                    'message' => 'Wallet debit was successful.'
-                ];
+                if ($charge > 0) $wallet->debit($charge, $service, 'CHARGE', info: 'Charge for '. strtolower($service->name));
             });
 
-            return $response;
-        } catch (\Exception $exception) {
-            return [
-                'success' => false,
-                'message' => $exception->getMessage()
-            ];
+            return new Result(true);
+        }
+        catch (\Exception $e) {
+            Log::error("Wallet Debit Error: {$e->getMessage()}");
+
+            return new Result(false, message: $e->getMessage());
         }
     }
 }

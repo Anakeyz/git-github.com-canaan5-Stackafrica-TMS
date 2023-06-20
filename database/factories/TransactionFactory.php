@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use App\Models\Service;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -32,7 +33,7 @@ class TransactionFactory extends Factory
             'charge'    => $charge,
             'total_amount' => $total,
             'reference' => Str::random(),
-            'status'    => 'SUCCESSFUL',
+            'status'    => Status::SUCCESSFUL,
             'info'      => 'Seeded',
 //            'created_at' => fake()->dateTimeBetween('- 2 months')
         ];

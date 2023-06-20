@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
+use App\Traits\HasKycCheck;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,8 +25,7 @@ use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles, LogsActivity, CausesActivity, HasApiTokens;
-
+    use HasFactory, Notifiable, HasRoles, LogsActivity, CausesActivity, HasApiTokens, HasKycCheck;
 
     /**
      * The application has two types of users which can either be `Agents` or `Admins`
@@ -86,24 +88,15 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-    public function walletTransactions(): HasMany
+    public function walletTransactions(): HasManyThrough
     {
-        return $this->hasMany(WalletTransaction::class)->successful();
+        return $this->hasManyThrough(WalletTransaction::class, Wallet::class)
+            ->where('wallet_transactions.status', Status::SUCCESSFUL);
     }
 
     public function terminals(): HasMany
     {
         return $this->hasMany(Terminal::class);
-    }
-
-    public function kycDocs(): HasMany
-    {
-        return $this->hasMany(KycDoc::class);
-    }
-
-    public function kycLevel(): BelongsTo
-    {
-        return $this->belongsTo(KycLevel::class, 'level_id');
     }
 
 // Attributes
@@ -156,6 +149,15 @@ class User extends Authenticatable
         return Attribute::set(fn($value) => Hash::make($value));
     }
 
+    public function pin(): Attribute
+    {
+        return Attribute::set(fn($value) => Hash::make($value));
+    }
+
+    public function adminPin(): Attribute
+    {
+        return Attribute::set(fn($value) => Hash::make($value));
+    }
 
 //    Methods
 

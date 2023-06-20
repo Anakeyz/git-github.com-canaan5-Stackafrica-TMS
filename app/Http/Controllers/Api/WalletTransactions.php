@@ -10,8 +10,8 @@ class WalletTransactions extends Controller
 {
     public function index(Request $request)
     {
-        $transactions = auth()->user()->walletTransactions()
-            ->latest()->without('wallet')->paginate($request->get('limit'));
+        $transactions = auth()->user()->walletTransactions()->latest()
+            ->without('wallet')->paginate($request->get('limit'));
 
         return MyResponse::success('Wallet transactions fetched.', $transactions);
     }

@@ -93,8 +93,8 @@
                         <th scope="col">Service</th>
                         <th scope="col">Prev Balance</th>
                         <th scope="col">New Balance</th>
-                        <th scope="col"><x-badge value="DEBIT" :color="statusColor('DEBIT')" /></th>
-                        <th scope="col"><x-badge value="CREDIT" :color="statusColor('CREDIT')" /></th>
+                        <th scope="col"><x-badge value="DEBIT" :color="statusColor(\App\Enums\Action::DEBIT)" /></th>
+                        <th scope="col"><x-badge value="CREDIT" :color="statusColor(\App\Enums\Action::CREDIT)" /></th>
                         <th scope="col">Date</th>
                     </tr>
                     </thead>
@@ -112,11 +112,11 @@
                                 <td class="text-blue-600 font-semibold">@money($transaction->new_balance)</td>
 
                                 <td class="">
-                                    <span class="text-danger">@if($transaction->type == 'DEBIT') @money($transaction->amount) @endif</span>
+                                    <span class="text-danger">@if($transaction->isDebit()) @money($transaction->amount) @endif</span>
                                 </td>
 
                                 <td class="">
-                                    <span class="text-success">@if($transaction->type == 'CREDIT') @money($transaction->amount) @endif</span>
+                                    <span class="text-success">@if($transaction->isCredit()) @money($transaction->amount) @endif</span>
                                 </td>
 
                                 <td class="whitespace-nowrap">{{ $transaction->created_at->toDayDateTimeString() }}</td>

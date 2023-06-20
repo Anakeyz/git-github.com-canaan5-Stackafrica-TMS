@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Action;
 use App\Http\Requests\GlRequest;
 use App\Models\GeneralLedger;
 use App\Models\GLT;
@@ -50,8 +51,8 @@ class GeneralLedgers extends Controller
         $amount = $request->amount;
         $info = 'General Ledger was funded by ' . auth()->user()->name;
 
-        $gl->recordTransaction('CREDIT', auth()->id(), $amount, $info);
+        $gl->recordTransaction(Action::CREDIT, auth()->id(), $amount, $info);
 
-        return back()->with('pending', 'Base Wallet funding awaiting Approval.');
+        return back()->with('pending', 'General ledger funding awaiting approval.');
     }
 }

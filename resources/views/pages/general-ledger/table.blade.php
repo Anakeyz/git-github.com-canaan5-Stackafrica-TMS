@@ -41,12 +41,12 @@
                             @endif
 
                             <td class="">
-                                <x-badge :value="$glt->type" :color="statusColor($glt->type)" />
+                                <x-badge :value="$glt->type->value" :color="statusColor($glt->type)" />
                             </td>
 
                             <td class="">{{ $glt->info }}</td>
 
-                            <td class="">{{ pDate($glt->created_at, true) }}</td>
+                            <td class="">{{ $glt->created_at->toDateTimeString() }}</td>
                         </tr>
                     @endforeach
 

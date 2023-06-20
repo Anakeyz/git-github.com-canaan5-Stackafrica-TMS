@@ -40,38 +40,8 @@ class UserSeeder extends Seeder
 //        $super_agent = User::factory()->times(3)->create(['level_id' => 1]);
 //        $super_agent->each(fn(User $user) => $user->assignRole('Super Agent'));
 //
-//        $agent = User::factory()->times(3)->create(['level_id' => 1]);
+//        $agent = User::factory()->times(13)->create(['level_id' => 1]);
+//
 //        $agent->each( fn(User $user) => $user->assignRole('Agent'));
-
-        // create agents
-        $agent = \App\Models\User::factory()->create([
-            'first_name' => 'Canaan',
-            'other_names' => 'Etai',
-            'email' => 'canaanetai@gmail.com',
-            'phone' => '08163240721',
-            'password' => 'password',
-            'status' => 'ACTIVE',
-        ]);
-        $agent->assignRole('Agent');
-
-        $agent = \App\Models\User::factory()->create([
-            'first_name' => 'Lyte',
-            'other_names' => 'Onyema',
-            'email' => 'lyte@gmail.com',
-            'phone' => '09012347584',
-            'password' => 'password',
-            'status' => 'ACTIVE',
-        ]);
-        $agent->assignRole('Agent');
-
-        $agent = \App\Models\User::factory()->create([
-            'first_name' => 'Sanusi',
-            'other_names' => 'Segun',
-            'email' => 'sanusi@gmail.com',
-            'phone' => '08082722783',
-            'password' => 'password',
-            'status' => 'ACTIVE',
-        ]);
-        $agent->assignRole('Agent');
     }
 }

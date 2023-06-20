@@ -44,7 +44,7 @@ class FeesTable extends Component
     public function edit( Fee $fee )
     {
         $this->fee = $fee;
-        return $this->redirect(route('terminal-groups.fees.edit', [$this->groupId, $fee->id]));
+        return $this->redirect(route('fees.edit', [$this->groupId, $fee->id]));
 //        $this->emit('editFeeModal', $this->fee);
     }
 

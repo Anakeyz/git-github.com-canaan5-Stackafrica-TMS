@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Action;
 use Cjmellor\Approval\Concerns\MustBeApproved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,18 +27,25 @@ class GeneralLedger extends Model
         return $this->hasMany(GLT::class, 'gl_id');
     }
 
-    public function recordTransaction(string $type, int $userId, float $amount, string $info)
+    /**
+     * Impact the general ledger for the service instance after a transaction occurs.
+     *
+     * @param Action $action <b>true</b> for <i>credit</i> or <b>false</b> for <i>debit</i>
+     * @param int $userId The user ID
+     * @param float $amount Total amount for the transaction to impact this general ledger
+     * @param string|null $info Extra information about the transaction
+     * @return void
+     */
+    public function recordTransaction(Action $action, int $userId, float $amount, string|null $info = null): void
     {
         $prev_bal = $this->balance;
 
-        if (!in_array($type, Wallet::IMPACT_TYPE)) abort(400);
-
-        $type == 'DEBIT' ? $this->debit($amount) : $this->credit($amount);
+        $this->{strtolower($action->value)}($amount); // $this->credit or $this->debit below
 
         $this->glts()->create([
             'from_user_id'  => $userId,
             'amount'        => $amount,
-            'type'          => $type,
+            'type'          => $action->value,
             'prev_balance'  => $prev_bal,
             'new_balance'   => $this->balance,
             'info'          => $info

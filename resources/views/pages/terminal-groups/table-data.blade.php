@@ -135,9 +135,13 @@
 
                             <td class="table-report__action w-40">
                                 <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3 btn btn-sm btn-danger-soft" href="{{ route('terminal-groups.fees', $group->id) }}"> <i data-lucide="dollar-sign" class="w-4 h-4 mr-1"></i> Fees </a>
+                                    <a class="flex items-center mr-3 btn btn-sm btn-danger-soft" href="{{ route('terminal-groups.fees.index', $group) }}">
+                                        <i data-lucide="dollar-sign" class="w-4 h-4 mr-1"></i> Fees
+                                    </a>
 
-                                    <a class="flex items-center btn btn-sm btn-secondary-soft" href="{{ route('terminal-groups.terminals.index', $group->id) }}" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="smartphone" class="w-4 h-4 mr-1"></i> Terminals </a>
+                                    <a class="flex items-center btn btn-sm btn-secondary-soft" href="{{ route('terminal-groups.terminals.index', $group) }}">
+                                        <i data-lucide="smartphone" class="w-4 h-4 mr-1"></i> Terminals
+                                    </a>
                                 </div>
                             </td>
 

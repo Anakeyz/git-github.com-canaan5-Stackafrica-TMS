@@ -1,5 +1,5 @@
 @props(['wallet'])
-<x-badge :color=" statusColor($wallet->status)"
+<x-badge :color="statusColor($wallet->status)"
          class="flex w-fit justify-between pr-1 text-xs"
 >
     <span>{{ $wallet->status }}</span>

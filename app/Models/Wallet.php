@@ -2,23 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\HasWalletMethods;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Ramsey\Uuid\Uuid;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Wallet extends Model
 {
-    use HasFactory, LogsActivity;
-
-    const IMPACT_TYPE = ['DEBIT', 'CREDIT'];
-
-    const STATUSES = ['SUCCESSFUL','FAILED'];
+    use HasFactory, LogsActivity, HasWalletMethods;
 
     protected $guarded = ['id'];
 

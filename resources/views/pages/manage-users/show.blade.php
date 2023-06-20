@@ -238,7 +238,7 @@
                                             <div class="mr-auto">
                                                 <x-badge>{{ $user->kycLevel->name }}</x-badge>
                                             </div>
-                                            <div>{{ $user->kycLevel->id }} / {{ allLevels()->count() }}</div>
+                                            <div>{{ $user->kycLevel->id }} / {{ app('levels')->count() }}</div>
                                         </div>
                                         <div class="progress h-1 mt-2">
                                             <div class="progress-bar w-1/4 bg-info" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="8"></div>

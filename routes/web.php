@@ -75,7 +75,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('users',                        Users::class)->only(['show', 'update', 'store']);
     Route::resource('terminals',                    Terminals::class)->except(['destroy', 'edit', 'create']);
-    Route::resource('fees',                         Fees::class);
     Route::resource('users.kyc-docs',               UserKycDocs::class)->shallow()->only(['index', 'create', 'store']);
     Route::resource('kyc-docs',                     KycDocs::class)->shallow()->except(['edit', 'show']);
     Route::resource('transactions',                 Transactions::class)->only('index');
@@ -92,41 +91,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('menus',                        Menus::class)->only('index');
     Route::resource('terminals.menus',              TerminalMenus::class)->only('store');
 
-    Route::get('terminal-groups/{group_id}/fees/edit/{feed_id}',    [Fees::class, 'edit']);
-    Route::get('terminal-groups/{group_id}/fees/edit/{feed_id}',    [Fees::class, 'edit']);
-
     Route::get('kyc-documents', [KycDocs::class, 'display'])->name('display');
     Route::get('/services/json', [Services::class, 'jsonData'])->name('services.json');
 
-    /**
-     * Terminal Groups
-     */
-    Route::controller(TerminalGroups::class)->prefix('terminal-groups')->name('terminal-groups.')
-        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])->group(function () {
-        Route::get('{id}/fees', 'fees')->name('fees');
-        Route::get('{id}/fees/{fee_id}/edit', 'editFee')->name('edit-fee');
-    });
-
-    /**
-     * Fee Structure
-     */
-    Route::controller(Fees::class)->prefix('terminal-groups')->name('terminal-groups.')
-        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])->group(function () {
-            Route::get('{id}/fees', 'index')->name('fees');
-            Route::get('{id}/fees/{fee_id}/edit', 'edit')->name('fees.edit');
-            Route::put('{id}/fees/{fee_id}/edit', 'update')->name('fees.edit');
-        });
-
     Route::resource('routing',Routing::class);
-    Route::controller(Routing::class)->prefix('routing')->name('routing.')
-        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])->group(function () {
+
+    Route::withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)->group(function () {
+        Route::resource('terminal-groups.fees', Fees::class)->only(['index', 'edit', 'update'])->shallow();
+
+        Route::controller(Routing::class)->prefix('routing')->name('routing.')->group(function () {
             Route::get('/{routing}/settings', 'settings')->name('settings');
             Route::get('/settings/{type}/store', 'addSetting')->name('settings.add');
             Route::get('/settings/{type}/edit', 'addSetting')->name('settings.edit');
             Route::post('/settings/store', 'addSetting')->name('settings.store');
             Route::patch('/settings/update', 'updateSetting')->name('settings.update');
-        }
-    );
+        });
+    });
 });
 
 require __DIR__.'/auth.php';

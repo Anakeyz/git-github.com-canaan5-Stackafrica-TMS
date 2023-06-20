@@ -203,7 +203,7 @@
                             <td class="text-blue-600 font-semibold">@money($transaction->total_amount)</td>
                             <td class=""><x-badge>@nbsp($transaction->service->name)</x-badge></td>
                             <td class="">
-                                <x-badge :value="$transaction->status" :color="statusColor($transaction->status)" />
+                                <x-badge :value="$transaction->status->value" :color="statusColor($transaction->status)" />
                             </td>
                             <td class="">{{ $transaction->reference }}</td>
                         </tr>

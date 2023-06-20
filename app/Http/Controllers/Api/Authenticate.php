@@ -31,9 +31,6 @@ class Authenticate extends Controller
 
         $user = auth()->user();
 
-        $user->session_token = base64_encode(random_bytes(16));
-        $user->save();
-
         return MyResponse::success('Terminal authentication successful.', [
             'id'                => $user->id,
             'tid'               => $terminal->tid,
@@ -48,8 +45,9 @@ class Authenticate extends Controller
             'name'              => $user->name,
             'phone'             => $user->phone,
             'level'             => $user->level,
+            'avatar'            => $user->avatar,
             'terminal_status'   => $terminal->status,
-            'session_token'     => $user->session_token,
+            'admin_pin'         => $user->admin_pin,
             'access_token'      => $user->generateToken($terminal),
         ]);
     }

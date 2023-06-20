@@ -163,6 +163,12 @@ return [
 
         'serial' => [
             'exists' => 'Terminal not found or INACTIVE.'
+        ],
+        'pin' => [
+            'not_in' => "Default :attribute '0000' not allowed."
+        ],
+        'admin_pin' => [
+            'not_in' => "Default :attribute '0000' not allowed."
         ]
     ],
 
@@ -177,6 +183,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'pin' => 'transaction pin',
+        'current_pin' => 'current transaction pin',
+        'CHANNEL' => 'channel'
+    ],
 
 ];

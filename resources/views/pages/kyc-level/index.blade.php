@@ -49,7 +49,7 @@
                         </thead>
 
                         <tbody>
-                        @foreach (allLevels() as $level)
+                        @foreach (app('levels') as $level)
                             <tr class="intro-x">
                                 <td class="w-56">{{ $level->id }}</td>
 

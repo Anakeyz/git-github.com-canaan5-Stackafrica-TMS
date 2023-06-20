@@ -37,7 +37,7 @@
 
                         <td class=""><livewire:status-toggle-badge :model="$wallet" wire:key="wallet-{{$wallet->id}}" /></td>
 
-                        <td class="">{{ pDate($wallet->created_at) }}</td>
+                        <td class="">{{ $wallet->created_at->toDayDateTimeString() }}</td>
                     </tr>
                 @endforeach
                 </tbody>

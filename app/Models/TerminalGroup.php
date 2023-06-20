@@ -21,4 +21,13 @@ class TerminalGroup extends Model
     {
         return $this->hasMany(Terminal::class, 'group_id');
     }
+
+    public function charge(Service $service, float $amount): float
+    {
+        $fee = $this->fees()->whereBelongsTo($service)->whereType(Fee::CHARGE)->first();
+
+        if (is_null($fee)) return  0;
+
+        return $fee->getChargeFor($amount);
+    }
 }

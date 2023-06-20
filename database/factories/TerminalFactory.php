@@ -23,11 +23,11 @@ class TerminalFactory extends Factory
             'status'        => ['ACTIVE', 'INACTIVE'][rand(0,1)],
             'tid'           => Str::random(8),
             'mid'           => Str::random(15),
-            'serial'        => strtoupper(Str::random(20)),
+            'serial'        => Str::random(20),
             'tmk'           => Str::random(38),
             'tsk'           => Str::random(38),
             'tpk'           => Str::random(38),
-            'category_code' => '5800',
+            'category_code' => fake()->randomNumber(4),
             'date_time'     => fake()->dateTime()->format('d/m/y H:i'),
             'name_location' => Str::random(40),
         ];

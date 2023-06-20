@@ -28,7 +28,7 @@ class LedgerPage extends Component
     public function render()
     {
         $transactions = WalletTransaction::latest()
-            ->successful()->with(['service', 'agent'])
+            ->successful()->with(['service', 'wallet', 'agent'])
             ->withSearch($this->search)
             ->filterByDate($this->date_filter)
             ->paginate();

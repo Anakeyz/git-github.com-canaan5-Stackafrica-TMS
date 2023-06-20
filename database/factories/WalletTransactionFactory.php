@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Wallet;
+use App\Enums\Action;
+use App\Enums\Status;
 use App\Models\WalletTransaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,9 +20,9 @@ class WalletTransactionFactory extends Factory
     public function definition()
     {
         return [
-            'status'    => 'SUCCESSFUL',
-            'type'      => Wallet::IMPACT_TYPE[rand(0,1)],
-            'reason'    => WalletTransaction::REASON[rand(0,1)],
+            'status'    => Status::SUCCESSFUL,
+            'type'      => Action::values()[rand(0,1)],
+            'reason'    => WalletTransaction::TYPES[rand(0,1)],
             'info'      => 'seeded',
             'amount'    => fake()->randomNumber(5),
             'prev_balance'    => fake()->randomNumber(5),

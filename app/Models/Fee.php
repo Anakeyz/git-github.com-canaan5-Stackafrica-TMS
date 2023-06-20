@@ -11,6 +11,11 @@ class Fee extends Model
 {
     use HasFactory, LogsActivity;
 
+    const CHARGE = 'CHARGE';
+    const COMMISSION = 'COMMISSION';
+    const FIXED = 'FIXED';
+    const PERCENT = 'PERCENTAGE';
+
     protected $guarded = ['id'];
 
     protected $casts = [
@@ -36,13 +41,13 @@ class Fee extends Model
      * @param $groupId
      * @return void
      */
-    public static function createDefault( $groupId = null )
+    public static function createDefault($groupId)
     {
-        Service::where('id', '!=', 1)->each(function ( $service ) use ( $groupId ) {
+        Service::whereNotIn('slug', ['airtime', 'internetdata'])->each(function (Service $service) use ( $groupId ) {
 
-            $config = collect([]);
-            if ( $service->name == 'BANK TRANSFER' ) {
-                $config = collect([
+            $config = collect();
+            if ( $service->slug == 'banktransfer' ) {
+                $config->merge([
                     '0-5000'        => 10.00,
                     '5001-50000'    => 21.51,
                     '50001-1000000' => 30.00
@@ -50,10 +55,10 @@ class Fee extends Model
             }
 
             Fee::updateOrCreate([
-                'group_id'       => $groupId ?? TerminalGroup::orderBy('id', 'asc')->first()?->id,
+                'group_id'       => $groupId,
                 'service_id'    => $service->id,
-                'title'         => $service->name,
             ], [
+                'title'         => $service->name,
                 'amount'        => 10.00,
                 'config'        => $config
             ]);
@@ -65,5 +70,36 @@ class Fee extends Model
         return LogOptions::defaults()
             ->useLogName('Fee')
             ->logOnly(['title']);
+    }
+
+    public function getChargeFor(float $amount): float
+    {
+        return match ($this->amount_type) {
+            self::FIXED => $this->getFixedCharge($amount),
+            self::PERCENT => $this->getPercentageCharge($amount),
+        };
+    }
+
+    public function getFixedCharge(float $amount): float
+    {
+        if (empty($this->config)) return $this->amount;
+
+        foreach ($this->config as $range => $value) {
+            $min = (int) str($range)->before('-')->trim()->value();
+            $max = (int) str($range)->afterLast('-')->trim()->value();
+
+            if ($amount > $min && $amount < $max) return $value;
+        }
+
+        return  $this->amount;
+    }
+
+    public function getPercentageCharge(float $amount): float
+    {
+        $charge = ($this->amount / 100) * $amount;
+
+        if ($this->cap != 0 and $charge > $this->cap) return $this->cap;
+
+        return $charge;
     }
 }

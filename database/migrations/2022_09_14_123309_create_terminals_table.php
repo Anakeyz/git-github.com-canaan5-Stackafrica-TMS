@@ -31,6 +31,9 @@ return new class extends Migration
             $table->string('country_code', 3)->default('566');
             $table->string('category_code', 4)->nullable();
             $table->string('name_location', 40)->nullable();
+            $table->string('admin_pin')->default('0000');
+            $table->string('pin')->default('0000');
+            $table->integer('wrong_pin_count')->default(0);
             $table->timestamps();
         });
     }

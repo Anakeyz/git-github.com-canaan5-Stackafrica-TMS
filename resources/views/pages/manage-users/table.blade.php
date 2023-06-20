@@ -62,7 +62,7 @@
                             <livewire:user-status-badge :user="$user" wire:key="status-badge-{{ $user->id }}"/>
                         </td>
 
-                        <td class="">{{ pDate($user->created_at) }}</td>
+                        <td class="">{{ $user->created_at->toDayDateTimeString() }}</td>
 
                         @if(!is_null($roleAction))
                             <td class="table-report__action w-56">

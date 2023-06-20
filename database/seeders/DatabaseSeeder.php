@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
 
         // create default configs
 
-//        $this->seedWithMysql();
+        $this->seedBanksWithMysql();
 
-        $this->call([
+        /*$this->call([
             ConfigSeeder::class,
             RoleSeeder::class,
             RoutingSeeder::class,
@@ -35,12 +35,18 @@ class DatabaseSeeder extends Seeder
             GLTSeeder::class,
             TerminalSeeder::class,
             TransactionSeeder::class,
-        ]);
+        ]);*/
     }
 
     public function seedWithMysql()
     {
         $seed = File::get(database_path('seeders/teqtms-1.sql'));
         DB::connection()->getPdo()->exec($seed);
+    }
+
+    public function seedBanksWithMysql()
+    {
+        $banks = File::get(database_path('seeders/banks.sql'));
+        DB::connection()->getPdo()->exec($banks);
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('service_id')->nullable();
             $table->string('name');
+            $table->string('class')->nullable();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

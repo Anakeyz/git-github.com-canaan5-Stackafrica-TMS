@@ -37,12 +37,13 @@ trait HasFiltering
      *
      * @param Builder $query
      * @param string $description
+     * @param string $column
      * @return void
      */
     public function scopeFilterByDateDesc(Builder $query, string $description = '', string $column = 'created_at'): void
     {
         $query->when($description == 'today',
-            fn($query) => $query->whereDate($column, today()->format('Y-m-d'))
+            fn($query) => $query->today($column)
         )->when($description == 'yesterday',
             fn($query) => $query->whereDate($column, today()->subDay()->format('Y-m-d'))
         )->when($description == 'week',
@@ -70,5 +71,10 @@ trait HasFiltering
                 fn($query) => $query->whereDate('created_at', $date[0])
             );
         }
+    }
+
+    public function scopeToday(Builder $builder, string $column = 'created_at')
+    {
+        $builder->whereDate($column, today());
     }
 }

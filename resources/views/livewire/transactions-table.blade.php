@@ -20,7 +20,7 @@
                     @endunless
 
                     @if($type == 'wallet')
-                        <th >Account Number</th>
+                        <th class="whitespace-nowrap">Account Number</th>
                     @endif
 
                     <th >Amount</th>
@@ -75,7 +75,7 @@
                             <td class="text-blue-600 font-semibold">@money($transaction->new_balance)</td>
 
                             <td class="">
-                                <x-badge :value="$transaction->type" :color="statusColor($transaction->type)" />
+                                <x-badge :value="$transaction->action->value" :color="statusColor($transaction->action)" />
                             </td>
                         @endif
 
@@ -84,22 +84,24 @@
 
                             <td class="text-blue-600 font-semibold">@money($transaction->total_amount)</td>
 
-                            <td class=""><x-badge>@nbsp($transaction->service->name)</x-badge></td>
+                            <td class="whitespace-nowrap"><x-badge>{{ $transaction->service->name }}</x-badge></td>
 
                             <td class="">
-                                <x-badge :value="$transaction->status" :color="statusColor($transaction->status)" />
+                                <x-badge :value="$transaction->status->value" :color="statusColor($transaction->status)" />
                             </td>
                         @endif
 
                         @if($type == 'wallet')
                             <td class="">
-                                <x-badge :value="$transaction->reason" :color="statusColor($transaction->reason)" />
+                                <x-badge :value="$transaction->type" :color="statusColor($transaction->type)" />
                             </td>
                         @endif
 
                         <td class="">{{ $transaction->reference }}</td>
 
-                        <td class="whitespace-nowrap">{{ $transaction->info }} that's why I sent it.</td>
+                        <td >
+                            <div class="w-32 truncate tooltip" title="{{ $transaction->info }}">{{ $transaction->info }}</div>
+                        </td>
 
                         <td class="whitespace-nowrap">{{ $transaction->created_at->toDayDateTimeString() }}</td>
                     </tr>
