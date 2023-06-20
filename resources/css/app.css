@@ -24,7 +24,7 @@
    | https://tailwindcss.com/docs/theme
    |
    */
-@import "./_colors.css";
+@import "_colors.scss";
 
 /*
    |--------------------------------------------------------------------------

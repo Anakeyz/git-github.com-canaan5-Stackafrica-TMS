@@ -48,7 +48,7 @@ module.exports = {
                     sky: colors.sky,
                     neutral: colors.neutral,
                     gray: colors.gray,
-                    teqp: '#bc2229',
+                    teqp: '#09a7f7',
                     teqs: '#2a2c3f'
                 }),
                 primary: withOpacityValue("--color-primary"),
