@@ -169,7 +169,7 @@
             <div class="intro-y flex items-center">
                 <h2 class="text-lg font-medium truncate mr-5">Latest Transactions</h2>
                 <div class="flex items-center ml-auto">
-                    <a href="{{ route('transactions.index') }}" class="underline text-pending hover:text-opacity-70 mr-4">View more</a>
+                    <a href="{{ route('transactions.index') }}" class="underline text-primary hover:text-opacity-70 mr-4">View more</a>
                 </div>
             </div>
             <div class="intro-y overflow-auto mt-5 sm:mt-0">
@@ -219,7 +219,7 @@
             <div class="intro-y flex items-center h-10">
                 <h2 class="text-lg font-medium truncate mr-5">Recently added Agents</h2>
                 <div class="flex items-center ml-auto">
-                    <a href="{{ route('agents.index') }}" class="underline text-pending hover:text-opacity-70 mr-4">View all agents</a>
+                    <a href="{{ route('agents.index') }}" class="underline text-primary hover:text-opacity-70 mr-4">View all agents</a>
                 </div>
             </div>
             <div class="intro-y overflow-auto mt-5 sm:mt-0">

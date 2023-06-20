@@ -3,10 +3,10 @@
     <div class="h-full flex items-center">
         <!-- BEGIN: Logo -->
         <a href="" class="logo -intro-x hidden md:flex xl:w-[180px] block">
-            <img alt="Midone - HTML Admin Template" class="logo__image w-6" src="{{ asset('build/assets/images/logo.svg') }}">
-            <span class="logo__text text-white font-semibold text-lg ml-3">
+            <img alt="@appName logo" class="logo__image w-28" src="{{ asset('build/assets/images/stack-logo.png') }}">
+            {{--<span class="logo__text text-white font-semibold text-lg ml-3">
                 @appName
-            </span>
+            </span>--}}
         </a>
         <!-- END: Logo -->
         <!-- BEGIN: Breadcrumb -->
