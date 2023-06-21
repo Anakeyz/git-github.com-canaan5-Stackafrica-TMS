@@ -40,6 +40,8 @@ class UpdateUserRequest extends FormRequest
             'status' => [$prohibited, 'nullable', Rule::in(User::ALL_STATUS)],
             'bvn' => ['nullable', 'digits:11', $unique],
             'nin' => ['nullable', 'digits:15', $unique],
+            'password' => 'confirmed',
+            'current' => 'required_with:password|current_password'
         ];
     }
 }
