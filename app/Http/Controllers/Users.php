@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\RoleHelper;
-use App\Helpers\UserHelper;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class Users extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     public function create()
     {
         if (\request()->routeIs('agents.onboard')) {

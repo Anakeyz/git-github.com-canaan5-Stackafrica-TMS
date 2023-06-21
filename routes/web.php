@@ -14,6 +14,7 @@ use App\Http\Controllers\KycLevels;
 use App\Http\Controllers\Ledger;
 use App\Http\Controllers\Menus;
 use App\Http\Controllers\Permissions;
+use App\Http\Controllers\Profile;
 use App\Http\Controllers\Providers;
 use App\Http\Controllers\Roles;
 use App\Http\Controllers\Services;
@@ -39,8 +40,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
-Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
+/*Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
+Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');*/
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -69,7 +70,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/others', 'index')->name('others');
         Route::post('/{gl}/update', 'update')->name('update');
     });
-
 
     Route::get('/activities', [\App\Http\Controllers\ActivityLogController::class, 'index'])->name('activities');
 

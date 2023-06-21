@@ -70,7 +70,7 @@
                                 </div>--}}
                             </div>
                             <div class="p-5">
-                                <div class="flex flex-col sm:flex-row">
+                                <div class="flex flex-row">
                                     <div class="mr-auto">
                                         <a href="" class="font-medium">@money($transactions->today_amount)</a>
                                         <div class="text-slate-500 mt-1">Today</div>
@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-col sm:flex-row mt-2">
+                                <div class="flex flex-row mt-2">
                                     <div class="mr-auto">
                                         <a href="" class="font-medium">@money($transactions->week_amount)</a>
                                         <div class="text-slate-500 mt-1">This week</div>
@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-col sm:flex-row mt-2">
+                                <div class="flex flex-row mt-2">
                                     <div class="mr-auto">
                                         <a href="" class="font-medium">@money($transactions->month_amount)</a>
                                         <div class="text-slate-500 mt-1">This Month</div>
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-col sm:flex-row mt-2">
+                                <div class="flex flex-row mt-2">
                                     <div class="mr-auto">
                                         <a href="" class="font-medium">@money($transactions->year_amount)</a>
                                         <div class="text-slate-500 mt-1">This year</div>

@@ -32,8 +32,9 @@ class User extends Authenticatable
      *<p>The role management of this system is divided into these as the groups.
      * <p>Therefore, each role created can either be an Admin (always the first index) or an Agent (the second index).
      */
-    const   GROUPS = ['Admins', 'Agents'];
+    const GROUPS = ['Admins', 'Agents'];
     const ALL_STATUS = ['ACTIVE', 'INACTIVE', 'SUSPENDED', 'DISABLED'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -68,7 +69,7 @@ class User extends Authenticatable
 
 //    Relationships
 
-    public function superAgents(): BelongsTo
+    public function superAgent(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -170,6 +171,11 @@ class User extends Authenticatable
         $agents = Role::query()->where('type', self::GROUPS[1])->pluck('name')->toArray();
 
         return $this->hasAnyRole($agents);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role_type == self::GROUPS[0];
     }
 
     /**

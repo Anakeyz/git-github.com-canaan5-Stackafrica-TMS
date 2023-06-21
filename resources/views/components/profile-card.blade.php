@@ -10,9 +10,18 @@
                 </div>
                 <div class="ml-5">
                     <div class="w-24 sm:w-40 mb-2 sm:whitespace-normal font-medium sm:text-lg">{{ $user->name }}</div>
-                    <div class="flex items-center">
+                    <div class="flex flex-col gap-3">
                         <livewire:user-status-badge :user="$user"/>
-                        <a class="tooltip" href="#" title="Edit Details"><i data-lucide="edit" class="text-info w-4 h-4"></i></a>
+                        <a class="flex gap-2 text-xs hover:text-info transition duration-300" href="#">
+                            <i data-lucide="edit" class="text-info w-4 h-4"></i>
+                            Edit Profile
+                        </a>
+                        @if($user->is(Auth::user()))
+                            <a class="flex gap-2 text-xs hover:text-pending transition duration-300" href="#">
+                                <i data-lucide="unlock" class="text-pending w-4 h-4"></i>
+                                Change Password
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
