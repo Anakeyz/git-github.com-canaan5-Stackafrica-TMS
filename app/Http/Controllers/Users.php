@@ -65,7 +65,7 @@ class Users extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->fulfilled());
+        $user->update($request->validated());
 
         return back()->with('success', 'Update successful!');
     }

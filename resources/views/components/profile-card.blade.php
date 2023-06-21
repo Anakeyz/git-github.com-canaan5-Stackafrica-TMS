@@ -12,12 +12,16 @@
                     <div class="w-24 sm:w-40 mb-2 sm:whitespace-normal font-medium sm:text-lg">{{ $user->name }}</div>
                     <div class="flex flex-col gap-3">
                         <livewire:user-status-badge :user="$user"/>
-                        <a class="flex gap-2 text-xs hover:text-info transition duration-300" href="#">
+                        <a class="flex gap-2 text-xs hover:text-info transition duration-300" href="#"
+                           data-tw-toggle="modal" data-tw-target="#edit-profile"
+                        >
                             <i data-lucide="edit" class="text-info w-4 h-4"></i>
                             Edit Profile
                         </a>
-                        @if($user->is(Auth::user()))
-                            <a class="flex gap-2 text-xs hover:text-pending transition duration-300" href="#">
+                        @if($allow = $user->is(Auth::user()))
+                            <a class="flex gap-2 text-xs hover:text-pending transition duration-300" href="#"
+                               data-tw-toggle="modal" data-tw-target="#change-password"
+                            >
                                 <i data-lucide="unlock" class="text-pending w-4 h-4"></i>
                                 Change Password
                             </a>
@@ -46,3 +50,9 @@
     </div>
 </div>
 
+@push('modals')
+    <x-users.edit-profile :$user />
+    @if($allow)
+        <x-users.change-password />
+    @endif
+@endpush

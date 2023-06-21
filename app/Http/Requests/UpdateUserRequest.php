@@ -25,17 +25,21 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $prohibited = Rule::prohibitedIf(!$this->user()->isAdmin());
+        $unique = Rule::unique('users')->ignoreModel($this->user);
+
         return [
-            'status' => ['nullable', Rule::in(User::ALL_STATUS)],
-            'bvn' => ['nullable', 'digits:11', Rule::unique('users', 'bvn')->ignoreModel($this->user)],
-            'nin' => ['nullable', 'digits:15', Rule::unique('users', 'nin')->ignoreModel($this->user)],
+            'first_name' => 'string',
+            'other_names' => 'string',
+            'email' => ['email:rfc,dns', $unique],
+            'phone' => ['digits:11', $unique],
+            'gender' => 'nullable|in:MALE,FEMALE',
+            'state' => [$prohibited, 'nullable',  'string'],
+            'address' => [$prohibited, 'nullable', 'string'],
+            'dob' => 'nullable|date',
+            'status' => [$prohibited, 'nullable', Rule::in(User::ALL_STATUS)],
+            'bvn' => ['nullable', 'digits:11', $unique],
+            'nin' => ['nullable', 'digits:15', $unique],
         ];
-    }
-
-
-    public function fulfilled(): array
-    {
-
-        return collect($this->request->all())->filter()->toArray();
     }
 }

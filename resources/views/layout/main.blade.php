@@ -11,6 +11,9 @@
         <!-- END: JS Assets-->
         @livewireScripts
 
+        <!-- Modals -->
+        @stack('modals')
+
         <!-- Custom scripts -->
         @stack('script')
     </body>
