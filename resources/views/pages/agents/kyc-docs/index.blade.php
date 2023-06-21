@@ -32,9 +32,9 @@
                         <th scope="col">Name Of Doc</th>
 
                         <th class="text-center whitespace-nowrap">
-                                <span class="flex justify-center">
-                                    <i data-lucide="settings" class="w-5 h-5"></i>
-                                </span>
+                            <span class="flex justify-center">
+                                <i data-lucide="settings" class="w-5 h-5"></i>
+                            </span>
                         </th>
                     </tr>
                     </thead>

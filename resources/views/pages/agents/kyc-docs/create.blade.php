@@ -32,7 +32,6 @@
                     <form method="post" action="{{ route('users.update', $user->id) }}" class="my-form">
                         @csrf
                         @method('PUT')
-
                         <div class="form-inline mt-3">
                             <label for="bvn" class="form-label">BVN</label>
                             <div class="w-full">
@@ -99,7 +98,7 @@
                 @if($user->kycDocs->count() > 0)
                     @foreach($user->kycDocs as $doc)
                         <div class="intro-y col-span-6 sm:col-span-4 md:col-span-3 2xl:col-span-2">
-                            <div class="file box rounded-md px-5 pt-8 pb-5 px-3 sm:px-5 relative zoom-in">
+                            <div class="file box rounded-md pt-8 pb-5 px-3 sm:px-5 relative zoom-in">
 
                                 <a href="{{ $doc->path }}" target="_blank" class="w-3/5 file__icon file__icon--file mx-auto">
                                     <div class="file__icon__file-name">{{ strtoupper($doc->ext) }}</div>
