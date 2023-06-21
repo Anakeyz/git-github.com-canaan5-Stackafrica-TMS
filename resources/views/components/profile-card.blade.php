@@ -4,10 +4,17 @@
     <div class="intro-y box p-5">
         <div class="flex flex-col md:flex-row -mx-5">
             <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                    <x-user-avatar :user="$user" class="rounded-full" />
-                    <div class="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2"> <i class="w-4 h-4 text-white" data-lucide="camera"></i> </div>
-                </div>
+                <form action="{{ route('users.update', $user) }}" method="post" class="avatar-form" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
+                        <x-user-avatar :user="$user" class="rounded-full" />
+                        <label for="avatar" class="absolute cursor-pointer mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2">
+                            <i class="w-4 h-4 text-white" data-lucide="camera"></i>
+                            <input type="file" name="avatar" class="hidden" id="avatar" onchange="this.closest('form').submit()">
+                        </label>
+                    </div>
+                </form>
                 <div class="ml-5">
                     <div class="w-24 sm:w-40 mb-2 sm:whitespace-normal font-medium sm:text-lg">{{ $user->name }}</div>
                     <div class="flex flex-col gap-3">

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Helpers\FileHelper;
 use App\Traits\HasKycCheck;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -109,9 +110,10 @@ class User extends Authenticatable
      */
     public function avatar(): Attribute
     {
-        return Attribute::get(
-            fn($value) => !is_null($value) ? $value
-                : asset('build/assets/images/'. strtolower($this->gender) .'.jpeg')
+        return Attribute::make(
+            get: fn($value) => !is_null($value) ? asset('storage/'. $value)
+                : asset('build/assets/images/'. strtolower($this->gender) .'.jpeg'),
+            set: fn($value) => FileHelper::processFileUpload($value, 'avatar')
         );
     }
 

@@ -41,7 +41,8 @@ class UpdateUserRequest extends FormRequest
             'bvn' => ['nullable', 'digits:11', $unique],
             'nin' => ['nullable', 'digits:15', $unique],
             'password' => 'confirmed',
-            'current' => 'required_with:password|current_password'
+            'current' => 'required_with:password|current_password',
+            'avatar' => 'image|max:2000'
         ];
     }
 }
