@@ -86,6 +86,11 @@ class Transaction extends Model
             ->orWhereRelation('service', 'slug', 'electricity');
     }
 
+    public function scopeSumAndCount(Builder $builder)
+    {
+        return $builder->selectRaw('count(*) as count, sum(amount) as amount_sum')->first();
+    }
+
     /**
      * Create a pending transaction for the terminal instance.
      */

@@ -70,9 +70,9 @@
                                 </div>--}}
                             </div>
                             <div class="p-5">
-                                <div class="flex flex-row">
+                                <div class="flex flex-col sm:flex-row">
                                     <div class="mr-auto">
-                                        <a href="" class="font-medium">@money($transactions->today_amount)</a>
+                                        <a href="" class="font-medium">@money($transactions->today->amount_sum)</a>
                                         <div class="text-slate-500 mt-1">Today</div>
                                     </div>
                                     <div class="flex">
@@ -82,13 +82,13 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <div class="bg-success/20 text-success rounded px-2 mt-1.5">{{ $transactions->today_count }}</div>
+                                            <div class="bg-success/20 text-success rounded px-2 mt-1.5">{{ $transactions->today->count }}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-row mt-2">
+                                <div class="flex flex-col sm:flex-row mt-2">
                                     <div class="mr-auto">
-                                        <a href="" class="font-medium">@money($transactions->week_amount)</a>
+                                        <a href="" class="font-medium">@money($transactions->week->amount_sum)</a>
                                         <div class="text-slate-500 mt-1">This week</div>
                                     </div>
                                     <div class="flex">
@@ -98,13 +98,13 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <div class="bg-info/20 text-info rounded px-2 mt-1.5">{{ $transactions->week_count }}</div>
+                                            <div class="bg-info/20 text-info rounded px-2 mt-1.5">{{ $transactions->week->count }}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-row mt-2">
+                                <div class="flex flex-col sm:flex-row mt-2">
                                     <div class="mr-auto">
-                                        <a href="" class="font-medium">@money($transactions->month_amount)</a>
+                                        <a href="" class="font-medium">@money($transactions->month->amount_sum)</a>
                                         <div class="text-slate-500 mt-1">This Month</div>
                                     </div>
                                     <div class="flex">
@@ -114,13 +114,13 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <div class="bg-pending/10 text-pending rounded px-2 mt-1.5">{{ $transactions->month_count }}</div>
+                                            <div class="bg-pending/10 text-pending rounded px-2 mt-1.5">{{ $transactions->month->count }}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-row mt-2">
+                                <div class="flex flex-col sm:flex-row mt-2">
                                     <div class="mr-auto">
-                                        <a href="" class="font-medium">@money($transactions->year_amount)</a>
+                                        <a href="" class="font-medium">@money($transactions->year->amount_sum)</a>
                                         <div class="text-slate-500 mt-1">This year</div>
                                     </div>
                                     <div class="flex">
@@ -130,7 +130,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <div class="bg-primary/10 text-primary rounded px-2 mt-1.5">{{ $transactions->year_count }}</div>
+                                            <div class="bg-primary/10 text-primary rounded px-2 mt-1.5">{{ $transactions->year->count }}</div>
                                         </div>
                                     </div>
                                 </div>

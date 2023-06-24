@@ -24,12 +24,14 @@ function statusColor(string|Status|Action $value): string
 /**
  * Convert to human-readable format with country's currency
  *
- * @param float $value
+ * @param float|null $value
  * @param string $symbol
  * @return string
  */
-function moneyFormat(float $value, string $symbol = '₦'): string
+function moneyFormat(float|null $value, string $symbol = '₦'): string
 {
+    $value ??= 0;
+    
     if ($value < 0) {
         $print_number = "($symbol" . str_replace('-', '', number_format ($value, 2, ".", ",")) . ")";
     } else {

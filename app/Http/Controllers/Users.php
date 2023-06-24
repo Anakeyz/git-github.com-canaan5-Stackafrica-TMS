@@ -40,14 +40,10 @@ class Users extends Controller
         $user->load('kycDocs', 'terminals');
 
         $transactions = (object) [
-            'today_amount' => $user->transactions()->filterByDateDesc('today')->sum('amount'),
-            'today_count' => $user->transactions()->filterByDateDesc('today')->count(),
-            'week_amount' => $user->transactions()->filterByDateDesc('week')->sum('amount'),
-            'week_count' => $user->transactions()->filterByDateDesc('week')->count(),
-            'month_amount' => $user->transactions()->filterByDateDesc('month')->sum('amount'),
-            'month_count' => $user->transactions()->filterByDateDesc('month')->count(),
-            'year_amount' => $user->transactions()->filterByDateDesc('year')->sum('amount'),
-            'year_count' => $user->transactions()->filterByDateDesc('year')->count(),
+            'today' => $user->transactions()->filterByDateDesc('today')->sumAndCount(),
+            'week' => $user->transactions()->filterByDateDesc('week')->sumAndCount(),
+            'month' => $user->transactions()->filterByDateDesc('month')->sumAndCount(),
+            'year' => $user->transactions()->filterByDateDesc('year')->sumAndCount(),
         ];
 
         return view('pages.manage-users.show', compact('user', 'transactions'));
