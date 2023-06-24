@@ -130,7 +130,7 @@
 @import "./components/_news.css";
 @import "./components/_pricing-tabs.css";
 @import "./components/_error-page.css";
-@import "./components/_search-result.css";
+@import "./components/_search-result.scss";
 @import "./components/_notification-content.css";
 @import "./components/_report-maps.css";
 @import "./components/_pos-dropdown.css";
