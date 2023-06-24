@@ -4,11 +4,9 @@
             @if($group) {{ $group->name }} - @endif Terminals
         </h2>
 
-        @if($group)
-            <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#create-terminal">Add New Terminal</button>
-            </div>
-        @endif
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+            <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#create-terminal">Add New Terminal</button>
+        </div>
     </div>
 
     <!-- BEGIN: HTML Table Data -->
@@ -170,9 +168,7 @@
         </div>
     </div>
 
-    @if($group)
-        <x-terminals.create :group="$group" />
-    @endif
+    <x-terminals.create :$group />
 
     <!-- END: HTML Table Data -->
     <x-terminals.edit />

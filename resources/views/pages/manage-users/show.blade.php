@@ -163,8 +163,10 @@
                             <div class="p-5">
                                 <div class="tab-content">
                                     <div id="terminal" class="tab-pane active" role="tabpanel" aria-labelledby="terminal-tab">
-                                        <div class="flex justify-end mb-1">
-                                            {{--                                    <a href="{{ route('terminals.create', ['agent' => $user->email]) }}" class="btn btn-sm btn-outline-primary p-1"> Add Terminal </a>--}}
+                                        <div class="flex justify-between mb-1">
+                                            <a href="#" class="btn btn-sm btn-outline-primary p-1"
+                                               data-tw-toggle="modal" data-tw-target="#create-terminal"
+                                            > Add Terminal </a>
 
                                             <div>
                                                 <button data-carousel="terminals-slider" data-target="prev" class="tiny-slider-navigator btn p-1 border-slate-300 text-slate-600 dark:text-slate-300 mr-2">
@@ -335,6 +337,7 @@
 
                 <x-terminals.edit />
                 <x-terminals.menus />
+                <x-terminals.create :$user />
             </div>
         </div>
     </div>

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\TerminalHelper;
-use App\Http\Requests\CreateTerminalRequest;
 use App\Http\Requests\TerminalRequest;
 use App\Models\Terminal;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class Terminals extends Controller

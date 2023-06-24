@@ -55,7 +55,7 @@
                         @endif
 
                         @if($showRole)
-                            <td class=""><x-badge>@nbsp($user->roleName)</x-badge></td>
+                            <td class=""><x-badge class="bg-primary">@nbsp($user->roleName)</x-badge></td>
                         @endif
 
                         <td class="">

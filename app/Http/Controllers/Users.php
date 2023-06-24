@@ -6,6 +6,7 @@ use App\Helpers\RoleHelper;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
+use App\Models\TerminalGroup;
 use App\Models\User;
 
 class Users extends Controller
@@ -17,12 +18,12 @@ class Users extends Controller
 
     public function create()
     {
-        if (\request()->routeIs('agents.onboard')) {
+        if (request()->routeIs('agents.onboard')) {
             $roles = RoleHelper::getAgentRoles();
             $title = 'Agent Onboarding';
             $super_agents = Role::findByName(Role::SUPERAGENT)->users;
         }
-        elseif(\request()->routeIs('admins.register')) {
+        elseif(request()->routeIs('admins.register')) {
             $roles = RoleHelper::getAdminRoles();
             $title = 'Admin Registration';
             $super_agents = collect();
