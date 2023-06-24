@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_available')->default(true);
             $table->mediumText('description')->nullable();
             $table->boolean('menu')->default(true);
+            $table->boolean('internal')->default(false);
             $table->timestamps();
         });
     }

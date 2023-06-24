@@ -51,7 +51,11 @@
                                 <td class="whitespace-nowrap">{{ $service->description }}</td>
 
                                 <td class="w-64">
-                                    <livewire:provider-select :service="$service" />
+                                    @if($service->internal)
+                                        <div class="w-56 py-1.5 px-3s border rounded shadow-sm">INTERNAL</div>
+                                    @else
+                                        <livewire:provider-select :service="$service" />
+                                    @endif
                                 </td>
 
                                 <td class="table-report__action w-40">
