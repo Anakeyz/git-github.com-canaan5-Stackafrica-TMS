@@ -34,4 +34,11 @@ class Loans extends Controller
 
         return MyResponse::success('Loan request added.');
     }
+
+    public function destroy(Loan $loan)
+    {
+        $loan->delete();
+
+        return MyResponse::success('Loan request deleted.');
+    }
 }

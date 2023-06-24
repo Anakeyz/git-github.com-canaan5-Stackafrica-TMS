@@ -175,7 +175,7 @@ class User extends Authenticatable
      */
     public function isAgentGroup(): bool
     {
-        $agents = Role::query()->where('type', self::GROUPS[1])->pluck('name')->toArray();
+        $agents = Role::where('type', self::GROUPS[1])->pluck('name')->toArray();
 
         return $this->hasAnyRole($agents);
     }
@@ -183,6 +183,11 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role_type == self::GROUPS[0];
+    }
+
+    public function isSuperAgent(): bool
+    {
+        return $this->getRoleNames()->contains('Super Agent');
     }
 
     /**

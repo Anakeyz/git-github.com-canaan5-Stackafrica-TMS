@@ -37,7 +37,7 @@ class LoanPolicy
      */
     public function update(User $user, Loan $loan): bool
     {
-        //
+        return $user->isAdmin() ||($user->isSuperAgent() && $loan->user->super_agent_id === $user->id);
     }
 
     /**
@@ -45,22 +45,6 @@ class LoanPolicy
      */
     public function delete(User $user, Loan $loan): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Loan $loan): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Loan $loan): bool
-    {
-        //
+        return $loan->isPending() && $user->is($loan->user);
     }
 }
