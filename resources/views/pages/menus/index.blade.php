@@ -51,7 +51,7 @@
                             </td>
 
                             <td class="text-center">
-                                <span class="bg-primary/20 rounded-full p-2">{{ $menu->terminals_count }}</span>
+                                <span class="bg-info/20 text-info rounded-full py-1 px-2">{{ $menu->terminals_count }}</span>
                             </td>
 
                             <td class="table-report__action w-56">

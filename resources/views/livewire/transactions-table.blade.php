@@ -17,6 +17,8 @@
                 <tr class="bg-gray-200">
                     @unless($type == 'single-user')
                         <th >Agent's Name</th>
+                    @else
+                        <th>Terminal</th>
                     @endunless
 
                     @if($type == 'wallet')
@@ -60,6 +62,10 @@
                                 >
                                     {{ ucwords($transaction->agent->name) }}
                                 </a>
+                            </td>
+                        @else
+                            <td class="whitespace-nowrap">
+                                {{ $transaction->terminal->device }} - {{ $transaction->terminal->tid }}
                             </td>
                         @endunless
 

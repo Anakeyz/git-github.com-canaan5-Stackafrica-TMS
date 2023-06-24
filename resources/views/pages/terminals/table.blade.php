@@ -131,7 +131,7 @@
                                         data-tw-toggle="modal" data-tw-target="#menu-list"
                                         @click="initializeModal(@js($terminal->menus), '{{ route('terminals.menus.store', $terminal) }}', @js($terminal))"
                                 >
-                                    <span class="bg-info/20 w-6 h-6 pt-0.5 rounded-full mr-1">{{ $terminal->menus->count() }}</span>
+                                    <span class="bg-info/20 text-info text-xs px-1.5 py-0.5 rounded-full mr-1">{{ $terminal->menus->count() }}</span>
                                     Menus
                                 </button>
                                 <button class="flex items-center mr-3 text-blue-600"

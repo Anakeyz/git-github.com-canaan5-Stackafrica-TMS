@@ -156,7 +156,11 @@
                                     </div>
                                 </div>
                                 <ul class="nav nav-link-tabs w-auto ml-auto hidden sm:flex" role="tablist">
-                                    <li id="terminal-tab" class="nav-item" role="presentation"> <a href="javascript:;" class="nav-link py-5 active" data-tw-target="#terminal" aria-controls="terminal" aria-selected="true" role="tab"> Terminal </a> </li>
+                                    <li id="terminal-tab" class="nav-item" role="presentation">
+                                        <a href="javascript:;" class="nav-link py-5 active" data-tw-target="#terminal" aria-controls="terminal" aria-selected="true" role="tab">
+                                            Terminal <span class="bg-primary/20 text-primary text-xs p-1 px-2 rounded-full">{{ $user->terminals->count() }}</span>
+                                        </a>
+                                    </li>
                                     <li id="kyc-level-tab" class="nav-item" role="presentation"> <a href="javascript:;" class="nav-link py-5" data-tw-target="#kyc-level" aria-selected="false" role="tab"> Level </a> </li>
                                 </ul>
                             </div>

@@ -57,8 +57,10 @@ class TransactionsTable extends Component
 
     private function getUserTransaction()
     {
-        return $this->user->transactions()->withSearch($this->search)
-            ->filterByDate($this->date_filter)->paginate();
+        return $this->user->transactions()->with('terminal')
+            ->withSearch($this->search)
+            ->filterByDate($this->date_filter)
+            ->paginate();
     }
 
     public function filterDate(string $date = null): void
