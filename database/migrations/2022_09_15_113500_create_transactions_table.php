@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('account_name')->nullable();
             $table->string('info')->nullable();
             $table->string('power_token')->nullable();
-            $table->enum('status', \App\Enums\Status::values())->default('PENDING');
+            $table->enum('status', \App\Enums\Status::forTransaction())->default('PENDING');
             $table->enum('channel', ['POS', 'WEB', 'MOBILE', 'OTHERS'])->default('POS');
             $table->string('provider')->nullable();
             $table->json('meta')->nullable();
