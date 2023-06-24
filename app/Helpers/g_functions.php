@@ -31,12 +31,7 @@ function statusColor(string|Status|Action $value): string
 function moneyFormat(float|null $value, string $symbol = '₦'): string
 {
     $value ??= 0;
-    
-    if ($value < 0) {
-        $print_number = "($symbol" . str_replace('-', '', number_format ($value, 2, ".", ",")) . ")";
-    } else {
-        $print_number = "$symbol" .  number_format ((int) $value, 2, ".", ",") ;
-    }
 
-    return $print_number;
+    return $value < 0 ? "($symbol" . abs(number_format($value, 2, )) . ")" :
+        "$symbol" .  number_format ($value, 2, );
 }

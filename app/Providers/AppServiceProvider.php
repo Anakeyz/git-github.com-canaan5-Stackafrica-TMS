@@ -73,6 +73,8 @@ class AppServiceProvider extends ServiceProvider
             fn() => Cache::rememberForever('menus', fn() => Service::whereMenu(true)->get())
         );
 
-        $this->app->bind('groups', fn() => TerminalGroup::all());
+        $this->app->bind('terminal_groups',
+            fn() => Cache::rememberForever('terminal_groups', fn() => TerminalGroup::all())
+        );
     }
 }

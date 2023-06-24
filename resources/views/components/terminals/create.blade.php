@@ -36,7 +36,7 @@
                             <div class="w-full">
                                 <select name="group_id" id="group" class="form-select">
                                     <option selected disabled> --- Select Terminal Group --- </option>
-                                    @foreach(app('groups') as $group)
+                                    @foreach(app('terminal_groups') as $group)
                                         <option value="{{ $group->id }}">{{ $group->name }}</option>
                                     @endforeach
                                 </select>
