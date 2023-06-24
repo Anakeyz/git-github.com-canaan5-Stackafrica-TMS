@@ -101,6 +101,11 @@ class User extends Authenticatable
         return $this->hasMany(Terminal::class);
     }
 
+    public function loans(): HasMany
+    {
+        return $this->hasMany(Loan::class);
+    }
+
 // Attributes
 
     /**

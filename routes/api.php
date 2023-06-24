@@ -6,8 +6,8 @@ use App\Http\Controllers\Api\Banks;
 use App\Http\Controllers\Api\Dashboard;
 use App\Http\Controllers\Api\DataPurchase;
 use App\Http\Controllers\Api\ElectricityPurchase;
+use App\Http\Controllers\Api\Loans;
 use App\Http\Controllers\Api\Logout;
-use App\Http\Controllers\Api\ResetPin;
 use App\Http\Controllers\Api\Terminals;
 use App\Http\Controllers\Api\Transactions;
 use App\Http\Controllers\Api\Transfer;
@@ -27,6 +27,7 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('transactions',              Transactions::class)->only(['index']);
         Route::apiResource('wallet-transactions',       WalletTransactions::class)->only(['index']);
         Route::apiResource('banks',                     Banks::class)->only(['index']);
+        Route::apiResource('loans',                     Loans::class)->only(['index', 'store', 'destroy']);
 
         Route::apiResource('validate-transfer',         Transfer::class)->only('index');
         Route::apiResource('transfer',                  Transfer::class)->only('store');
