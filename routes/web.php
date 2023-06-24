@@ -86,7 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('roles.users',                  AssignUserRole::class)->only(['store', 'destroy']);
     Route::resource('services',                     Services::class)->only(['index', 'update']);
     Route::resource('terminal-groups',              TerminalGroups::class)->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-    Route::resource('terminal-groups.terminals',    TerminalGroupTerminals::class)->only(['index', 'store']);
+    Route::resource('terminal-groups.terminals',    TerminalGroupTerminals::class)->only('index');
     Route::resource('providers',                    Providers::class)->only(['index', 'store', 'destroy']);
     Route::resource('menus',                        Menus::class)->only('index');
     Route::resource('terminals.menus',              TerminalMenus::class)->only('store');

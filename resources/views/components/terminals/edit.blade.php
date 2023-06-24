@@ -14,9 +14,19 @@
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
                 <div class="modal-body">
-
                     @csrf
                     @method('PUT')
+                    <div class="mt-4">
+                        <label for="group" class="form-label sm:w-24">Group</label>
+                        <div class="w-full">
+                            <select name="group_id" id="group" class="form-select" x-model="terminal.group_id">
+                                @foreach(app('groups') as $group)
+                                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                            <x-input-error input-name="group_id" />
+                        </div>
+                    </div>
                     <div class="mt-6">
                         <label for="device" class="form-label sm:w-24">Device</label>
                         <div class="w-full">

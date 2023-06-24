@@ -29,7 +29,7 @@ return new class extends Migration
             $table->smallInteger('timeout')->default(60);
             $table->string('currency_code', 3)->default('566');
             $table->string('country_code', 3)->default('566');
-            $table->string('category_code', 4)->nullable();
+            $table->string('category_code', 40)->nullable();
             $table->string('name_location', 40)->nullable();
             $table->string('admin_pin')->default('0000');
             $table->string('pin')->default('0000');

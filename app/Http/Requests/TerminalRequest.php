@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Terminal;
-use App\Models\User;
 use App\Rules\UserIsAgent;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -34,10 +32,11 @@ class TerminalRequest extends FormRequest
     private function createRequest(): array
     {
         return [
-            'email'         => ['required', 'email', 'exists:users,email', new UserIsAgent()],
+            'email'         => ['required', 'email', new UserIsAgent()],
             'tid'           => 'required|size:8|unique:terminals,tid',
             'mid'           => 'required|size:15',
-            'serial'        => 'required|max:20|unique:terminals,serial',
+            'serial'        => 'required|max:24|unique:terminals,serial',
+            'group_id'      => 'required|exists:terminal_groups,id',
             'device'        => 'required|string'
         ];
     }
@@ -45,9 +44,10 @@ class TerminalRequest extends FormRequest
     private function updateRequest()
     {
         return [
-            'tid'           => ['nullable','size:8', Rule::unique('terminals', 'tid')->ignore($this->route('terminal'))],
+            'group_id'      => 'required|exists:terminal_groups,id',
+            'tid'           => ['nullable','size:8', Rule::unique('terminals', 'tid')->ignore($this->terminal)],
             'mid'           => 'nullable|size:15',
-            'serial'        => ['nullable','max:20', Rule::unique('terminals', 'serial')->ignore($this->route('terminal'))],
+            'serial'        => ['nullable','max:24', Rule::unique('terminals', 'serial')->ignore($this->terminal)],
             'device'        => 'nullable|string'
         ];
     }

@@ -4,11 +4,13 @@ namespace App\Providers;
 
 use App\Models\KycLevel;
 use App\Models\Service;
+use App\Models\Terminal;
 use App\Models\TerminalGroup;
 use App\Models\User;
 use App\Observers\ApprovalObserver;
 use App\Observers\KycLevelObserver;
 use App\Observers\TerminalGroupObserver;
+use App\Observers\TerminalObserver;
 use App\Observers\UserObserver;
 use Cjmellor\Approval\Models\Approval;
 use Illuminate\Support\Facades\Blade;
@@ -54,6 +56,7 @@ class AppServiceProvider extends ServiceProvider
         Approval::observe(ApprovalObserver::class);
         KycLevel::observe(KycLevelObserver::class);
         TerminalGroup::observe(TerminalGroupObserver::class);
+        Terminal::observe(TerminalObserver::class);
     }
 
     private function registerCacheableModels(): void

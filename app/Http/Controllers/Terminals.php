@@ -14,31 +14,25 @@ class Terminals extends Controller
         return view('pages.terminals.index');
     }
 
-    public function store()
+    public function store(TerminalRequest $request)
     {
-        $user = User::where('email', request()->email)->first();
-        $data = \request()->all();
+        $user = User::whereEmail($request->email)->first();
 
         Terminal::create([
-            'user_id'       => $user->id,
-            'device'        => $data['device'],
-            'tid'           => $data['tid'],
-            'mid'           => $data['mid'],
-            'serial'        => $data['serial'],
-            'tmk'           => Str::random(38),
-            'tsk'           => Str::random(38),
-            'tpk'           => Str::random(38),
-            'category_code' => fake()->randomNumber(4),
-            'date_time'     => fake()->dateTime()->format('d/m/y H:i'),
-            'name_location' => Str::random(40),
+            'user_id'   => $user->id,
+            'device'    => $request->device,
+            'tid'       => $request->tid,
+            'mid'       => $request->mid,
+            'serial'    => $request->serial,
+            'group_id'  => $request->group_id,
         ]);
 
-        return to_route('terminals.index')->with('pending', 'Terminal update awaiting approval.');
+        return back()->with('pending', "New $user->email Terminal - $request->tid awaiting approval! ");
     }
 
     public function update(TerminalRequest $request, Terminal $terminal)
     {
-        empty($request->validated()) ? $terminal->changeStatus() : $terminal->update($request->validated());
+        $terminal->update($request->validated());
 
         return back()->with('pending', 'Terminal update awaiting approval.');
     }

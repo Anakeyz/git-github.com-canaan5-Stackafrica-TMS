@@ -113,7 +113,7 @@
                                 {{ ucwords($terminal->owner->name) }}
                             </a>
                         </td>
-                        <td>{{ $terminal->device }}</td>
+                        <td class="whitespace-nowrap">{{ $terminal->device }}</td>
 
                         <td>{{ $terminal->tid }}</td>
 

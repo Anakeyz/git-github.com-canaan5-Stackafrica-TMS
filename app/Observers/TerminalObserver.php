@@ -27,7 +27,7 @@ class TerminalObserver
      */
     public function created(Terminal $terminal): void
     {
-        $terminal->menu()->attach(Service::all());
+        $terminal->menus()->attach(Service::all());
     }
 
     /**

@@ -2,11 +2,14 @@
 
 namespace App\Rules;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 
 class UserIsAgent implements Rule
 {
+    public User|null $user = null;
+
     /**
      * Create a new rule instance.
      *
@@ -26,9 +29,9 @@ class UserIsAgent implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        $user = User::query()->where($attribute, $value)->first();
+        $this->user = User::where($attribute, $value)->first();
 
-        return !is_null($user) && $user->hasRole('Agent');
+        return  $this->user?->hasRole(Role::AGENT);
     }
 
     /**
@@ -38,6 +41,6 @@ class UserIsAgent implements Rule
      */
     public function message(): string
     {
-        return 'Invalid Agent email.';
+        return 'Invalid '. Role::AGENT . ' email.';
     }
 }

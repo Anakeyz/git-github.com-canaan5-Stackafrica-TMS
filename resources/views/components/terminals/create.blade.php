@@ -40,7 +40,7 @@
                                         <option value="{{ $group->id }}">{{ $group->name }}</option>
                                     @endforeach
                                 </select>
-                                <x-input-error input-name="device" />
+                                <x-input-error input-name="group_id" />
                             </div>
                         </div>
                     @endif
