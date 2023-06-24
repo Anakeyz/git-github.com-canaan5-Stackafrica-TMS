@@ -53,7 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/register', 'create')->name('register');
         });
 
-        Route::controller(Agent::class)->prefix('agents')->name('agents.')->group(function () {
+        Route::controller(Agent::class)->prefix('customers')->name('agents.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/onboard', 'create')->name('onboard');
         });

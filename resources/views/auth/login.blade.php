@@ -17,7 +17,7 @@
                 </a>
                 <div class="my-auto">
                     <img alt="Icewall Tailwind HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="{{ asset('build/assets/images/illustration.svg') }}">
-                    <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">A few more clicks to <br> sign in to the your dashboard.</div>
+                    <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">A platform where retailers <br/> & wholesalers trade.</div>
                     <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Manage terminals and transactions...</div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <!-- BEGIN: Session msg -->
 
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Sign In</h2>
-                    <div class="intro-x mt-2 text-slate-400 xl:hidden text-center">A few more clicks to sign in to your account. Manage your account and transactions</div>
+                    <div class="intro-x mt-2 text-slate-400 xl:hidden">A platform where retailers and wholesalers trade. Manage your account and transactions.</div>
                     <div class="intro-x mt-8">
                         <form id="auth-form" method="post" action="{{ route('login') }}">
                             @csrf

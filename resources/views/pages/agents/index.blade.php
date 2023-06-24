@@ -6,17 +6,17 @@
 
 @section('breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Agents</li>
+    <li class="breadcrumb-item active" aria-current="page">Customers</li>
 @endsection
 
 @section('subcontent')
 
     <div class="intro-y flex sm:flex-row flex-col sm:items-center justify-between mt-8">
         <h2 class="text-lg font-medium">
-            Agents
+            Customers
         </h2>
 
-        <a href="{{ route('agents.onboard') }}" class="btn btn-primary sm:mt-0 mt-5 text-left">Onboard New Agent</a>
+        <a href="{{ route('agents.onboard') }}" class="btn btn-primary sm:mt-0 mt-5 text-left">Onboard New Customer</a>
     </div>
 
     <section class="sm:my-10 my-5">

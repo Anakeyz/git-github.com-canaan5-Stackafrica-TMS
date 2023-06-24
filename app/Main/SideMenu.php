@@ -92,7 +92,7 @@ class SideMenu
 
                     'agents' => [
                         'route_name' => 'agents.index',
-                        'title' => User::GROUPS[1]
+                        'title' => 'Customers'
                     ],
                 ]
             ],
