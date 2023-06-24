@@ -117,8 +117,8 @@
                 <div class="grid grid-cols-12 gap-4 mt-6">
                     <div class="col-span-12 md:col-span-4">
                         <div x-show="role === 'Agent'" x-transition>
-                            <label class="form-label">Super Agent (optional)</label>
-                            <select data-placeholder="Select Super Agent" class="tom-select w-full"
+                            <label class="form-label">{{ \App\Models\Role::SUPERAGENT }} (optional)</label>
+                            <select data-placeholder="Select {{ \App\Models\Role::SUPERAGENT }}" class="tom-select w-full"
                                     name="super_agent_id" x-model="super_agent"
                             >
                                 <option value=""></option>

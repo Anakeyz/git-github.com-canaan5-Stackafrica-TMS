@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\AppConfig;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -20,8 +19,8 @@ class RoleSeeder extends Seeder
 //        Seed permissions
         collect($this->permissionsSeeder())->each(fn($value) => Permission::create(['name' => $value]));
 
-        $staff_roles = ['Super Admin', 'Admin'];
-        $agent_roles = ['Super Agent', 'Agent'];
+        $staff_roles = [Role::ADMIN, Role::SUPERADMIN];
+        $agent_roles = [Role::SUPERAGENT, Role::AGENT];
 
 //        create roles for admin and super admin
         collect($staff_roles)->each(function ($value) {
@@ -30,13 +29,11 @@ class RoleSeeder extends Seeder
                 'type' => User::GROUPS[0]
             ]);
 
-//        Get all permissions except those belonging to agents and super agents;
-            $permissions = Permission::whereNotIn('name', ['access super agent', 'access agent'])->pluck('name')->toArray();
-            $role->givePermissionTo($permissions);
+            $role->givePermissionTo(Permission::pluck('name')->toArray());
         });
 
         $role = Role::create([
-            'name' => 'Approver',
+            'name' => 'APPROVER',
             'type' => User::GROUPS[0]
         ]);
 
@@ -46,17 +43,12 @@ class RoleSeeder extends Seeder
             'name' => $value,
             'type' => User::GROUPS[1]
         ]));
-
-        Role::findByName('Agent')->givePermissionTo('access agent');
-        Role::findByName('Super Agent')->givePermissionTo('access super agent');
     }
 
     private function permissionsSeeder(): array
     {
         return [
             'access admin',
-            'access super agent',
-            'access agent',
             'read users',
             'create user',
             'modify user',
@@ -85,7 +77,7 @@ class RoleSeeder extends Seeder
             'read settings',
             'modify settings',
             'read accounts',
-            'approve actions'
+            'approve actions',
         ];
 
     }

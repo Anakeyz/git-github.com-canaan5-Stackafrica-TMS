@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\RoleHelper;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 
 class Users extends Controller
 {
@@ -20,7 +20,7 @@ class Users extends Controller
         if (\request()->routeIs('agents.onboard')) {
             $roles = RoleHelper::getAgentRoles();
             $title = 'Agent Onboarding';
-            $super_agents = Role::findByName('Super Agent')->users;
+            $super_agents = Role::findByName(Role::SUPERAGENT)->users;
         }
         elseif(\request()->routeIs('admins.register')) {
             $roles = RoleHelper::getAdminRoles();
@@ -54,7 +54,7 @@ class Users extends Controller
 
     public function store(RegisterUserRequest $request)
     {
-        $data = $request->role == 'Agent' ? $request->validated() : $request->except('super_agent_id');
+        $data = $request->role == Role::AGENT ? $request->validated() : $request->except('super_agent_id');
 
         $user = User::create($data); // Observer creates password, level and wallet;
 

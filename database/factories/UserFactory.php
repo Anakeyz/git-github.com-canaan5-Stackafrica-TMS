@@ -24,7 +24,6 @@ class UserFactory extends Factory
             'phone' => fake()->e164PhoneNumber(),
             'status' => ['ACTIVE', 'INACTIVE', 'SUSPENDED', 'DISABLED'][rand(0,3)],
             'email_verified_at' => now(),
-            'password' => 'stack4231', // password
             'gender' => ['MALE', 'FEMALE'][rand(0, 1)],
         ];
     }

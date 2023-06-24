@@ -18,7 +18,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -26,7 +25,7 @@ use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles, LogsActivity, CausesActivity, HasApiTokens, HasKycCheck;
+    use HasFactory, Notifiable, HasRoles, LogsActivity, CausesActivity, HasApiTokens, HasKycCheck, SoftDeletes;
 
     /**
      * The application has two types of users which can either be `Agents` or `Admins`
@@ -187,7 +186,7 @@ class User extends Authenticatable
 
     public function isSuperAgent(): bool
     {
-        return $this->getRoleNames()->contains('Super Agent');
+        return $this->getRoleNames()->contains(Role::SUPERAGENT);
     }
 
     /**
@@ -223,8 +222,7 @@ class User extends Authenticatable
     public function getInitialPassword(): string
     {
         return App::isProduction() ?
-            str($this->phone)->substr(-5)->prepend($this->first_name)->lower() :
-            'password4231';
+            str($this->phone)->substr(-5)->prepend($this->first_name)->lower() : 'stack4231';
     }
 
     public function getActivitylogOptions(): LogOptions

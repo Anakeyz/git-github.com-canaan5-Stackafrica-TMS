@@ -52,7 +52,7 @@
 
                                 <td class="w-64">
                                     @if($service->internal)
-                                        <div class="w-56 py-1.5 px-3s border rounded shadow-sm">INTERNAL</div>
+                                        <div class="w-56 py-1.5 px-3 border rounded shadow-sm">INTERNAL</div>
                                     @else
                                         <livewire:provider-select :service="$service" />
                                     @endif

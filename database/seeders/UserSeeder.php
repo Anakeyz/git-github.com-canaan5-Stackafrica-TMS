@@ -2,12 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\AppConfig;
-use App\Helpers\WalletHelper;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use App\Models\User;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -27,7 +23,7 @@ class UserSeeder extends Seeder
             'status' => 'ACTIVE',
         ]);
 
-        $teq->first()->assignRole('Super Admin');
+        $teq->first()->assignRole(Role::SUPERADMIN);
 
         // Fake admin
 //        $admin = User::factory()->times(9)->create();

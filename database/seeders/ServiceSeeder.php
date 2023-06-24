@@ -19,29 +19,26 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        $services = ['CASHOUT/WITHDRAWAL', 'CABLE TV', 'AIRTIME', 'INTERNET DATA', 'ELECTRICITY', 'BANK TRANSFER', 'WALLET TRANSFER', 'FUNDING/INBOUND'];
+        $spout_services = ['CABLE TV', 'AIRTIME', 'INTERNET DATA', 'ELECTRICITY', 'BANK TRANSFER'];
+        $services = array_merge($spout_services, ['CASHOUT/WITHDRAWAL', 'WALLET TRANSFER', 'FUNDING/INBOUND', 'LOAN']);
 
-        collect($services)->each(function ($service) {
+        collect($services)->each(function ($service) use ($spout_services) {
             $s = (new Service([
                 'name'  => $service,
-                'menu_name' => str($service)->before('/')->value()
+                'menu_name' => str($service)->before('/')->value(),
+                'internal' => in_array($service, ['LOAN', 'WALLET TRANSFER'])
             ]));
 
             $s->withoutApproval()->save();
 
-            if ($service == 'WALLET TRANSFER') {
-                ServiceProvider::create([
-                    'service_id'    => $s->id,
-                    'name'          => 'INTERNAL',
-                ]);
-            }
-
-            if ($service != 'FUNDING/INBOUND' || $service != 'CASHOUT/WITHDRAWAL') {
-                ServiceProvider::create([
+            if (in_array($service, $spout_services)) {
+                $p = ServiceProvider::create([
                     'service_id' => $s->id,
                     'name' => 'Spout',
                     'class' => '\App\Repository\Spout'
                 ]);
+
+                $s->update(['provider_id' => $p->id]);
             }
         });
     }
