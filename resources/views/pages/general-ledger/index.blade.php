@@ -26,10 +26,10 @@
                 @foreach($gls as $gl)
                     <div class="report-box zoom-in inline-block px-2">
                         <div class="box p-5 w-80">
-                            <div class="flex flex-wrap gap-3">
+                            <div class="flex gap-3">
                                 <a class="mr-auto" href="{{ route('general-ledger.show', ['service' => $gl->service->slug]) }}">
-                                    <div class="text-dark text-opacity-70 flex items-center leading-3">
-                                        <span class="pr-2">{{ $gl->service->name }} Balance</span>
+                                    <div class="text-dark text-opacity-70 text-xs flex font-medium items-center leading-3">
+                                        <span class="pr-2 truncate">{{ $gl->service->name }} Balance</span>
                                         <i data-lucide="alert-circle" class="w-4 h-4"></i>
                                     </div>
                                     <div class="text-dark relative text-xl font-medium leading-5 pl-4 mt-3.5">

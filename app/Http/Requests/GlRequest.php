@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\GeneralLedger;
 use App\Models\Service;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GlRequest extends FormRequest
 {
@@ -32,18 +33,11 @@ class GlRequest extends FormRequest
 
     private function showRequest(): array
     {
-        if (request()->has('service')) {
-            $validation = ['service' => 'required'];
+        $this->gl = GeneralLedger::whereHas('service', function ($q) {
+            $q->where('slug', $this->service ?? 'cashoutwithdrawal');
+        })?->first();
 
-            $this->gl = GeneralLedger::whereHas('service', function ($q) {
-                $q->where('slug', request('service'));
-            })?->first();
-        }
-        else {
-            $this->gl = GeneralLedger::first();
-        }
-
-        return $validation ?? [];
+        return $this->has('service') ? ['service' => 'exists:services,slug'] : [];
     }
 
 
