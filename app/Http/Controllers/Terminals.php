@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 
 class Terminals extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Terminal::class);
+    }
+
     public function index()
     {
         return view('pages.terminals.index');

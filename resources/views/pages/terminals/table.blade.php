@@ -4,9 +4,11 @@
             @if($group) {{ $group->name }} - @endif Terminals
         </h2>
 
-        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-            <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#create-terminal">Add New Terminal</button>
-        </div>
+        @can('create terminal')
+            <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+                <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#create-terminal">Add New Terminal</button>
+            </div>
+        @endcan
     </div>
 
     <!-- BEGIN: HTML Table Data -->
@@ -134,12 +136,14 @@
                                     <span class="bg-info/20 text-info text-xs px-1.5 py-0.5 rounded-full mr-1">{{ $terminal->menus->count() }}</span>
                                     Menus
                                 </button>
-                                <button class="flex items-center mr-3 text-blue-600"
-                                        data-tw-toggle="modal" data-tw-target="#edit-terminal"
-                                        @click="terminal = @js($terminal); action = '{{ route('terminals.update', $terminal) }}';"
-                                >
-                                    <i data-lucide="edit" class="w-4 h-4 mr-1"></i> Edit
-                                </button>
+                                @can('update', $terminal)
+                                    <button class="flex items-center mr-3 text-blue-600"
+                                            data-tw-toggle="modal" data-tw-target="#edit-terminal"
+                                            @click="terminal = @js($terminal); action = '{{ route('terminals.update', $terminal) }}';"
+                                    >
+                                        <i data-lucide="edit" class="w-4 h-4 mr-1"></i> Edit
+                                    </button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

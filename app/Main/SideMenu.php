@@ -45,7 +45,7 @@ class SideMenu
                     'menus' => [
                         'route_name' => 'menus.index',
                         'title' => 'Menus',
-                        'permission' => 'read menu'
+                        'permission' => 'read menus'
                     ],
                 ]
             ],

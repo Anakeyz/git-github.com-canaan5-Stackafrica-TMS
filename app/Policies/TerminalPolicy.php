@@ -11,9 +11,17 @@ class TerminalPolicy
     /**
      * Determine whether the user can view the model.
      */
+    public function viewAny(User $user): bool
+    {
+        return $user->can('read terminals');
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
     public function view(User $user, Terminal $terminal): bool
     {
-        //
+        return $user->is($terminal->agent) || $user->can('update', $terminal);
     }
 
     /**
@@ -21,7 +29,7 @@ class TerminalPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can('create terminal');
     }
 
     /**
@@ -29,7 +37,10 @@ class TerminalPolicy
      */
     public function update(User $user, Terminal $terminal): bool
     {
-        return $user->is($terminal->agent);
+        if ($user->isSuperAgent())
+            return $user->can('update terminal') && $user->is($terminal->agent->superAgent);
+
+        return $user->is($terminal->agent) || $user->can('edit terminals');
     }
 
     /**
