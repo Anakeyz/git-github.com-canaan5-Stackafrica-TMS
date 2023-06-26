@@ -44,10 +44,12 @@
                                 @money($gl->balance)
                             </div>
                         </div>
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-info bg-opacity-20 text-info cursor-pointer"
-                              data-tw-toggle="modal" data-tw-target="#modal{{$gl->id}}"
-                        >
-                        <i data-lucide="plus"></i>
+                        @can('edit general ledger')
+                            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-info bg-opacity-20 text-info cursor-pointer"
+                                  data-tw-toggle="modal" data-tw-target="#modal{{$gl->id}}"
+                            >
+                            <i data-lucide="plus"></i>
+                        @endcan
                     </span>
                     </div>
                 </div>
@@ -97,5 +99,7 @@
         <livewire:gl-table :name="$name" :gl="$gl" />
     </section>
 
-    <x-gl-modal :gl="$gl" />
+    @can('edit general ledger')
+        <x-gl-modal :gl="$gl" />
+    @endcan
 @endsection

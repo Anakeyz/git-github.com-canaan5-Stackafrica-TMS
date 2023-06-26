@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 
 class GeneralLedgers extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->can('read general ledger');
+
         $gls = GeneralLedger::whereNot('service_id', 1)
             ->with('service')->get()->sortBy('service.name');
 
@@ -20,6 +22,8 @@ class GeneralLedgers extends Controller
 
     public function show(GlRequest $request)
     {
+        $request->user()->can('read general ledger');
+
 //        Showing only cashout initially for the index route
         $gl = $request->gl;
 
@@ -48,6 +52,8 @@ class GeneralLedgers extends Controller
 
     public function update(GlRequest $request, GeneralLedger $gl)
     {
+        $request->user()->can('edit general ledger');
+
         $amount = $request->amount;
         $info = 'General Ledger was funded by ' . auth()->user()->name;
 

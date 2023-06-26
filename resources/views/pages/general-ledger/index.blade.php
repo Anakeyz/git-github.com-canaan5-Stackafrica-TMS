@@ -36,16 +36,21 @@
                                         @money($gl->balance)
                                     </div>
                                 </a>
-                                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-info bg-opacity-20 hover:bg-opacity-30 text-info cursor-pointer"
-                                      data-tw-toggle="modal" data-tw-target="#modal{{$gl->id}}"
-                                >
+
+                                @can('edit general ledger')
+                                    <span class="flex items-center justify-center w-12 h-12 rounded-full bg-info bg-opacity-20 hover:bg-opacity-30 text-info cursor-pointer"
+                                          data-tw-toggle="modal" data-tw-target="#modal{{$gl->id}}"
+                                    >
                                     <i data-lucide="plus"></i>
                                 </span>
+                                @endcan
                             </div>
                         </div>
                     </div>
 
-                    <x-gl-modal :gl="$gl" />
+                    @can('edit general ledger')
+                        <x-gl-modal :gl="$gl" />
+                    @endcan
                 @endforeach
             </div>
         </div>
