@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Traits\BelongsToSuperAgent;
 use App\Traits\HasFiltering;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Transaction extends Model
 {
-    use HasFactory, HasFiltering, LogsActivity;
+    use HasFactory, HasFiltering, LogsActivity, BelongsToSuperAgent;
 
     protected $guarded = ['id'];
 
@@ -24,19 +25,6 @@ class Transaction extends Model
         'wallet_debited' => 'boolean',
         'status' => Status::class
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('super_agent_transactions', function (Builder $builder) {
-            $builder->when(\Auth::hasUser() && session('super_agent'),
-                fn(Builder $builder) => $builder->whereRelation('agent',
-                    fn($builder) => $builder->where('super_agent_id', session('super_agent'))
-                )
-            );
-        });
-    }
 
 // Relationships
     public function service(): BelongsTo

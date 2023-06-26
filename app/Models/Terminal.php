@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\FailedApiResponse;
+use App\Traits\BelongsToSuperAgent;
 use Cjmellor\Approval\Concerns\MustBeApproved;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Terminal extends Model
 {
-    use HasFactory, MustBeApproved;
+    use HasFactory, MustBeApproved, BelongsToSuperAgent;
 
     protected $guarded = ['id'];
 

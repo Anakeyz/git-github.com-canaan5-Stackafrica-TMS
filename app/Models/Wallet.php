@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToSuperAgent;
 use App\Traits\HasWalletMethods;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -15,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Wallet extends Model
 {
-    use HasFactory, LogsActivity, HasWalletMethods;
+    use HasFactory, LogsActivity, HasWalletMethods, BelongsToSuperAgent;
 
     protected $guarded = ['id'];
 

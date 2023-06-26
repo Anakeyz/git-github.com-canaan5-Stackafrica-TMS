@@ -53,7 +53,7 @@ class RoleSeeder extends Seeder
                     'read terminals',
                     'create terminal',
                     'edit terminal',
-                    'read general ledger',
+                    'read ledger',
                     'read wallets',
                     'read transactions',
                 ]);
