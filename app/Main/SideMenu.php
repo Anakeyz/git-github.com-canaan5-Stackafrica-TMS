@@ -32,17 +32,20 @@ class SideMenu
                 'sub_menu' => [
                     'group' => [
                         'route_name' => 'terminal-groups.index',
-                        'title' => 'Groups'
+                        'title' => 'Groups',
+                        'permission' => 'read groups'
                     ],
 
                     'list' => [
                         'route_name' => 'terminals.index',
-                        'title' => 'List'
+                        'title' => 'List',
+                        'permission' => 'read terminals'
                     ],
 
                     'menus' => [
                         'route_name' => 'menus.index',
-                        'title' => 'Menus'
+                        'title' => 'Menus',
+                        'permission' => 'read menu'
                     ],
                 ]
             ],
@@ -60,25 +63,29 @@ class SideMenu
                         'route_name' => 'wallets.transactions',
                         'title' => 'Transactions'
                     ],
-                ]
+                ],
+                'permission' => 'read wallets'
             ],
 
             'Transactions' => [
                 'icon' => 'activity',
                 'route_name' => 'transactions.index',
-                'title' => 'Transactions'
+                'title' => 'Transactions',
+                'permission' => 'read transactions'
             ],
 
             'general-ledger' => [
                 'icon' => 'target',
                 'title' => 'General Ledger',
                 'route_name' => 'general-ledger.show',
+                'permission' => 'read general ledger'
             ],
 
             'ledger' => [
                 'icon' => 'book-open',
                 'title' => 'Ledger',
                 'route_name' => 'ledger.index',
+                'permission' => 'read ledger'
             ],
 
             'users' => [
@@ -87,12 +94,14 @@ class SideMenu
                 'sub_menu' => [
                     'staff' => [
                         'route_name' => 'admins.index',
-                        'title' => User::GROUPS[0]
+                        'title' => User::GROUPS[0],
+                        'permission' => 'read admin'
                     ],
 
                     'agents' => [
                         'route_name' => 'agents.index',
-                        'title' => 'Customers'
+                        'title' => 'Customers',
+                        'permission' => 'read customers'
                     ],
                 ]
             ],
@@ -110,7 +119,8 @@ class SideMenu
                         'route_name' => 'kyc-docs.index',
                         'title' => 'KYC Documents'
                     ],
-                ]
+                ],
+                'permission' => 'read kyc-level'
             ],
 
 
@@ -129,7 +139,8 @@ class SideMenu
                         'route_name' => 'permissions.index',
                         'title' => 'Permissions'
                     ],
-                ]
+                ],
+                'permission' => 'read roles'
             ],
 
 //            'roles-n-permissions' => [
@@ -157,19 +168,22 @@ class SideMenu
 ////                        'route_name' => 'manage-users.agents',
 //                        'title' => 'Settlements'
 //                    ],
-                ]
+                ],
+                'permission' => 'read settings'
             ],
 
             'approvals' => [
                 'icon' => 'user-check',
                 'route_name' => 'approvals.index',
-                'title' => 'Approvals'
+                'title' => 'Approvals',
+                'permission' => 'approve actions'
             ],
 
             'app-management' => [
                 'icon' => 'cpu',
 //                'route_name' => 'roles-permissions',
-                'title' => 'App Management'
+                'title' => 'App Management',
+                'permission' => 'read settings'
             ],
 
 //            'dispute-management' => [
@@ -181,7 +195,8 @@ class SideMenu
             'activities' => [
                 'icon' => 'framer',
                 'route_name' => 'activities',
-                'title' => 'Audit Trail'
+                'title' => 'Audit Trail',
+                'permission' => 'read admin'
             ],
         ];
     }
