@@ -25,6 +25,19 @@ class Transaction extends Model
         'status' => Status::class
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('super_agent_transactions', function (Builder $builder) {
+            $builder->when(\Auth::hasUser() && session('super_agent'),
+                fn(Builder $builder) => $builder->whereRelation('agent',
+                    fn($builder) => $builder->where('super_agent_id', session('super_agent'))
+                )
+            );
+        });
+    }
+
 // Relationships
     public function service(): BelongsTo
     {

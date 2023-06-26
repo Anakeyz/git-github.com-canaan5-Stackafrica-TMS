@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Route;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 
 class UsersTable extends Component
 {
@@ -23,18 +23,18 @@ class UsersTable extends Component
 
     public function render()
     {
-        if ($this->name == 'agents') {
+        if (str($this->name)->contains(Role::AGENT)) {
             $users = User::role(RoleHelper::getAgentRoles())
                 ->with('kycLevel')->latest()
-                ->paginate(config('app.pagination'));
+                ->paginate();
         }
         elseif ($this->name == 'admins') {
             $users = User::role(RoleHelper::getAdminRoles())
                 ->with('kycLevel')->latest()
-                ->paginate(config('app.pagination'));
+                ->paginate();
         }
         else {
-            $users = $this->role->users()->paginate(config('app.pagination'));
+            $users = $this->role->users()->paginate();
         }
 
         return view('pages.manage-users.table', compact('users'));

@@ -67,6 +67,17 @@ class User extends Authenticatable
 
     protected $appends = ['name'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('superAgentUsers', function (Builder $builder) {
+            $builder->when(\Auth::hasUser() && session('super_agent'),
+                fn(Builder $builder) => $builder->where('super_agent_id', session('super_agent'))
+            );
+        });
+    }
+
 //    Relationships
 
     public function superAgent(): BelongsTo

@@ -24,7 +24,8 @@
             <div class="col-span-12">
                 <div class="grid grid-cols-12 gap-6">
                     <!-- BEGIN: Users Table -->
-                    <livewire:users-table name="agents" :show-level="true"/>
+                    @php($name = str(\App\Models\Role::AGENT)->unless(Auth::user()->isSuperAgent())->append(\App\Models\Role::SUPERAGENT))
+                    <livewire:users-table name="{{ $name }}" :show-level="true"/>
                     <!-- END: Users Table -->
                 </div>
             </div>
