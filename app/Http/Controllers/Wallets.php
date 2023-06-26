@@ -22,11 +22,11 @@ class Wallets extends Controller
 
     public function updateStatus(Wallet $wallet)
     {
-        if (!$wallet->owner->is_active && !$wallet->is_active)
-            return back()->with('error', "Failed! {$wallet->owner->email} is currently {$wallet->owner->status}");
+        if (!$wallet->agent->is_active && !$wallet->is_active)
+            return back()->with('error', "Failed! {$wallet->agent->email} is currently {$wallet->agent->status}");
 
         $wallet->changeStatus();
 
-        return back()->with('success', "Wallet status updated for {$wallet->owner->email}.");
+        return back()->with('success', "Wallet status updated for {$wallet->agent->email}.");
     }
 }

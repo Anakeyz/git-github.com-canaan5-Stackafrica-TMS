@@ -29,7 +29,7 @@ class TerminalPolicy
      */
     public function update(User $user, Terminal $terminal): bool
     {
-        return $user->is($terminal->owner);
+        return $user->is($terminal->agent);
     }
 
     /**

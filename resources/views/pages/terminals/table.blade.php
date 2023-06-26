@@ -107,10 +107,10 @@
                 @forelse ($terminals as $terminal)
                     <tr class="intro-x">
                         <td class="whitespace-nowrap">
-                            <a href="{{ route('users.show', $terminal->owner->id) }}"
+                            <a href="{{ route('users.show', $terminal->agent->id) }}"
                                class="tooltip text-blue-600"
-                               title="{{ $terminal->owner->email }}">
-                                {{ ucwords($terminal->owner->name) }}
+                               title="{{ $terminal->agent->email }}">
+                                {{ ucwords($terminal->agent->name) }}
                             </a>
                         </td>
                         <td class="whitespace-nowrap">{{ $terminal->device }}</td>

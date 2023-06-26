@@ -116,7 +116,7 @@ class Transaction extends Model
         string $narration,
         string $provider): static
     {
-        return $terminal->owner->transactions()->create([
+        return $terminal->agent->transactions()->create([
             'terminal_id'   => $terminal->id,
             'amount'        => $amount,
             'total_amount'  => $totalAmount,

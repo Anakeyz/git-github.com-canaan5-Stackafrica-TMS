@@ -39,7 +39,7 @@ class Terminal extends Model
     /**
      * @return BelongsTo
      */
-    public function owner(): BelongsTo
+    public function agent(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

@@ -21,7 +21,7 @@ class TerminalTransactionRequest extends FormRequest
     public function authorize(): bool
     {
         // Ensure the terminal for this request belongs to the user making the request && the requests wants json.
-        return $this->terminal->owner->is($this->user()) && $this->wantsJson();
+        return $this->terminal->agent->is($this->user()) && $this->wantsJson();
     }
 
     protected function prepareForValidation(): void

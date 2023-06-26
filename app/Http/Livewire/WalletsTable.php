@@ -12,7 +12,7 @@ class WalletsTable extends Component
 
     public function render()
     {
-        $wallets = Wallet::orderBy('account_number')->with('owner')->paginate(config('app.pagination'));
+        $wallets = Wallet::orderBy('account_number')->with('agent')->paginate(config('app.pagination'));
 
         return view('pages.wallets.table', compact('wallets'));
     }

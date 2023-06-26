@@ -23,7 +23,7 @@ class Authenticate extends Controller
 
         $terminal = Terminal::whereSerial($request->get('serial'))->first();
 
-        if ( !auth()->attempt(['email' => $terminal->owner->email, 'password' => $request->get('password')]) ) {
+        if ( !auth()->attempt(['email' => $terminal->agent->email, 'password' => $request->get('password')]) ) {
             throw ValidationException::withMessages([
                 'email' => "The password you entered is incorrect.",
             ]);

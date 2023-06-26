@@ -54,8 +54,8 @@ class TerminalsTable extends Component
 
     public function render()
     {
-        $terminals = is_null($this->group) ? Terminal::with('owner') :
-            Terminal::whereBelongsTo($this->group, 'group')->with('owner');
+        $terminals = is_null($this->group) ? Terminal::with('agent') :
+            Terminal::whereBelongsTo($this->group, 'group')->with('agent');
 
         if ( !empty($this->search['value']) ) {
             $field = $this->search['field'];

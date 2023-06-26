@@ -44,7 +44,7 @@ class Wallet extends Model
      * Wallet belongs to user
      * @return BelongsTo
      */
-    public function owner(): BelongsTo
+    public function agent(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id')
             ->select('first_name', 'other_names', 'id', 'phone', 'email', 'status', 'level_id');
@@ -99,6 +99,6 @@ class Wallet extends Model
     public function scopeWithSearch(Builder $query, $search): Builder
     {
         return $query->where('account_number', 'like', '%' . $search . '%')
-            ->orWhereHas('owner', fn($query) => $query->withSearch($search));
+            ->orWhereHas('agent', fn($query) => $query->withSearch($search));
     }
 }

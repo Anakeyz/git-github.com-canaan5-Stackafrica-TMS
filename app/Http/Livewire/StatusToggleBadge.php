@@ -19,9 +19,9 @@ class StatusToggleBadge extends Component
 
     public function updateStatus()
     {
-        if (!$this->model->owner->is_active && !$this->model->is_active) {
+        if (!$this->model->agent->is_active && !$this->model->is_active) {
             $this->dispatchBrowserEvent('error', [
-                'message' => "Cannot change status because {$this->model->owner->name} is {$this->model->owner->status}."
+                'message' => "Cannot change status because {$this->model->agent->name} is {$this->model->agent->status}."
             ]);
         }
         else {

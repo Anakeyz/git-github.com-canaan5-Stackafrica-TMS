@@ -16,7 +16,7 @@
             Edit Terminal
         </h2>
 
-        <p class="text-primary text-sm mt-5">Edit terminal for <strong class="text-info">{{ $terminal->owner->name . ' ~ ' . $terminal->owner->email }}</strong></p>
+        <p class="text-primary text-sm mt-5">Edit terminal for <strong class="text-info">{{ $terminal->agent->name . ' ~ ' . $terminal->agent->email }}</strong></p>
     </div>
 
     <div class="grid grid-cols-12 gap-6 mt-5">

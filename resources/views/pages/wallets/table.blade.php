@@ -19,15 +19,15 @@
                 @foreach ($wallets as $wallet)
                     <tr class="intro-x">
                         <td class="">
-                            <a href="{{ route('users.show', $wallet->owner->id) }}"
+                            <a href="{{ route('users.show', $wallet->agent->id) }}"
                                class="tooltip text-blue-600"
-                               title="{{ $wallet->owner->email }}"
+                               title="{{ $wallet->agent->email }}"
                             >
-                                {{ ucwords($wallet->owner->name) }}
+                                {{ ucwords($wallet->agent->name) }}
                             </a>
                         </td>
 
-                        <td class=""><x-badge>{{ ucwords($wallet->owner->roleName) }}</x-badge></td>
+                        <td class=""><x-badge>{{ ucwords($wallet->agent->roleName) }}</x-badge></td>
 
                         <td class="">{{ $wallet->account_number }}</td>
 
