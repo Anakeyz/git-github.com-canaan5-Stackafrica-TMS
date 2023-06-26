@@ -46,7 +46,7 @@
                     <div class="flex flex-wrap gap-3 w-auto">
                         <div class="mr-auto sm:w-auto w-full">
                             <div class="flex items-center leading-3">
-                                <span class="pr-2 text-blue-600">Opening Balance</span>
+                                <span class="pr-2 text-blue-600 py-1.5">Opening Balance</span>
                                 <i data-lucide="alert-circle" class="w-4 h-4"></i>
                             </div>
                             <div class="text-success relative sm:text-2xl text-lg truncate font-medium leading-5 md:pl-1 mt-3.5">
@@ -63,7 +63,7 @@
                     <div class="flex flex-wrap gap-3 w-auto">
                         <div class="mr-auto sm:w-auto w-full">
                             <div class="flex items-center leading-3">
-                                <span class="pr-2 text-blue-600">Closing Balance</span>
+                                <span class="pr-2 text-blue-600 py-1.5">Closing Balance</span>
                                 <i data-lucide="alert-circle" class="w-4 h-4"></i>
                             </div>
                             <div class="text-danger relative sm:text-2xl text-lg truncate font-medium leading-5 md:pl-1 mt-3.5">

@@ -34,9 +34,9 @@ class LedgerPage extends Component
             ->paginate();
 
         $type = WalletTransaction::successful()->withSearch($this->search)
-            ->filterByDate($this->date_filter)->groupBy('type')
-            ->selectRaw('type, sum(amount) as amount')
-            ->pluck('amount', 'type');
+            ->filterByDate($this->date_filter)->groupBy('action')
+            ->selectRaw('action, sum(amount) as amount')
+            ->pluck('amount', 'action');
 
         $yesterday = date("Y-m-d", strtotime( '-1 days' ) );
         $openingBalance = WalletTransaction::whereDate('created_at', $yesterday)->latest()->first();
