@@ -36,11 +36,13 @@
 
                     <th scope="col">Config</th>
 
-                    <th class="text-center whitespace-nowrap">
-                        <span class="flex justify-center">
-                            <i data-lucide="settings" class="w-5 h-5"></i>
-                        </span>
-                    </th>
+                    @can('edit fees')
+                        <th class="text-center whitespace-nowrap">
+                            <span class="flex justify-center">
+                                <i data-lucide="settings" class="w-5 h-5"></i>
+                            </span>
+                        </th>
+                    @endcan
                 </tr>
                 </thead>
 
@@ -71,11 +73,13 @@
                             @endif
 
 
-                            <td class="table-report__action w-40">
-                                <div class="flex justify-center items-center">
-                                    <button class="flex items-center mr-3" wire:click="edit({{ $fee }})"><i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </button>
-                                </div>
-                            </td>
+                            @can('update', $fee)
+                                <td class="table-report__action w-40">
+                                    <div class="flex justify-center items-center">
+                                        <button class="flex items-center mr-3 text-primary" wire:click="edit({{ $fee }})"><i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </button>
+                                    </div>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
 

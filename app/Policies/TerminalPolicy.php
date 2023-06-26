@@ -29,7 +29,7 @@ class TerminalPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create terminal');
+        return $user->can('create terminals');
     }
 
     /**
@@ -38,7 +38,7 @@ class TerminalPolicy
     public function update(User $user, Terminal $terminal): bool
     {
         if ($user->isSuperAgent())
-            return $user->can('update terminal') && $user->is($terminal->agent->superAgent);
+            return $user->can('edit terminals') && $user->is($terminal->agent->superAgent);
 
         return $user->is($terminal->agent) || $user->can('edit terminals');
     }

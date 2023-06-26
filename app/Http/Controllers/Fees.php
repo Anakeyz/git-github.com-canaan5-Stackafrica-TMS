@@ -13,11 +13,6 @@ use function view;
 
 class Fees extends Controller
 {
-//    public function index()
-//    {
-//        return view('pages.fees.index');
-//    }
-
     public function index(TerminalGroup $group)
     {
         return view('pages.terminal-groups.fees', compact('group'));
@@ -25,6 +20,8 @@ class Fees extends Controller
 
     public function edit(Fee $fee)
     {
+        $this->authorize('update', $fee);
+
         $group = $fee->group;
 
         return view('pages.fees.edit', compact('group', 'fee'));
@@ -33,6 +30,8 @@ class Fees extends Controller
 
     public function update(Request $request, Fee $fee)
     {
+        $this->authorize('update', $fee);
+
         $data = $request->only(['amount', 'amount_type', 'cap', 'info', 'config', 'newConfig']);
 
         $configs = collect();

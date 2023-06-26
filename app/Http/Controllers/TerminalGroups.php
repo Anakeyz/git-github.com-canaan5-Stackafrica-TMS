@@ -13,6 +13,11 @@ use function view;
 
 class TerminalGroups extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(TerminalGroup::class);
+    }
+
     public function index()
     {
         return view('pages.terminal-groups.index');

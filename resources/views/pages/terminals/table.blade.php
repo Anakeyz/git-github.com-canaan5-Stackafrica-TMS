@@ -4,7 +4,7 @@
             @if($group) {{ $group->name }} - @endif Terminals
         </h2>
 
-        @can('create terminal')
+        @can('create', \App\Models\Terminal::class)
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                 <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#create-terminal">Add New Terminal</button>
             </div>
@@ -58,31 +58,6 @@
                     <a href="" id="tabulator-html-filter-reset" type="reset" class="btn btn-secondary w-full sm:w-16 mt-2 sm:mt-0 sm:ml-1" >Reset</a>
                 </div>
             </form>
-
-            {{--            Todo: Feature - Make print and export function --}}
-            {{--<div class="flex mt-5 sm:mt-0">
-                <button id="tabulator-print" class="btn btn-outline-secondary w-1/2 sm:w-auto mr-2"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print </button>
-
-                <div class="dropdown w-1/2 sm:w-auto">
-                    <button class="dropdown-toggle btn btn-outline-secondary w-full sm:w-auto" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export <i data-lucide="chevron-down" class="w-4 h-4 ml-auto sm:ml-2"></i> </button>
-                    <div class="dropdown-menu w-40">
-                        <ul class="dropdown-content">
-                            <li>
-                                <a id="tabulator-export-csv" href="javascript:;" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export CSV </a>
-                            </li>
-                            <li>
-                                <a id="tabulator-export-json" href="javascript:;" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export JSON </a>
-                            </li>
-                            <li>
-                                <a id="tabulator-export-xlsx" href="javascript:;" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export XLSX </a>
-                            </li>
-                            <li>
-                                <a id="tabulator-export-html" href="javascript:;" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export HTML </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>--}}
         </div>
         <div class="overflow-x-auto scrollbar-hidden">
 
@@ -172,7 +147,9 @@
         </div>
     </div>
 
-    <x-terminals.create :$group />
+    @can('create', \App\Models\Terminal::class)
+        <x-terminals.create :$group />
+    @endcan
 
     <!-- END: HTML Table Data -->
     <x-terminals.edit />
