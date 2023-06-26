@@ -27,6 +27,7 @@ use App\Http\Controllers\UserKycDocs;
 use App\Http\Controllers\Users;
 use App\Http\Controllers\Wallets;
 use App\Http\Controllers\TerminalGroups;
+use App\Http\Controllers\WalletTransactions;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,12 +60,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
     });
 
-    Route::controller(Wallets::class)->prefix('wallets')->name('wallets.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/transactions', 'transactions')->name('transactions');
-        Route::post('/{wallet}/update-status', 'updateStatus')->name('update-status');
-    });
-
     Route::controller(GeneralLedgers::class)->prefix('general-ledger')->name('general-ledger.')->group(function () {
         Route::get('/', 'show')->name('show');
         Route::get('/others', 'index')->name('others');
@@ -90,6 +85,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('providers',                    Providers::class)->only(['index', 'store', 'destroy']);
     Route::resource('menus',                        Menus::class)->only('index');
     Route::resource('terminals.menus',              TerminalMenus::class)->only('store');
+    Route::resource('wallets',                      Wallets::class)->only('index');
+    Route::resource('wallet-transactions',          WalletTransactions::class)->only('index');
 
     Route::get('kyc-documents', [KycDocs::class, 'display'])->name('display');
     Route::get('/services/json', [Services::class, 'jsonData'])->name('services.json');

@@ -60,7 +60,7 @@ class SideMenu
                     ],
 
                     'transactions' => [
-                        'route_name' => 'wallets.transactions',
+                        'route_name' => 'wallet-transactions.index',
                         'title' => 'Transactions'
                     ],
                 ],

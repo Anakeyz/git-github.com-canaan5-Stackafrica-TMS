@@ -30,17 +30,17 @@ class TransactionSeeder extends Seeder
         $t = Transaction::successful()->get();
 
 //        Seed Wallet Transactions
-        $t->each(function (Transaction $transaction) {
+        /*$t->each(function (Transaction $transaction) {
             WalletHelper::creditTransaction($transaction);
-        });
+        });*/
 
-       /* $t->each(
+        $t->each(
             fn (Transaction $transaction) => WalletTransaction::factory()->create([
                 'product_id'    => $transaction->type_id,
                 'wallet_id'     => $transaction->agent->wallet->id,
                 'reference'     => $transaction->reference,
                 'created_at'     => $transaction->created_at,
             ])
-        );*/
+        );
     }
 }
