@@ -39,17 +39,32 @@ class RoleSeeder extends Seeder
 
         $role->givePermissionTo('approve actions');
 
-        collect($agent_roles)->each(fn($value) => Role::create([
-            'name' => $value,
-            'type' => User::GROUPS[1]
-        ]));
+        collect($agent_roles)->each(function ($value) {
+            $role = Role::create([
+                'name' => $value,
+                'type' => User::GROUPS[1]
+            ]);
+
+            if ($value == Role::SUPERAGENT)
+                $role->givePermissionTo([
+                    'read customers',
+                    'create user',
+                    'modify user',
+                    'read terminals',
+                    'create terminal',
+                    'edit terminal',
+                    'read general ledger',
+                    'read wallets',
+                    'read transactions',
+                ]);
+        });
     }
 
-    private function permissionsSeeder(): array
+    public function permissionsSeeder(): array
     {
         return [
-            'access admin',
-            'read users',
+            'read admin',
+            'read customers',
             'create user',
             'modify user',
             'disable user',
@@ -62,6 +77,9 @@ class RoleSeeder extends Seeder
             'edit permission',
             'read wallets',
             'modify wallet',
+            'read groups',
+            'edit groups',
+            'delete groups',
             'read terminals',
             'create terminal',
             'edit terminal',
@@ -76,8 +94,10 @@ class RoleSeeder extends Seeder
             'modify dispute',
             'read settings',
             'modify settings',
-            'read accounts',
+            'read transactions',
             'approve actions',
+            'read menu',
+            'edit menu',
         ];
 
     }

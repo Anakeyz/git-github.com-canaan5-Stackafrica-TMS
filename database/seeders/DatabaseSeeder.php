@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
             TerminalGroupSeeder::class,
             FeeSeeder::class,
             GeneralLedgerSeeder::class,
+            /*GLTSeeder::class,
+            TerminalSeeder::class,
+            TransactionSeeder::class,*/
         ]);
     }
 }
