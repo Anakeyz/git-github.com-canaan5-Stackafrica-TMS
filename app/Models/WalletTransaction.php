@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Action;
 use App\Enums\Status;
+use App\Traits\BelongsToSuperAgent;
 use App\Traits\HasFiltering;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
 
 class WalletTransaction extends Model
 {
-    use HasFactory, HasFiltering, LogsActivity, BelongsToThrough;
+    use HasFactory, HasFiltering, LogsActivity, BelongsToThrough, BelongsToSuperAgent;
 
     const TYPES = ['TRANSACTION', 'CHARGE'];
 
