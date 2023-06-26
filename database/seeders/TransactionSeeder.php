@@ -38,7 +38,6 @@ class TransactionSeeder extends Seeder
             fn (Transaction $transaction) => WalletTransaction::factory()->create([
                 'product_id'    => $transaction->type_id,
                 'wallet_id'     => $transaction->agent->wallet->id,
-                'user_id'       => $transaction->agent->id,
                 'reference'     => $transaction->reference,
                 'created_at'     => $transaction->created_at,
             ])

@@ -21,8 +21,7 @@ class WalletTransactionFactory extends Factory
     {
         return [
             'status'    => Status::SUCCESSFUL,
-            'type'      => Action::values()[rand(0,1)],
-            'reason'    => WalletTransaction::TYPES[rand(0,1)],
+            'action'      => Action::values()[rand(0,1)],
             'info'      => 'seeded',
             'amount'    => fake()->randomNumber(5),
             'prev_balance'    => fake()->randomNumber(5),
