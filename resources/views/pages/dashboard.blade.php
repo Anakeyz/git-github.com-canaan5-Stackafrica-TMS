@@ -10,11 +10,8 @@
 
 @section('subcontent')
     <div class="relative">
-        <div class="grid grid-cols-12 gap-6">
+        <div @class(['grid grid-cols-12 gap-6', 'xl:grid-cols-9' => Auth::user()->cannot('read general ledger')])>
             <div class="col-span-12 xl:col-span-9 2xl:col-span-9 z-10">
-                <div class="mt-6 -mb-6 intro-y">
-
-                </div>
                 <div class="mt-14 mb-3 grid grid-cols-12 sm:gap-10 intro-y">
                     <div class="col-span-12 md:col-span-8">
                         <livewire:transaction-statistics />
@@ -98,71 +95,73 @@
                 </div>
             </div>
         </div>
-        <div class="report-box-4 w-full h-full grid grid-cols-12 gap-6 xl:absolute -mt-8 xl:mt-0 pb-6 xl:pb-0 top-0 right-0 z-30 xl:z-auto">
-            <div class="col-span-12 xl:col-span-3 xl:col-start-10 xl:pb-16 z-30">
-                <div class="h-full flex flex-col">
-                    <div class="box p-5 mt-6 bg-primary intro-x">
-                        <div class="flex flex-wrap gap-3">
-                            <div class="mr-auto">
-                                <div class="text-white text-opacity-70 dark:text-slate-300 flex items-center leading-3">
-                                    General Ledger Total Balance
-                                    <i data-lucide="alert-circle" class="tooltip w-4 h-4 ml-1.5" title="Total value of your sales: ₦158.409.416"></i>
-                                </div>
-                                <div class="text-white flex justify-between gap-6 items-center text-2xl font-medium leading-5 mt-3.5">
-                                    @money($gl_balance->total)
-                                    <a class="flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-darkmode-300 bg-opacity-20 hover:bg-opacity-30 text-white" href="">
-                                        <i data-lucide="credit-card" class="w-5 h-5"></i>
-                                    </a>
+        @can('read general ledger')
+            <div class="report-box-4 w-full h-full grid grid-cols-12 gap-6 xl:absolute -mt-8 xl:mt-0 pb-6 xl:pb-0 top-0 right-0 z-30 xl:z-auto">
+                <div class="col-span-12 xl:col-span-3 xl:col-start-10 xl:pb-16 z-30">
+                    <div class="h-full flex flex-col">
+                        <div class="box p-5 mt-6 bg-primary intro-x">
+                            <div class="flex flex-wrap gap-3">
+                                <div class="mr-auto">
+                                    <div class="text-white text-opacity-70 dark:text-slate-300 flex items-center leading-3">
+                                        General Ledger Total Balance
+                                        <i data-lucide="alert-circle" class="tooltip w-4 h-4 ml-1.5" title="Total value of your sales: ₦158.409.416"></i>
+                                    </div>
+                                    <div class="text-white flex justify-between gap-6 items-center text-2xl font-medium leading-5 mt-3.5">
+                                        @money($gl_balance->total)
+                                        <a class="flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-darkmode-300 bg-opacity-20 hover:bg-opacity-30 text-white" href="">
+                                            <i data-lucide="credit-card" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="report-box-4__content xl:min-h-0 intro-x">
-                        <div class="max-h-full xl:overflow-y-auto box mt-5">
-                            <div class="xl:sticky border-b bg-white top-0 px-5 pt-5 pb-3 mb-2">
-                                <div class="flex items-center">
-                                    <div class="font-medium truncate mr-5">Balance Summary by Services</div>
+                        <div class="report-box-4__content xl:min-h-0 intro-x">
+                            <div class="max-h-full xl:overflow-y-auto box mt-5">
+                                <div class="xl:sticky border-b bg-white top-0 px-5 pt-5 pb-3 mb-2">
+                                    <div class="flex items-center">
+                                        <div class="font-medium truncate mr-5">Balance Summary by Services</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tab-content px-5 pb-5">
-                                <div class="tab-pane active grid grid-cols-12 gap-y-3" id="weekly-report" role="tabpanel" aria-labelledby="weekly-report-tab">
-                                    <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
-                                        <div class="text-slate-500">Cashout</div>
-                                        <div class="mt-1.5 flex items-center">
-                                            <div class="text-lg">@money($gl_balance->cashout)</div>
+                                <div class="tab-content px-5 pb-5">
+                                    <div class="tab-pane active grid grid-cols-12 gap-y-3" id="weekly-report" role="tabpanel" aria-labelledby="weekly-report-tab">
+                                        <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
+                                            <div class="text-slate-500">Cashout</div>
+                                            <div class="mt-1.5 flex items-center">
+                                                <div class="text-lg">@money($gl_balance->cashout)</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
-                                        <div class="text-slate-500">Transfer</div>
-                                        <div class="mt-1.5 flex items-center">
-                                            <div class="text-lg">@money($gl_balance->transfer)</div>
+                                        <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
+                                            <div class="text-slate-500">Transfer</div>
+                                            <div class="mt-1.5 flex items-center">
+                                                <div class="text-lg">@money($gl_balance->transfer)</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
-                                        <div class="text-slate-500">Airtime & Data</div>
-                                        <div class="mt-1.5 flex items-center">
-                                            <div class="text-lg">@money($gl_balance->airtime_data)</div>
+                                        <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
+                                            <div class="text-slate-500">Airtime & Data</div>
+                                            <div class="mt-1.5 flex items-center">
+                                                <div class="text-lg">@money($gl_balance->airtime_data)</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
-                                        <div class="text-slate-500">Bill Payments</div>
-                                        <div class="mt-1.5 flex items-center">
-                                            <div class="text-lg">@money($gl_balance->bill_payments)</div>
+                                        <div class="col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-12">
+                                            <div class="text-slate-500">Bill Payments</div>
+                                            <div class="mt-1.5 flex items-center">
+                                                <div class="text-lg">@money($gl_balance->bill_payments)</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <a href="{{ route('general-ledger.show') }}" class="btn btn-outline-secondary col-span-12 border-slate-300 dark:border-darkmode-300 border-dashed relative justify-start mb-2">
-                                        <span class="truncate mr-5">View General Ledger</span>
-                                        <span class="w-8 h-8 absolute flex justify-center items-center right-0 top-0 bottom-0 my-auto ml-auto mr-0.5">
+                                        <a href="{{ route('general-ledger.show') }}" class="btn btn-outline-secondary col-span-12 border-slate-300 dark:border-darkmode-300 border-dashed relative justify-start mb-2">
+                                            <span class="truncate mr-5">View General Ledger</span>
+                                            <span class="w-8 h-8 absolute flex justify-center items-center right-0 top-0 bottom-0 my-auto ml-auto mr-0.5">
                                             <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                         </span>
-                                    </a>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endcan
     </div>
     <div class="report-box-3 report-box-3--content grid grid-cols-12 gap-6 xl:-mt-5 2xl:-mt-8 -mb-10 z-40 2xl:z-10">
         <div class="col-span-12 2xl:col-span-9">

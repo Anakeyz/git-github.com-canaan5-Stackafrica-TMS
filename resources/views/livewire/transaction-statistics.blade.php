@@ -1,10 +1,10 @@
 <div class="grid grid-cols-12">
-    <div class="col-span-12 md:col-span-6 py-1 sm:pl-1 md:pl-0 lg:pl-1 relative text-center md:text-left">
-        <div class="text-sm 2xl:text-base font-medium -mb-1">
-            Hi {{ Auth::user()->first_name }}, <span class="text-slate-600 dark:text-slate-300 font-normal">welcome back!</span>
+    <div class="col-span-12 md:col-span-6 py-1 sm:pl-1 md:pl-0 lg:pl-1 relative">
+        <div class="text-lg 2xl:text-base font-medium -mb-1 text-center md:text-left">
+            Hi {{ Auth::user()->first_name }}, <span class="text-slate-600 dark:text-slate-300 font-normal">welcome back! 👋🏼</span>
         </div>
 
-        <div class="report-box-4__content xl:min-h-0 intro-x w-60">
+        <div class="xl:min-h-0 intro-x md:w-60">
             <div class="max-h-full xl:overflow-y-auto box mt-5">
                 <div class="xl:sticky border-b bg-white top-0 px-5 pt-5 pb-3 mb-2">
                     <div class="flex items-center">
@@ -19,64 +19,62 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content px-5 pb-5">
-                    <div class="tab-pane active grid grid-cols-12 gap-y-3" id="weekly-report" role="tabpanel" aria-labelledby="weekly-report-tab">
-                        <div class="col-span-12">
-                            <div class="grid grid-cols-5">
-                                <div class="col-span-2 text-slate-500">Cashout</div>
-                                <div class="col-span-3 text-right">
-                                    {{ $services_stats->where('slug', 'cashoutwithdrawal')->first()?->count ?? 0 }}
-                                </div>
-                            </div>
-                            <div class="mt-1.5 flex items-center">
-                                <div class="text-lg">@money($services_stats->where('slug', 'cashoutwithdrawal')->first()?->amount ?? 0)</div>
+                <div class="grid grid-cols-12 gap-y-3 p-5">
+                    <div class="col-span-12">
+                        <div class="grid grid-cols-5">
+                            <div class="col-span-2 text-slate-500">Cashout</div>
+                            <div class="col-span-3 text-right">
+                                {{ $services_stats->where('slug', 'cashoutwithdrawal')->first()?->count ?? 0 }}
                             </div>
                         </div>
-                        <div class="col-span-12">
-                            <div class="grid grid-cols-5">
-                                <div class="col-span-2 text-slate-500">Transfer</div>
-                                <div class="col-span-3 text-right">
-                                    {{ $services_stats->where('slug', 'banktransfer')->first()?->count ?? 0}}
-                                </div>
-                            </div>
-                            <div class="mt-1.5 flex items-center">
-                                <div class="text-lg">@money($services_stats->where('slug', 'banktransfer')->first()?->amount ?? 0)</div>
+                        <div class="mt-1.5 flex items-center">
+                            <div class="text-lg">@money($services_stats->where('slug', 'cashoutwithdrawal')->first()?->amount ?? 0)</div>
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="grid grid-cols-5">
+                            <div class="col-span-2 text-slate-500">Transfer</div>
+                            <div class="col-span-3 text-right">
+                                {{ $services_stats->where('slug', 'banktransfer')->first()?->count ?? 0}}
                             </div>
                         </div>
-                        <div class="col-span-12">
-                            <div class="grid grid-cols-5">
-                                <div class="col-span-2 text-slate-500">BillPayment</div>
-                                <div class="col-span-3 text-right">
-                                    {{ $services_stats->where('slug', 'electricity')->first()?->count ?? 0 + $services_stats->where('slug', 'cabletv')->first()?->count ?? 0 }}
-                                </div>
-                            </div>
-                            <div class="mt-1.5 flex items-center">
-                                <div class="text-lg">
-                                    @money($services_stats->where('slug', 'electricity')->first()?->amount ?? 0 + $services_stats->where('slug', 'cabletv')->first()?->amount ?? 0)
-                                </div>
+                        <div class="mt-1.5 flex items-center">
+                            <div class="text-lg">@money($services_stats->where('slug', 'banktransfer')->first()?->amount ?? 0)</div>
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="grid grid-cols-5">
+                            <div class="col-span-2 text-slate-500">BillPayment</div>
+                            <div class="col-span-3 text-right">
+                                {{ $services_stats->where('slug', 'electricity')->first()?->count ?? 0 + $services_stats->where('slug', 'cabletv')->first()?->count ?? 0 }}
                             </div>
                         </div>
-                        <div class="col-span-12">
-                            <div class="grid grid-cols-5">
-                                <div class="col-span-2 text-slate-500">Airtime</div>
-                                <div class="col-span-3 text-right">
-                                    {{ $services_stats->where('slug', 'airtime')->first()?->count ?? 0}}
-                                </div>
-                            </div>
-                            <div class="mt-1.5 flex items-center">
-                                <div class="text-lg">@money($services_stats->where('slug', 'airtime')->first()?->amount ?? 0)</div>
+                        <div class="mt-1.5 flex items-center">
+                            <div class="text-lg">
+                                @money($services_stats->where('slug', 'electricity')->first()?->amount ?? 0 + $services_stats->where('slug', 'cabletv')->first()?->amount ?? 0)
                             </div>
                         </div>
-                        <div class="col-span-12">
-                            <div class="grid grid-cols-5">
-                                <div class="col-span-2 text-slate-500">Data</div>
-                                <div class="col-span-3 text-right">
-                                    {{ $services_stats->where('slug', 'internetdata')->first()?->count ?? 0 }}
-                                </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="grid grid-cols-5">
+                            <div class="col-span-2 text-slate-500">Airtime</div>
+                            <div class="col-span-3 text-right">
+                                {{ $services_stats->where('slug', 'airtime')->first()?->count ?? 0}}
                             </div>
-                            <div class="mt-1.5 flex items-center">
-                                <div class="text-lg">@money($services_stats->where('slug', 'internetdata')->first()?->amount ?? 0)</div>
+                        </div>
+                        <div class="mt-1.5 flex items-center">
+                            <div class="text-lg">@money($services_stats->where('slug', 'airtime')->first()?->amount ?? 0)</div>
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="grid grid-cols-5">
+                            <div class="col-span-2 text-slate-500">Data</div>
+                            <div class="col-span-3 text-right">
+                                {{ $services_stats->where('slug', 'internetdata')->first()?->count ?? 0 }}
                             </div>
+                        </div>
+                        <div class="mt-1.5 flex items-center">
+                            <div class="text-lg">@money($services_stats->where('slug', 'internetdata')->first()?->amount ?? 0)</div>
                         </div>
                     </div>
                 </div>
