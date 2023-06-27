@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         $teq->first()->assignRole(Role::SUPERADMIN);
 
          // Fake admin
-        $admin = User::factory(9)->create();
+        /*$admin = User::factory(9)->create();
 
         $admin_roles = Role::query()->where('type', User::GROUPS[0])->pluck('name')->toArray();
 
@@ -46,6 +46,6 @@ class UserSeeder extends Seeder
             'super_agent_id' => $super_agents->pluck('id')->toArray()[rand(0, $super_agents->count())]
         ]);
 
-        $agents->merge($agents1)->each( fn(User $user) => $user->assignRole(Role::AGENT));
+        $agents->merge($agents1)->each( fn(User $user) => $user->assignRole(Role::AGENT));*/
     }
 }
