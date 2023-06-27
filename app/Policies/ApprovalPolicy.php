@@ -19,7 +19,7 @@ class ApprovalPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('approve actions');
+        return $user->can('approve actions');
     }
 
     /**

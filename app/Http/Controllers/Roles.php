@@ -11,6 +11,8 @@ class Roles extends Controller
 {
     public function index()
     {
+        \Auth::user()->can('read admin');
+
         $roles = Role::orderBy('name')
             ->withCount(['users', 'permissions'])
             ->with(['users' => fn($query) => $query->inRandomOrder()->limit(6)])
@@ -21,6 +23,8 @@ class Roles extends Controller
 
     public function show($role)
     {
+        \Auth::user()->can('read admin');
+
         $role = Role::findByName($role);
 
         $permissions = Permission::all()->sortBy('name')->pluck('name')->toArray();
@@ -30,6 +34,8 @@ class Roles extends Controller
 
     public function create()
     {
+        \Auth::user()->can('read admin');
+
         $permissions = Permission::all();
         $types = User::GROUPS;
 
@@ -38,6 +44,8 @@ class Roles extends Controller
 
     public function store(RoleRequest $request)
     {
+        \Auth::user()->can('read admin');
+
         $data = $request->only('name', 'type');
         $role = Role::create($data);
 
@@ -48,6 +56,8 @@ class Roles extends Controller
 
     public function update(RoleRequest $request, $role)
     {
+        \Auth::user()->can('read admin');
+
         $role = Role::findByName($role);
 
         // Don't change super agent and agent role names

@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Cache;
 
 class Services extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->can('read settings');
+
         $services = Service::orderBy('name')->with('providers')->get();
 
         return view('pages.services.index', compact('services'));
@@ -17,6 +19,8 @@ class Services extends Controller
 
     public function update(Request $request, Service $service)
     {
+        $request->user()->can('edit settings');
+
         $service->update($request->only(['name', 'description', 'is_available', 'menu_name']));
 
         $name = $request->filled('menu_name') ? 'Menu name' : 'Service';

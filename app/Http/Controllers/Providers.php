@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 
 class Providers extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->can('read settings');
+
         $providers = ServiceProvider::with('service')->orderBy('name')->get();
         $services = Service::orderBy('name')->get();
 
@@ -18,6 +20,8 @@ class Providers extends Controller
 
     public function store(Request $request)
     {
+        $request->user()->can('create settings');
+
         $request->validate([
             'name' => 'required|string',
             'services.*' => 'required|exists:services,id'
@@ -33,8 +37,10 @@ class Providers extends Controller
         return back()->with('success', 'New Provider added!');
     }
 
-    public function destroy(ServiceProvider $provider)
+    public function destroy(Request $request, ServiceProvider $provider)
     {
+        $request->user()->can('edit settings');
+
         if (Service::whereProviderId($provider->id)->exists())
             return back()->with('error', "Cannot be deleted because it's currently selected.");
 

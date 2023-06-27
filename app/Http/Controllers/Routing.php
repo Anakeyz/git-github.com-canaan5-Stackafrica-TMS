@@ -4,19 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Processor;
 use App\Models\RoutingType;
+use Illuminate\Http\Request;
 
 
 class Routing extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->can('read settings');
+
         $types = RoutingType::all();
 
         return view('pages.routing.index', compact('types'));
     }
 
-    public function settings(int $id)
+    public function settings(Request $request, int $id)
     {
+        $request->user()->can('edit settings');
+
         $processors = Processor::all();
         $routingType = RoutingType::find($id);
         $type = $routingType->name;
@@ -25,8 +30,10 @@ class Routing extends Controller
         return view("pages.routing.settings", compact('type', 'processors'));
     }
 
-    public function addSetting()
+    public function addSetting(Request $request)
     {
+        $request->user()->can('create settings');
+
         $data = request()->all();
 //        dd(request()->all());
 
