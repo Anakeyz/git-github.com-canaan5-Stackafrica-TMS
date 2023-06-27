@@ -15,7 +15,7 @@
                     @if ($menu == 'devider')
                         <li class="side-nav__devider my-6"></li>
                     @else
-                        @if(!isset($menu['permission']) || Auth::user()->can($menu['permission']))
+                        @if(!isset($menu['permission']) || Auth::user()->canAny($menu['permission']))
                             <li>
                                 <a href="{{ isset($menu['route_name']) ? route($menu['route_name']) : 'javascript:;' }}" class="{{ $first_level_active_index == $menuKey || request()->segment(1) == $menuKey ? 'side-menu side-menu--active' : 'side-menu' }}">
                                     <div class="side-menu__icon">
@@ -33,7 +33,7 @@
                                 @if (isset($menu['sub_menu']))
                                     <ul class="{{ $first_level_active_index == $menuKey ? 'side-menu__sub-open' : '' }}">
                                         @foreach ($menu['sub_menu'] as $subMenuKey => $subMenu)
-                                            @if(!isset($subMenu['permission']) || Auth::user()->can($subMenu['permission']))
+                                            @if(!isset($subMenu['permission']) || Auth::user()->canAny($subMenu['permission']))
                                                 <li>
                                                     <a href="{{ isset($subMenu['route_name']) ? route($subMenu['route_name']) : 'javascript:;' }}" class="{{ $second_level_active_index == $subMenuKey ? 'side-menu side-menu--active' : 'side-menu' }}">
                                                         <div class="side-menu__icon">

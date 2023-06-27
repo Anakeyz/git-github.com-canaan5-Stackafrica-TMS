@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AirtimePurchase;
 use App\Http\Controllers\Api\Authenticate;
 use App\Http\Controllers\Api\Banks;
+use App\Http\Controllers\Api\CableTvPurchase;
 use App\Http\Controllers\Api\Dashboard;
 use App\Http\Controllers\Api\DataPurchase;
 use App\Http\Controllers\Api\ElectricityPurchase;
@@ -12,7 +13,6 @@ use App\Http\Controllers\Api\Terminals;
 use App\Http\Controllers\Api\Transactions;
 use App\Http\Controllers\Api\Transfer;
 use App\Http\Controllers\Api\WalletTransactions;
-use App\Http\Controllers\CableTvPurchase;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {

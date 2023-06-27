@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Enums\Status;
 use App\Helpers\General;
 use App\Helpers\MyResponse;
 use App\Helpers\Purchase;
 use App\Helpers\WalletHelper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CableTvPurchaseRequest;
 use App\Models\Service;
 use App\Models\Terminal;
