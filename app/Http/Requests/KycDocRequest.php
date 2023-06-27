@@ -32,8 +32,8 @@ class KycDocRequest extends FormRequest
 
     public function fulfilled(): array
     {
-        $path = FileHelper::processFileUpload(request('file'));
+        $path = FileHelper::processFileUpload($this->file('file'));
 
-        return array_merge(request()->only('name'), ['path' => $path]);
+        return array_merge($this->only('name'), ['path' => $path]);
     }
 }

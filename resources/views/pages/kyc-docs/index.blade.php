@@ -44,10 +44,10 @@
                      @forelse($kyc_docs as $doc)
                         <tr class="intro-x">
                             <td class="w-56">
-                                <a href="{{ route('users.show', $doc->user) }}">
-                                    {{ $doc->user->name }}
+                                <a href="{{ route('users.show', $doc->agent) }}">
+                                    {{ $doc->agent->name }}
                                     <br>
-                                    <span class="small text-gray-400"> {{ $doc->user->email }}</span>
+                                    <span class="small text-gray-400"> {{ $doc->agent->email }}</span>
                                 </a>
                             </td>
 

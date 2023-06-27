@@ -11,9 +11,11 @@ use Illuminate\Http\Request;
 class KycDocs extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $kyc_docs = KycDoc::with('user')->latest()->paginate();
+        $request->user()->canAny(['read kyc-level', 'read customers']);
+
+        $kyc_docs = KycDoc::with('agent')->latest()->paginate();
 
         return view('pages.kyc-docs.index', compact('kyc_docs'));
     }

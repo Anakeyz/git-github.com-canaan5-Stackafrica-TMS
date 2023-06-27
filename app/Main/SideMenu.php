@@ -112,15 +112,16 @@ class SideMenu
                 'sub_menu' => [
                     'kyc-level' => [
                         'route_name' => 'kyc-levels.index',
-                        'title' => 'KYC Level'
+                        'title' => 'KYC Level',
+                        'permission' => 'read kyc-level'
                     ],
 
                     'kyc-docs' => [
                         'route_name' => 'kyc-docs.index',
-                        'title' => 'KYC Documents'
+                        'title' => 'KYC Documents',
+                        'permission' => ['read customers', 'read kyc-level']
                     ],
                 ],
-                'permission' => 'read kyc-level'
             ],
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToSuperAgent;
 use Cjmellor\Approval\Concerns\MustBeApproved;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,15 +13,15 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class KycDoc extends Model
 {
-    use HasFactory, LogsActivity, MustBeApproved;
+    use HasFactory, LogsActivity, MustBeApproved, BelongsToSuperAgent;
 
     protected $guarded = ['id'];
 
     const TYPE = ['TEXT', 'FILE'];
 
-    public function user(): BelongsTo
+    public function agent(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 
