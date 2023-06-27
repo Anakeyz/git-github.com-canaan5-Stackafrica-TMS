@@ -16,7 +16,9 @@
             Customers
         </h2>
 
-        <a href="{{ route('agents.onboard') }}" class="btn btn-primary sm:mt-0 mt-5 text-left">Onboard New Customer</a>
+        @can('create', \App\Models\User::class)
+            <a href="{{ route('agents.onboard') }}" class="btn btn-primary sm:mt-0 mt-5 text-left">Onboard New Customer</a>
+        @endcan
     </div>
 
     <section class="sm:my-10 my-5">

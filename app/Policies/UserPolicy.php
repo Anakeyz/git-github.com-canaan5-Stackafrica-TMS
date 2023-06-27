@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->canAny(['read customers', 'read admin']);
     }
 
     /**
@@ -25,7 +25,10 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->is($model) || $user->is($model->superAgent);
+        if ($user->isSuperAgent())
+            return $user->is($model) || ($user->is($model->superAgent) && $user->can('read customers'));
+
+        return $user->is($model) || $user->can('read admin');
     }
 
     /**
@@ -33,7 +36,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('create users');
     }
 
     /**
@@ -41,7 +44,10 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->is($model) || $user->is($model->superAgent);
+        if ($user->isSuperAgent())
+            return $user->is($model) || ($user->is($model->superAgent) && $user->can('edit users'));
+
+        return $user->is($model) || $user->can('edit users');
     }
 
     /**

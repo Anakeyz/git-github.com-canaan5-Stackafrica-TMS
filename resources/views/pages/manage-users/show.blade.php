@@ -209,12 +209,14 @@
                                                                             <span class="bg-info/10 text-info px-2 p-1 shadow-sm hover:bg-info/20 rounded-full mr-1">{{ $terminal->menus->count() }} Menus</span>
                                                                         </a>
 
-                                                                        <a href="#" class="tooltip" title="Edit Terminal Details"
-                                                                           data-tw-toggle="modal" data-tw-target="#edit-terminal"
-                                                                           @click="terminal = @js($terminal); action = '{{ route('terminals.update', $terminal) }}'"
-                                                                        >
-                                                                            <i data-lucide="edit" class="w-5 h-5 text-blue-600"></i>
-                                                                        </a>
+                                                                        @can('update', $terminal)
+                                                                            <a href="#" class="tooltip" title="Edit Terminal Details"
+                                                                               data-tw-toggle="modal" data-tw-target="#edit-terminal"
+                                                                               @click="terminal = @js($terminal); action = '{{ route('terminals.update', $terminal) }}'"
+                                                                            >
+                                                                                <i data-lucide="edit" class="w-5 h-5 text-blue-600"></i>
+                                                                            </a>
+                                                                        @endcan
                                                                     </div>
                                                                 </div>
                                                                 <div class="flex items-center mt-5">
