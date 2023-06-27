@@ -42,16 +42,6 @@ class Wallet extends Model
 //      Relationships
 
     /**
-     * Wallet belongs to user
-     * @return BelongsTo
-     */
-    public function agent(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id')
-            ->select('first_name', 'other_names', 'id', 'phone', 'email', 'status', 'level_id');
-    }
-
-    /**
      * Wallet has Many Transactions
      * @return HasMany
      */

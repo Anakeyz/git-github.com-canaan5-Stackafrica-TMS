@@ -40,14 +40,6 @@ class Terminal extends Model
     /**
      * @return BelongsTo
      */
-    public function agent(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function group(): BelongsTo
     {
         return $this->belongsTo(TerminalGroup::class, 'group_id');

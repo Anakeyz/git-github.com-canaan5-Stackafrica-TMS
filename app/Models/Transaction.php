@@ -32,11 +32,6 @@ class Transaction extends Model
         return $this->belongsTo(Service::class, 'type_id');
     }
 
-    public function agent(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function terminal(): BelongsTo
     {
         return $this->belongsTo(Terminal::class);

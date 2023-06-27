@@ -19,12 +19,6 @@ class KycDoc extends Model
 
     const TYPE = ['TEXT', 'FILE'];
 
-    public function agent(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-
 //    Attribute
 
     public function path(): Attribute
