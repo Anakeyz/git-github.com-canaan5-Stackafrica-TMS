@@ -31,7 +31,7 @@ class UserIsAgent implements Rule
     {
         $this->user = User::where($attribute, $value)->first();
 
-        return  $this->user?->hasRole(Role::AGENT);
+        return  $this->user?->hasRole(Role::AGENT) ?? false;
     }
 
     /**
