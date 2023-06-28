@@ -200,6 +200,11 @@ class User extends Authenticatable
         return $this->getRoleNames()->contains(Role::SUPERAGENT);
     }
 
+    public function isAgent(): bool
+    {
+        return $this->getRoleNames()->contains(Role::AGENT);
+    }
+
     /**
      * Change the terminal status to the opposite value
      */
