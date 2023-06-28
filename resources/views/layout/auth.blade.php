@@ -3,8 +3,12 @@
 @section('body')
     <body class="login">
         @yield('content')
-        @include('../layout/components/dark-mode-switcher')
-        @include('../layout/components/main-color-switcher')
+        {{--@include('../layout/components/dark-mode-switcher')
+        @include('../layout/components/main-color-switcher')--}}
+
+        <!-- BEGIN: Session msg -->
+        <x-session-msg />
+        <!-- BEGIN: Session msg -->
 
         <!-- BEGIN: JS Assets-->
         @vite('resources/js/app.js')

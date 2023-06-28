@@ -54,26 +54,4 @@ class UserObserver
     {
         //
     }
-
-    /**
-     * Handle the User "restored" event.
-     *
-     * @param User $user
-     * @return void
-     */
-    public function restored(User $user)
-    {
-        //
-    }
-
-    /**
-     * Handle the User "force deleted" event.
-     *
-     * @param User $user
-     * @return void
-     */
-    public function forceDeleted(User $user)
-    {
-        //
-    }
 }

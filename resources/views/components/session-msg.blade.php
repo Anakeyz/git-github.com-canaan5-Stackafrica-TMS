@@ -1,6 +1,6 @@
 <!-- BEGIN: Notification Content -->
 
-@if(session()->has(['message', 'status']))
+@if(session()->has('status') || session()->has('message'))
     <div id="info-notification-content" class="toastify-content hidden flex bg-info/20">
         <div class="mt-1">
             <i class="text-info" data-lucide="alert-circle"></i>
