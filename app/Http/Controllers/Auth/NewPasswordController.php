@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class NewPasswordController extends Controller
 {
@@ -57,12 +59,28 @@ class NewPasswordController extends Controller
             }
         );
 
+
+
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? to_route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        if ($status == Password::PASSWORD_RESET) {
+            // Show success screen for agents.
+            if (User::whereEmail($request->email)->first()->isAgent()) {
+                return to_route('password.success', 'success')
+                    ->with('alert', 'You may now proceed to login on your terminal with your new password.');
+            }
+            return to_route('login')->with('status', __($status));
+        } else {
+            return back()->withInput($request->only('email'))
+                ->withErrors(['email' => __($status)]);
+        }
+    }
+
+    public function show($success)
+    {
+        if (session()->has('alert')) return view('auth.success-reset-password');
+
+        throw new RouteNotFoundException;
     }
 }
