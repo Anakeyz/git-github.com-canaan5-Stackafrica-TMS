@@ -31,7 +31,7 @@ class UserIsAgent implements Rule
     {
         $this->user = User::where($attribute, $value)->first();
 
-        return  $this->user?->hasRole(Role::AGENT) ?? false;
+        return  $this->user?->hasAnyRole([Role::AGENT, Role::SUPERAGENT]) ?? false;
     }
 
     /**
@@ -41,6 +41,6 @@ class UserIsAgent implements Rule
      */
     public function message(): string
     {
-        return 'Invalid '. Role::AGENT . ' email.';
+        return 'Invalid '. Role::AGENT . '/' . Role::SUPERAGENT . ' email.';
     }
 }
