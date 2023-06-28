@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\DataPurchase;
 use App\Http\Controllers\Api\ElectricityPurchase;
 use App\Http\Controllers\Api\Loans;
 use App\Http\Controllers\Api\Logout;
+use App\Http\Controllers\Api\PasswordResetLink;
 use App\Http\Controllers\Api\Terminals;
 use App\Http\Controllers\Api\Transactions;
 use App\Http\Controllers\Api\Transfer;
@@ -17,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
-    Route::post('auth',         Authenticate::class);
+    Route::post('auth',                 Authenticate::class);
+    Route::post('forgot-password',      PasswordResetLink::class);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('dashboard', Dashboard::class);
