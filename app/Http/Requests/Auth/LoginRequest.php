@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,7 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attemptWhen($this->only('email', 'password'),
-            fn($user) => (! $user->isAgent()),
+            fn(User $user) => (! $user->isAgent()),
             $this->boolean('remember'))
         ) {
             RateLimiter::hit($this->throttleKey());

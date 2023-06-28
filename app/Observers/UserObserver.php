@@ -39,9 +39,11 @@ class UserObserver
      * @param User $user
      * @return void
      */
-    public function updated(User $user)
+    public function updating(User $user)
     {
-        //
+        if ($user->isDirty('password')) {
+            $user->password_change_at = now();
+        }
     }
 
     /**

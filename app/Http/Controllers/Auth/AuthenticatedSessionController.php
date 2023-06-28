@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -40,6 +41,16 @@ class AuthenticatedSessionController extends Controller
             ->inLog('User')
             ->createdAt(now())
             ->log('login');
+
+        // For first time login
+        if (is_null(Auth::user()->password_change_at)) {
+            $token = Password::createToken(Auth::user());
+            $email = Auth::user()->email;
+
+            Auth::logout();
+
+            return to_route('password.reset', [$token, 'email' => $email])->with('alert', 'auth.first-login');
+        }
 
         $request->session()->regenerate();
 
