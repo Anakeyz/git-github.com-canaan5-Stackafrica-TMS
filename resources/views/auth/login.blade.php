@@ -28,6 +28,7 @@
                         <form id="auth-form" method="post" action="{{ route('login') }}">
                             @csrf
                             <input id="email" type="text" name="email" class="intro-x login__input form-control py-3 px-4 block" placeholder="Email">
+                            <x-input-error input-name="email" />
                             <input id="password" type="password" name="password" class="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password">
 
                             <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">

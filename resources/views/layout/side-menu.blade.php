@@ -80,6 +80,7 @@
             <!-- BEGIN: Session Msg -->
             <div class="my-5">
                 <x-session-msg />
+                <x-validation-errors />
             </div>
 
             @yield('subcontent')

@@ -28,6 +28,7 @@
                         <form id="auth-form" method="post" action="{{ route('password.email') }}">
                             @csrf
                             <input id="email" type="text" name="email" class="intro-x login__input form-control py-3 px-4 block" placeholder="Email">
+                            <x-input-error input-name="email" />
 
                             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                                 <button id="auth-btn" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Submit</button>
