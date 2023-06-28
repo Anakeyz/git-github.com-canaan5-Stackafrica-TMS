@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\TerminalGroup;
 use App\Models\User;
+use App\Notifications\AccountRegistration;
 
 class Users extends Controller
 {
@@ -56,6 +57,8 @@ class Users extends Controller
         $user = User::create($data); // Observer creates password, level and wallet;
 
         $user->assignRole($request->role);
+
+        $user->notify(new AccountRegistration);
 
         return to_route('users.show', $user)->with('success', "$request->role onboarding successful!");
     }

@@ -144,7 +144,7 @@ class User extends Authenticatable
         $roles = $this->getRoleNames();
 
         return Attribute::get(
-            fn($value) => $roles->count() < 1 ? null : $roles[0]
+            fn($value) => $roles->count() < 1 ? null : $roles->first()
         );
     }
 
