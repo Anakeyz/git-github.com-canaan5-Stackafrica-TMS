@@ -5,10 +5,10 @@
         max-width: calc(100% - 30px);
     }
     .toast-close {
-        @apply text-transparent absolute opacity-100 inset-y-0 right-0 pr-3 flex items-center;
+        @apply text-transparent absolute opacity-100 inset-y-0 top-[5px] right-0 pr-2 items-center;
         &:before {
             content: "×";
-            @apply block text-slate-500 text-3xl -mt-1.5 font-light;
+            @apply block text-slate-500 text-lg -mt-1.5 font-light;
         }
     }
 }

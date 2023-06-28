@@ -6,9 +6,10 @@ import {createIcons, icons} from "lucide";
     error = $("#error-notification-content"),
     info = $("#info-notification-content"),
     pending = $("#pending-notification-content");
+    const validation = $(".validation-msg");
 
     const successDuration = 3500;
-    const defaultDuration = 5000;
+    const defaultDuration = 5500;
 
     if(success.length) {
         callToast(success, successDuration)
@@ -116,4 +117,20 @@ import {createIcons, icons} from "lucide";
         }
     }
 
+    if(validation.length) {
+        validation.each(function() {
+            Toastify({
+                text: $(this).data('msg'),
+                duration: 6000,
+                close: true,
+                stopOnFocus: true,
+                style: {
+                    color: '#c21919',
+                    background: '#fbe9eb',
+                    display: 'flex',
+                    padding: '5px 25px 5px 10px'
+                }
+            }).showToast();
+        });
+    }
 })()
