@@ -27,6 +27,19 @@ class Terminal extends Model
         return 'serial';
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function processors()
+    {
+        return $this->hasMany(TerminalProcessor::class, 'serial');
+    }
+
     public function pin(): Attribute
     {
         return Attribute::set(fn($value) => Hash::make($value));

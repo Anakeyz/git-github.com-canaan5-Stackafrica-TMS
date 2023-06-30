@@ -42,6 +42,12 @@ class SideMenu
                         'permission' => 'read terminals'
                     ],
 
+                    'processor' => [
+                        'route_name' => 'terminal.processors.index',
+                        'title' => 'Processors',
+                        'permission' => 'read terminal-processors'
+                    ],
+
                     'menus' => [
                         'route_name' => 'menus.index',
                         'title' => 'Menus',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Approval;
+use App\Models\Terminal;
 use Cjmellor\Approval\Enums\ApprovalStatus;
 use Illuminate\Http\Request;
 
@@ -26,11 +27,17 @@ class Approvals extends Controller
 
         $model = new $modelClass();
 
-        if ($modelId) $model = $model->find($modelId);
+        if ($modelId) {
+            $model = $model->find($modelId);
+        }
 
         $model->fill($approval->new_data->toArray());
 
         $model->withoutApproval()->save();
+
+        if ($model instanceof  Terminal) {
+            TerminalProcessor::createForTerminal($model);
+        }
 
         $approval->update(['state' => ApprovalStatus::Approved]);
 

@@ -101,6 +101,11 @@ class RoleSeeder extends Seeder
             'approve actions',
             'read menus',
             'edit menus',
+            'create terminal-processors',
+            'read terminal-processors',
+            'edit terminal-processors',
+            'delete terminal-processors',
+            'update terminal-processors',
         ];
 
     }

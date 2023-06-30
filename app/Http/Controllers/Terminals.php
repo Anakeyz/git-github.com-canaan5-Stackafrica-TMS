@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TerminalRequest;
+use App\Models\Processor;
 use App\Models\Terminal;
 use App\Models\User;
 use Illuminate\Support\Str;
