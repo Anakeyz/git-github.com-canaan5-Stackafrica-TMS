@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TerminalRequest;
 use App\Models\Processor;
 use App\Models\Terminal;
-use App\Models\User;
+use App\Models\TerminalProcessor;
 
-class TerminalProcessor extends Controller
+class TerminalProcessors extends Controller
 {
     public function index()
     {
@@ -36,25 +35,4 @@ class TerminalProcessor extends Controller
 //
 //        return back()->with('pending', 'Terminal update awaiting approval.');
 //    }
-
-
-    public static function createForTerminal(Terminal $terminal)
-    {
-        $processors = Processor::all();
-
-        foreach ($processors as $processor) {
-            $terminalProcessor = new \App\Models\TerminalProcessor();
-
-            $terminalProcessor->user_id = $terminal->user_id;
-            $terminalProcessor->serial = $terminal->serial;
-            $terminalProcessor->processor_id = $processor->id;
-            $terminalProcessor->processor_name = $processor->name;
-            $terminalProcessor->processor_name = $terminal->serial;
-            $terminalProcessor->tid = "00000000";
-            $terminalProcessor->mid = "000000000000000";
-            $terminalProcessor->category_code = "0000";
-
-            $terminalProcessor->withoutApproval()->save();
-        }
-    }
 }

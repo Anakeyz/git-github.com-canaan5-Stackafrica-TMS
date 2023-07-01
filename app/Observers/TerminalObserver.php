@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Helpers\General;
 use App\Models\Service;
 use App\Models\Terminal;
+use App\Models\TerminalProcessor;
 
 class TerminalObserver
 {
@@ -30,6 +31,8 @@ class TerminalObserver
     public function created(Terminal $terminal): void
     {
         $terminal->menus()->attach(Service::all());
+
+        TerminalProcessor::createForTerminal($terminal);
     }
 
     /**

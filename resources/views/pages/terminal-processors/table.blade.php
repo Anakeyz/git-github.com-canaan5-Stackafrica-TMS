@@ -4,7 +4,7 @@
             Terminal Processors
         </h2>
 
-        @can('create', \App\Models\TerminalProcessor::class)
+        @can('create', \App\Models\TerminalProcessors::class)
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                 <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#create-terminal">Add Terminal Processor</button>
             </div>

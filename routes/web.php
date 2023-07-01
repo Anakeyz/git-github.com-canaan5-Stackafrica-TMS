@@ -94,7 +94,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('routing',Routing::class);
 
 
-    Route::name('terminal.processors')->prefix('/terminal')->controller(\App\Http\Controllers\TerminalProcessor::class)->group(function () {
+    Route::name('terminal.processors')->prefix('/terminal')->controller(\App\Http\Controllers\TerminalProcessors::class)->group(function () {
         Route::get('/processors', 'index')->name('.index')->middleware(['permission:read terminal-processors']);
         Route::get('/processors/{id}/edit', 'index')->name('.update')->middleware(['permission:update terminal-processors']);
     });

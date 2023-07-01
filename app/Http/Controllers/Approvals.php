@@ -35,10 +35,6 @@ class Approvals extends Controller
 
         $model->withoutApproval()->save();
 
-        if ($model instanceof  Terminal) {
-            TerminalProcessor::createForTerminal($model);
-        }
-
         $approval->update(['state' => ApprovalStatus::Approved]);
 
         return back()->with('success', "Approval successful! $approval->resource $approval->action.");
