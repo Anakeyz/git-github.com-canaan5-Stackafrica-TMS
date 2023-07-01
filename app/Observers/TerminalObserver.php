@@ -14,7 +14,7 @@ class TerminalObserver
      */
     public function creating(Terminal $terminal): void
     {
-        $nl = substr($terminal->owner->name, 0, 21) . '-'. substr(env('APP_NAME'), 0, 11);
+        $nl = substr($terminal->owner->name, 0, 21) . '-'. substr(config('app.name'), 0, 11);
 
         $terminal->status = 'ACTIVE';
         $terminal->tmk = strtoupper(General::generateReference(length: 38));

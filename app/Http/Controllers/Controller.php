@@ -16,12 +16,4 @@ class Controller extends BaseController
     {
         return config('app.pagination');
     }
-
-    protected function getExceptionMsg(\Exception $exception): RedirectResponse
-    {
-        $msg = env('APP_ENV') == 'production' ?
-            'An Error Exception occurred!' : $exception->getMessage();
-
-        return back()->with('error', $msg);
-    }
 }
