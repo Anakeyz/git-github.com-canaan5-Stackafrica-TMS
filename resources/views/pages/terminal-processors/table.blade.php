@@ -137,5 +137,5 @@
     </div>
 
     <!-- END: HTML Table Data -->
-    <x-terminal.edit />
+    <x-terminal-processors.edit />
 </div>

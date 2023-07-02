@@ -35,9 +35,10 @@
                                         @foreach ($menu['sub_menu'] as $subMenuKey => $subMenu)
                                             @if(!isset($subMenu['permission']) || Auth::user()->canAny($subMenu['permission']))
                                                 <li>
-                                                    <a href="{{ isset($subMenu['route_name']) ? route($subMenu['route_name']) : 'javascript:;' }}" class="{{ $second_level_active_index == $subMenuKey ? 'side-menu side-menu--active' : 'side-menu' }}">
+                                                    <a href="{{ isset($subMenu['route_name']) ? route($subMenu['route_name']) : 'javascript:;' }}"
+                                                       class="{{ $second_level_active_index == $subMenuKey ? 'side-menu side-menu--active bg-white/50 mx-1.5' : 'side-menu' }}">
                                                         <div class="side-menu__icon">
-                                                            <i data-lucide="{{isset($subMenu['icon']) && !empty($subMenu['icon'])  ? $subMenu['icon'] : 'disc'}}" style="width: 14px;"></i>
+                                                            <i data-lucide="{{$subMenu['icon'] ?? 'disc'}}" style="width: 14px;"></i>
                                                         </div>
                                                         <div class="side-menu__title">
                                                             {{ $subMenu['title'] }}
