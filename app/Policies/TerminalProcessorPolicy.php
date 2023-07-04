@@ -38,29 +38,13 @@ class TerminalProcessorPolicy
      */
     public function update(User $user, TerminalProcessor $terminalProcessor): bool
     {
-        return $user->is($terminalProcessor->owner) || $user->can('edit terminal-processors');
+        return $user->is($terminalProcessor->owner) || $user->can('update terminal-processors');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
     public function delete(User $user, Terminal $terminal): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Terminal $terminal): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Terminal $terminal): bool
     {
         //
     }

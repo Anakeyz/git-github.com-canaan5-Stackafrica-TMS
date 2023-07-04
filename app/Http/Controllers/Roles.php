@@ -52,14 +52,11 @@ class Roles extends Controller
         return to_route('roles.index')->with('success', 'New role added!');
     }
 
-    public function update(RoleRequest $request, $role)
+    public function update(RoleRequest $request, Role $role)
     {
         \Auth::user()->can('read admin');
 
-        $role = Role::findByName($role);
-
-        // Don't change super agent and agent role names
-        if (!in_array($role, [Role::SUPERAGENT, Role::AGENT]))
+        if (!in_array($role->type, [Role::SUPERAGENT, Role::AGENT]))
             $role->update(['name' => $request->name]);
 
 //            Don't change agent's permissions
@@ -67,6 +64,6 @@ class Roles extends Controller
             $role->syncPermissions($request->permissions);
         }
 
-        return  to_route('roles.show', $role->name)->with('success', 'Role edited!');
+        return  back()->with('success', 'Role edited!');
     }
 }

@@ -56,7 +56,7 @@
             @else
                 <p>
                     @foreach($role->permissions->sortBy('name') as $permission)
-                        {{ ucwords($permission->name) }}{{ !$loop->last ? ', ' : '.'}}
+                        {{ ucwords(str($permission->name)->replace('-', ' ')) }}{{ !$loop->last ? ', ' : '.'}}
                     @endforeach
                     <span class="text-xs flex items-center text-info hover:underline cursor-pointer"
                          data-tw-toggle="modal" data-tw-target="#role-edit-modal"
@@ -84,7 +84,7 @@
 
     <!-- BEGIN: Modal Content -->
     <x-modal modal-id="role-edit-modal" modal-title="Edit Name and Permissions">
-        <form action="{{ route('roles.update', $role->name) }}" method="post" class="my-form col-span-12 check-permissions-change">
+        <form action="{{ route('roles.update', $role) }}" method="post" class="my-form col-span-12 check-permissions-change">
             @csrf
             @method('PUT')
 
@@ -102,11 +102,11 @@
                 <div class="grid grid-cols-6 lg:grid-cols-8">
                     @foreach($permissions as $permission)
                         <div class="col-span-6 sm:col-span- md:col-span-2 lg:col-span-2">
-                            <input id="{{ str($permission)->slug() }}" class="form-check-input" type="checkbox"
+                            <input id="{{ $slug = str($permission)->slug() }}" class="form-check-input" type="checkbox"
                                    name="permissions[]" value="{{ $permission }}"
                                    @if(in_array($permission, $role->permissions->pluck('name')->toArray())) checked @endif
                             >
-                            <label class="form-check-label" for="{{str($permission)->slug()}}">{{ ucwords($permission) }}</label>
+                            <label class="form-check-label" for="{{  $slug }}">{{ ucwords(str($permission)->replace('-', ' ')) }}</label>
                         </div>
                     @endforeach
                 </div>

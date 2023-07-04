@@ -44,7 +44,7 @@ class RoleRequest extends FormRequest
     public function updateRequest(): array
     {
         return [
-            'name' => ['required', 'string', Rule::unique('roles', 'name')->ignoreModel(Role::findByName($this->route('role')))],
+            'name' => ['required', 'string', Rule::unique('roles', 'name')->ignoreModel($this->role)],
             'permissions' => 'nullable|array'
         ];
     }
