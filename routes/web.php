@@ -22,6 +22,7 @@ use App\Http\Controllers\Services;
 use App\Http\Controllers\Routing;
 use App\Http\Controllers\TerminalGroupTerminals;
 use App\Http\Controllers\TerminalMenus;
+use App\Http\Controllers\TerminalProcessors;
 use App\Http\Controllers\Terminals;
 use App\Http\Controllers\Transactions;
 use App\Http\Controllers\UserKycDocs;
@@ -89,17 +90,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('wallets',                      Wallets::class)->only('index');
     Route::resource('wallet-transactions',          WalletTransactions::class)->only('index');
     Route::resource('processors',                   Processors::class)->only(['index', 'store', 'update']);
+    Route::resource('terminal-processors',          TerminalProcessors::class)->only(['index', 'update']);
+    Route::resource('routing',                      Routing::class)->only('index');
 
     Route::get('kyc-documents', [KycDocs::class, 'display'])->name('display');
     Route::get('/services/json', [Services::class, 'jsonData'])->name('services.json');
 
-    Route::resource('routing',Routing::class);
-
-
-    Route::name('terminal.processors')->prefix('/terminal')->controller(\App\Http\Controllers\TerminalProcessors::class)->group(function () {
-        Route::get('/processors', 'index')->name('.index')->middleware(['permission:read terminal-processors']);
-        Route::get('/processors/{id}/edit', 'index')->name('.update')->middleware(['permission:update terminal-processors']);
-    });
 
     Route::withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)->group(function () {
         Route::resource('terminal-groups.fees', Fees::class)->only(['index', 'edit', 'update'])->shallow();
