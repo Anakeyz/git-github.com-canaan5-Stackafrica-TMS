@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('host');
             $table->unsignedInteger('port');
             $table->boolean('ssl')->default(true);
-            $table->string('comp1');
-            $table->string('comp2');
-            $table->string('zpk')->nullable();
+            $table->string('comp1'); // Component key 1
+            $table->string('comp2'); // Component key 2
+            $table->string('zpk')->nullable(); // Zone Pin key
             $table->boolean('requiresKey')->default(false);
             $table->string('tid_prefix')->nullable();
             $table->string('mid_prefix')->nullable();

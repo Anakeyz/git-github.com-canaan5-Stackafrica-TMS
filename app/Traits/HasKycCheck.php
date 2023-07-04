@@ -28,7 +28,7 @@ trait HasKycCheck
             throw new FailedApiResponse('Your single transaction limit is ' . moneyFormat($this->kycLevel->single_trans_max));
         }
 
-        $amount_today = $this->transactions()->today()->sum('amount');
+        $amount_today = $this->transactions()->successful()->today()->sum('amount');
 
         if (($amount_today + $amount) > $this->kycLevel->daily_limit) {
             $remainder = moneyFormat($this->kycLevel->daily_limit - $amount_today);
