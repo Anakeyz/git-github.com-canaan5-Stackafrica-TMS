@@ -25,7 +25,7 @@
 
         <div class="grid grid-cols-12 gap-5 mt-5">
             @foreach($roles as $role)
-                <a class="col-span-12 sm:col-span-4 2xl:col-span-3 box p-5 cursor-pointer zoom-in flex justify-between" href="{{ route('roles.show', $role->name) }}">
+                <a class="col-span-12 sm:col-span-4 2xl:col-span-3 box p-5 cursor-pointer zoom-in flex justify-between" href="{{ route('roles.show', $role->id) }}">
                     <div>
                         <div class="font-medium text-base">{{ $role->name }}</div>
                         <div class="text-info">{{ $role->users_count }} users</div>

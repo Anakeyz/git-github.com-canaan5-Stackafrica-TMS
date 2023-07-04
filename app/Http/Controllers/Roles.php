@@ -21,11 +21,9 @@ class Roles extends Controller
         return view('pages.access-control.roles.index', compact('roles'));
     }
 
-    public function show($role)
+    public function show(Role $role)
     {
         \Auth::user()->can('read admin');
-
-        $role = Role::findByName($role);
 
         $permissions = Permission::all()->sortBy('name')->pluck('name')->toArray();
 

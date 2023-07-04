@@ -19,7 +19,7 @@
                   data-tw-toggle="modal" data-tw-target="#role-edit-modal"
             >
                     <i data-lucide="edit" class="w-3 h-3 mr-1"></i>
-                    Edit name & permissions
+                    Edit role name & permissions
             </div>
         </div>
     </section>
@@ -58,6 +58,12 @@
                     @foreach($role->permissions->sortBy('name') as $permission)
                         {{ ucwords($permission->name) }}{{ !$loop->last ? ', ' : '.'}}
                     @endforeach
+                    <span class="text-xs flex items-center text-info hover:underline cursor-pointer"
+                         data-tw-toggle="modal" data-tw-target="#role-edit-modal"
+                    >
+                        <i data-lucide="edit" class="w-3 h-3 mr-1"></i>
+                        Edit role name & permissions
+                    </span>
                 </p>
             @endif
         </div>
