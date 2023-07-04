@@ -1,4 +1,4 @@
-<div x-data="service_menus">
+<div x-data="{processor: {}, action: null}">
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
             Terminal Processors
@@ -12,7 +12,7 @@
     </div>
 
     <!-- BEGIN: HTML Table Data -->
-    <div class="intro-y box p-5 mt-5" x-data>
+    <div class="intro-y box p-5 mt-5">
         <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
 
             <!--  Filter form  -->
@@ -102,8 +102,8 @@
                             <div class="flex justify-center items-center">
                                 @can('update', $terminalProcessor)
                                     <button class="flex items-center mr-3 text-blue-600"
-                                            data-tw-toggle="modal" data-tw-target="#edit-terminal"
-                                            @click="terminalProcessor = @js($terminalProcessor); action = '{{ route('terminal.processors.update', $terminalProcessor) }}';"
+                                            data-tw-toggle="modal" data-tw-target="#edit-processor"
+                                            @click="action = '{{ route('terminal-processors.update', $terminalProcessor) }}'; processor = @js($terminalProcessor);"
                                     >
                                         <i data-lucide="edit" class="w-4 h-4 mr-1"></i> Edit
                                     </button>

@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="mt-6">
-                        <label for="comp1" class="form-label sm:w-24">Component Key 1</label>
+                        <label for="comp1" class="form-label">Component Key 1</label>
                         <div class="w-full">
                             <input id="comp1" type="text" class="form-control" placeholder="Enter the component key 1" name="comp1"
                                    x-model="processor.comp1"
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <label for="comp2" class="form-label sm:w-24">Component Key 2</label>
+                        <label for="comp2" class="form-label">Component Key 2</label>
                         <div class="w-full">
                             <input id="comp2" type="text" class="form-control" placeholder="Enter the component key 1" name="comp2"
                                    x-model="processor.comp2"
