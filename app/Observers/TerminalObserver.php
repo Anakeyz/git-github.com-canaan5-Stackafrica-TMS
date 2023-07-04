@@ -14,15 +14,13 @@ class TerminalObserver
      */
     public function creating(Terminal $terminal): void
     {
-        $nl = substr($terminal->owner->name, 0, 21) . '-'. substr(config('app.name'), 0, 11);
-
         $terminal->status = 'ACTIVE';
         $terminal->tmk = strtoupper(General::generateReference(length: 38));
         $terminal->tpk = strtoupper(General::generateReference(length: 38));
         $terminal->tsk = strtoupper(General::generateReference(length: 38));
         $terminal->date_time = now()->format('d/m/y H:i');
         $terminal->category_code = General::generateReference(length: 4);
-        $terminal->name_location = str_pad($nl, 35, ' ', STR_PAD_RIGHT) . 'LA NG';
+        $terminal->name_location = General::generateNameLocation($terminal->owner->name);
     }
 
     /**

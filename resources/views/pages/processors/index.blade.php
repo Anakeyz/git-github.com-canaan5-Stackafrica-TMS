@@ -17,7 +17,7 @@
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                 <a href="#" class="col-span-1 btn btn-primary shadow-sm"
                    data-tw-toggle="modal" data-tw-target="#create-provider"
-                >Add New</a>
+                >Add New Processor</a>
             </div>
         </div>
     </section>
@@ -37,7 +37,7 @@
                             <th scope="col">Host</th>
                             <th scope="col">Port</th>
                             <th scope="col">SSL</th>
-                            <th scope="col">Created At</th>
+                            <th scope="col">Date Created</th>
                             <th class="text-center whitespace-nowrap">
                                 <span class="flex justify-center">
                                     <i data-lucide="settings" class="w-5 h-5"></i>

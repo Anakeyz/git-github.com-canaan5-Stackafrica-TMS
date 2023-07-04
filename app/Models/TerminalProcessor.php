@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\General;
 use Cjmellor\Approval\Concerns\MustBeApproved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +29,8 @@ class TerminalProcessor extends Model
                 'processor_name' => $terminal->serial,
                 'tid' => '00000000',
                 'mid' => '000000000000000',
-                'category_code' => '0000'
+                'category_code' => '0000',
+                'name_location' => General::generateNameLocation($terminal->owner->name)
             ]);
 
             $terminalProcessor->withoutApproval()->save();

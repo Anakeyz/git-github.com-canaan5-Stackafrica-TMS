@@ -29,4 +29,11 @@ class General
 
         return $reference;
     }
+
+    public static function generateNameLocation(string $name): string
+    {
+        $nl = substr($name, 0, 21) . '-'. substr(config('app.name'), 0, 11);
+
+        return str_pad($nl, 35, ' ', STR_PAD_RIGHT) . 'LA NG';
+    }
 }
