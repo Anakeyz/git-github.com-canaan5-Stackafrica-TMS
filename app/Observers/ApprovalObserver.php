@@ -25,7 +25,7 @@ class ApprovalObserver
      */
     public function created(Approval $approval)
     {
-        //
+        // Todo: send mail to approvers for new action
     }
 
     /**
