@@ -14,6 +14,7 @@ use App\Http\Controllers\KycLevels;
 use App\Http\Controllers\Ledger;
 use App\Http\Controllers\Menus;
 use App\Http\Controllers\Permissions;
+use App\Http\Controllers\Processors;
 use App\Http\Controllers\Profile;
 use App\Http\Controllers\Providers;
 use App\Http\Controllers\Roles;
@@ -87,6 +88,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('terminals.menus',              TerminalMenus::class)->only('store');
     Route::resource('wallets',                      Wallets::class)->only('index');
     Route::resource('wallet-transactions',          WalletTransactions::class)->only('index');
+    Route::resource('processors',                   Processors::class)->only(['index', 'store', 'update']);
 
     Route::get('kyc-documents', [KycDocs::class, 'display'])->name('display');
     Route::get('/services/json', [Services::class, 'jsonData'])->name('services.json');

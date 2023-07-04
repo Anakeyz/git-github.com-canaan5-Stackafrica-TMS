@@ -13,6 +13,11 @@ class Processor extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'ssl' => 'bool',
+        'requiresKey' => 'bool'
+    ];
+
     public function terminals(): HasMany
     {
         return $this->hasMany(TerminalProcessor::class);

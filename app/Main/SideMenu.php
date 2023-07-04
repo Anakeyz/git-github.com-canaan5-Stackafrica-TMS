@@ -165,6 +165,11 @@ class SideMenu
                         'route_name' => 'services.index',
                         'title' => 'Services and Providers'
                     ],
+                    'processor' => [
+                        'route_name' => 'processors.index',
+                        'title' => 'Processors',
+                        'permission' => 'read terminal-processors'
+                    ],
                     'routing' => [
                         'icon' => 'send',
                         'route_name' => 'routing.index',
