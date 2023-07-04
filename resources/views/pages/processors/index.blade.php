@@ -23,7 +23,7 @@
     </section>
 
     <section class="mt-3 bg-white px-5 py-3">
-        <div x-data="{type: {}, action: null}">
+        <div x-data="{processor: {}, action: null}">
             <div class="sm:mb-3 flex flex-col-reverse sm:flex-row justify-between sm:items-center intro-y">
                 <p class="font-semibold">Showing list of all Routing types</p>
             </div>
@@ -36,7 +36,6 @@
                             <th scope="col">Name</th>
                             <th scope="col">Host</th>
                             <th scope="col">Port</th>
-                            <th scope="col">SSL</th>
                             <th scope="col">Date Created</th>
                             <th class="text-center whitespace-nowrap">
                                 <span class="flex justify-center">
@@ -54,17 +53,14 @@
                                 <td class="w-56">{{ $processor->name }}</td>
                                 <td class="w-56">{{ $processor->host }}</td>
                                 <td class="w-56">{{ $processor->port }}</td>
-                                <td class="w-56">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" @checked($processor->ssl)>
-                                    </div>
-                                </td>
-
                                 <td class="whitespace-nowrap">{{ $processor->created_at->toDayDateTimeString() }}</td>
 
                                 <td class="table-report__action w-40">
                                     <div class="flex justify-around gap-4 items-center">
-                                        <a href="#" class="flex items-center text-primary">
+                                        <a href="#" class="flex items-center text-primary"
+                                           data-tw-toggle="modal" data-tw-target="#edit-processor"
+                                           @click="action = '{{ route('processors.update', $processor) }}'; processor = @js($processor);"
+                                        >
                                             <i data-lucide="edit" class="w-4 h-4 mr-1"></i> Edit
                                         </a>
                                     </div>
@@ -75,6 +71,9 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Modals -->
+            <x-processors.edit />
         </div>
     </section>
 @endsection
