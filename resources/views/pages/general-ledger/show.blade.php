@@ -1,9 +1,8 @@
 @extends('../layout/'.  config('view.menu-style'))
 
-@section('title')
-    General Ledger
-@endsection
-@php $name = $gl->service->name  @endphp
+@section('title', 'General Ledger')
+
+@php($name = $gl->service->name)
 
 @section('breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>

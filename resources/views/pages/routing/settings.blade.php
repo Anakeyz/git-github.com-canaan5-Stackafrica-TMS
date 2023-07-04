@@ -1,8 +1,6 @@
 @extends('../layout/'.  config('view.menu-style'))
 
-@section('title')
-    Amount Routing Settings
-@endsection
+@section('title', 'Amount Routing Settings')
 
 @section('breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>

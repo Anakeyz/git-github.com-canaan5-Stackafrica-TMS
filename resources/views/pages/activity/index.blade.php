@@ -1,8 +1,6 @@
 @extends('../layout/'.  config('view.menu-style'))
 
-@section('title')
-    Audit Trail
-@endsection
+@section('title', "Audit Trail")
 
 @section('breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>

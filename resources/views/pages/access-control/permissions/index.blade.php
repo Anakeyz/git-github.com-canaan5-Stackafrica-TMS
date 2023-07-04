@@ -1,8 +1,6 @@
 @extends('../layout/'.  config('view.menu-style'))
 
-@section('title')
-    Manage Permissions
-@endsection
+@section('title', 'Manage Permissions')
 
 @section('breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>

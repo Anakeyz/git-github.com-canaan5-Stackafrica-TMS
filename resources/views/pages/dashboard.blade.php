@@ -1,8 +1,6 @@
 @extends('../layout/'.  config('view.menu-style'))
 
-@section('title')
-    Dashboard
-@endsection
+@section('title', 'Dashboard')
 
 @section('breadcrumbs')
     <li class="breadcrumb-item"><a>Dashboard</a></li>
