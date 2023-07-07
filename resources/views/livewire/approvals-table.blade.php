@@ -48,7 +48,7 @@
                                         data-tw-toggle="modal" data-tw-target="#view-approval"
                                         @click="approvalRoute = '{{ route('approvals.update', $approval) }}'; approval = @js($approval)"
                                 >
-                                    <i data-lucide="edit" class="w-4 h-4 mr-1"></i> Details
+                                    <i data-lucide="edit" class="w-4 h-4 mr-1"></i> View details
                                 </button>
 
                                 {{--<form action="{{ route('approvals.update', $approval) }}" method="post" class="my-form">

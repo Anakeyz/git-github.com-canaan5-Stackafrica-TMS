@@ -13,12 +13,13 @@
                     </div>
                     <!-- END: Slide Over Header -->
                     <div class="modal-body">
-                        <p>
+                        <p class="mb-1">
                             <span class="font-medium" x-text="`Date ${approval.action}:`"></span>
-                            <span x-text="(new Date(approval.created_at)).toGMTString().replace('GMT', '')"></span>
+                            <span x-text="(new Date(approval.created_at)).toLocaleString()"></span>
                         </p>
+                        <p x-text="`The details of the ${approval.action} attributes are shown below:`"></p>
                         <div class="grid grid-cols-3 mt-2 font-medium text-slate-500">
-                            <div class="col-span-1">Details</div>
+                            <div class="col-span-1">Attribute</div>
                             <div class="col-span-1">New value</div>
                             <template x-if="approval.action !== 'created'">
                                 <div class="col-span-1">Old value</div>
