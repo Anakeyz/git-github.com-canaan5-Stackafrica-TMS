@@ -31,6 +31,7 @@ use App\Http\Controllers\Wallets;
 use App\Http\Controllers\TerminalGroups;
 use App\Http\Controllers\WalletTransactions;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActivityLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,7 +69,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/{gl}/update', 'update')->name('update');
     });
 
-    Route::get('/activities', [\App\Http\Controllers\ActivityLogController::class, 'index'])->name('activities');
+    Route::controller(ActivityLogController::class)->prefix('activities')->name('activities.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{activity}', 'show')->name('show');
+    });
 
     Route::resource('users',                        Users::class)->only(['show', 'update', 'store']);
     Route::resource('terminals',                    Terminals::class)->except(['destroy', 'edit', 'create']);

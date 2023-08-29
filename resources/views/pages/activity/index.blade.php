@@ -34,9 +34,11 @@
 
                         <th scope="col">Causer</th>
 
-                        <th scope="col">Details</th>
-
                         <th scope="col">Date</th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Details
+                        </th>
                     </tr>
                     </thead>
 
@@ -53,17 +55,26 @@
 
                                 <td class="w-56">{{ $activity->causer?->email }}</td>
 
-                                <td class="w-32">{{ $activity->properties }}</td>
+                                <td class="w-96">{{ $activity->created_at->format('d/m/Y G:i') }}</td>
 
-                                <td class="w-96">{{ $activity->created_at }}</td>
+                                <td class="text-center whitespace-nowrap">
+                                    <a href="{{ route('activities.show', [$activity->id]) }}">
+                                        <span class="flex justify-center">
+                                            <i data-lucide="eye" class="w-5 h-5"></i>
+                                        </span>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
 
                     @else
-                        <tr class="intro-x"><td colspan="10" class="text-center">No Terminal has been added yet</td></tr>
+                        <tr class="intro-x"><td colspan="10" class="text-center">No Activity has occurred</td></tr>
                     @endif
                     </tbody>
                 </table>
+            </div>
+            <div class="m-3">
+                {{$activities->links()}}
             </div>
         </div>
     </section>

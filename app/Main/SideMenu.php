@@ -206,7 +206,7 @@ class SideMenu
 
             'activities' => [
                 'icon' => 'framer',
-                'route_name' => 'activities',
+                'route_name' => 'activities.index',
                 'title' => 'Audit Trail',
                 'permission' => 'read admin'
             ],
